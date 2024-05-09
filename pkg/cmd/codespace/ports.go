@@ -249,7 +249,7 @@ func (a *App) UpdatePortVisibility(ctx context.Context, selector *CodespaceSelec
 	}
 	defer safeClose(fwd, &err)
 
-	// TODO: check if port visibility can be updated in parallel instead of sequentially
+	// TENCENT: check if port visibility can be updated in parallel instead of sequentially
 	for _, port := range ports {
 		err := a.RunWithProgress(fmt.Sprintf("Updating port %d visibility to: %s", port.number, port.visibility), func() (err error) {
 			// wait for success or failure

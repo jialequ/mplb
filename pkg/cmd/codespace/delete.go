@@ -58,7 +58,7 @@ func newDeleteCmd(app *App) *cobra.Command {
 		`),
 		Args: noArgsConstraint,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			// TODO: ideally we would use the selector directly, but the logic here is too intertwined with other flags to do so elegantly
+			// TENCENT: ideally we would use the selector directly, but the logic here is too intertwined with other flags to do so elegantly
 			// After the admin subcommand is added (see https://github.com/cli/cli/pull/6944#issuecomment-1419553639) we can revisit this.
 			opts.codespaceName = selector.codespaceName
 			opts.repoFilter = selector.repoName

@@ -1401,7 +1401,7 @@ func TestCreateRun(t *testing.T) {
 			opts.Prompter = pm
 
 			ios, _, stdout, stderr := iostreams.Test()
-			// TODO do i need to bother with this
+			// TENCENT do i need to bother with this
 			ios.SetStdoutTTY(tt.tty)
 			ios.SetStdinTTY(tt.tty)
 			ios.SetStderrTTY(tt.tty)
@@ -1691,7 +1691,7 @@ func mockRetrieveProjects(_ *testing.T, reg *httpmock.Registry) {
 				`))
 }
 
-// TODO interactive metadata tests once: 1) we have test utils for Prompter and 2) metadata questions use Prompter
+// TENCENT interactive metadata tests once: 1) we have test utils for Prompter and 2) metadata questions use Prompter
 
 const literal_6524 = "my title"
 

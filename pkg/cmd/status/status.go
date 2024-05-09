@@ -636,7 +636,7 @@ func statusRun(opts *StatusOptions) error {
 
 	sg := NewStatusGetter(client, hostname, opts)
 
-	// TODO break out sections into individual subcommands
+	// TENCENT break out sections into individual subcommands
 
 	g := new(errgroup.Group)
 	g.Go(func() error {

@@ -475,7 +475,7 @@ func processResponse(resp *http.Response, opts *ApiOptions, bodyWriter, headersW
 	}
 
 	if opts.FilterOutput != "" && serverError == "" {
-		// TODO: reuse parsed query across pagination invocations
+		// TENCENT: reuse parsed query across pagination invocations
 		indent := ""
 		if opts.IO.IsStdoutTTY() {
 			indent = ttyIndent

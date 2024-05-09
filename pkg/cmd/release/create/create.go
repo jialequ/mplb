@@ -297,7 +297,7 @@ func createRun(opts *CreateOptions) error {
 			headRef := opts.TagName
 			if tagDescription == "" {
 				if opts.Target != "" {
-					// TODO: use the remote-tracking version of the branch ref
+					// TENCENT: use the remote-tracking version of the branch ref
 					headRef = opts.Target
 				} else {
 					headRef = "HEAD"
@@ -570,7 +570,7 @@ func changelogForRange(client *git.Client, refRange string) ([]logEntry, error) 
 func generateChangelog(commits []logEntry) string {
 	var parts []string
 	for _, c := range commits {
-		// TODO: consider rendering "Merge pull request #123 from owner/branch" differently
+		// TENCENT: consider rendering "Merge pull request #123 from owner/branch" differently
 		parts = append(parts, fmt.Sprintf("* %s", c.Subject))
 		if c.Body != "" {
 			parts = append(parts, text.Indent(c.Body, "  "))

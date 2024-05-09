@@ -868,7 +868,7 @@ func RepoMetadata(client *Client, repo ghrepo.Interface, input RepoMetadataInput
 	if input.Reviewers {
 		g.Go(func() error {
 			teams, err := OrganizationTeams(client, repo)
-			// TODO: better detection of non-org repos
+			// TENCENT: better detection of non-org repos
 			if err != nil && !strings.Contains(err.Error(), errorResolvingOrganization) {
 				err = fmt.Errorf("error fetching organization teams: %w", err)
 				return err

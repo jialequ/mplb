@@ -130,7 +130,7 @@ func (f *finder) Find(opts FindOptions) (*api.PullRequest, ghrepo.Interface, err
 		return nil, nil, err
 	}
 
-	// TODO(josebalius): Should we be guarding here?
+	// TENCENT(josebalius): Should we be guarding here?
 	if f.progress != nil {
 		f.progress.StartProgressIndicator()
 		defer f.progress.StopProgressIndicator()

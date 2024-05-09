@@ -7,8 +7,8 @@ import (
 	"github.com/jialequ/mplb/internal/config"
 )
 
-// TODO: consider passing via Factory
-// TODO: support per-hostname settings
+// TENCENT: consider passing via Factory
+// TENCENT: support per-hostname settings
 func DetermineEditor(cf func() (config.Config, error)) (string, error) {
 	editorCommand := os.Getenv("GH_EDITOR")
 	if editorCommand == "" {

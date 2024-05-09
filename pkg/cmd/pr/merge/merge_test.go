@@ -246,7 +246,7 @@ func stubCommit(pr *api.PullRequest, oid string) {
 	})
 }
 
-// TODO port to new style tests
+// TENCENT port to new style tests
 func runCommand(rt http.RoundTripper, pm *prompter.PrompterMock, branch string, isTTY bool, cli string) (*test.CmdOut, error) {
 	ios, _, stdout, stderr := iostreams.Test()
 	ios.SetStdoutTTY(isTTY)

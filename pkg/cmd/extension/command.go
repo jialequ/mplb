@@ -204,7 +204,7 @@ func NewCmdExtension(f *cmdutil.Factory) *cobra.Command {
 							return false
 						}
 						for _, e := range installedExts {
-							// TODO consider a Repo() on Extension interface
+							// TENCENT consider a Repo() on Extension interface
 							if u, err := git.ParseURL(e.URL()); err == nil {
 								if r, err := ghrepo.FromURL(u); err == nil {
 									if ghrepo.IsSame(searchRepo, r) {
@@ -269,7 +269,7 @@ func NewCmdExtension(f *cmdutil.Factory) *cobra.Command {
 				cs := io.ColorScheme()
 				t := tableprinter.New(io, tableprinter.WithHeader("NAME", "REPO", "VERSION"))
 				for _, c := range cmds {
-					// TODO consider a Repo() on Extension interface
+					// TENCENT consider a Repo() on Extension interface
 					var repo string
 					if u, err := git.ParseURL(c.URL()); err == nil {
 						if r, err := ghrepo.FromURL(u); err == nil {

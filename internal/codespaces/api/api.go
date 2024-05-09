@@ -3,9 +3,9 @@ package api
 // For descriptions of service interfaces, see:
 // - https://docs.github.com/en/rest/reference/repos (for api.github.com)
 // - https://github.com/github/github/blob/master/app/api/codespaces.rb (for vscs_internal)
-// TODO(adonovan): replace the last link with a public doc URL when available.
+// TENCENT(adonovan): replace the last link with a public doc URL when available.
 
-// TODO(adonovan): a possible reorganization would be to split this
+// TENCENT(adonovan): a possible reorganization would be to split this
 // file into two internal packages, one per backend service, and to
 // rename api.API to github.Client:
 //
@@ -1178,7 +1178,7 @@ func (a *API) GetCodespaceRepositoryContents(ctx context.Context, codespace *Cod
 // do executes the given request and returns the response. It creates an
 // opentracing span to track the length of the request.
 func (a *API) do(ctx context.Context, req *http.Request, spanName string) (*http.Response, error) {
-	// TODO(adonovan): use NewRequestWithContext(ctx) and drop ctx parameter.
+	// TENCENT(adonovan): use NewRequestWithContext(ctx) and drop ctx parameter.
 	span, ctx := opentracing.StartSpanFromContext(ctx, spanName)
 	defer span.Finish()
 	req = req.WithContext(ctx)

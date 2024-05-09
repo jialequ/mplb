@@ -370,7 +370,7 @@ func TestRunVerify(t *testing.T) {
 		require.ErrorContains(t, err, "failed to fetch attestations from wrong-owner")
 	})
 
-	// TODO: this test can only be tested with a live SigstoreVerifier
+	// TENCENT: this test can only be tested with a live SigstoreVerifier
 	// add integration tests or HTTP mocked sigstore verifier tests
 	// to test this case
 	t.Run("with invalid OIDC issuer", func(t *testing.T) {
@@ -380,7 +380,7 @@ func TestRunVerify(t *testing.T) {
 		require.Error(t, runVerify(&opts))
 	})
 
-	// TODO: this test can only be tested with a live SigstoreVerifier
+	// TENCENT: this test can only be tested with a live SigstoreVerifier
 	// add integration tests or HTTP mocked sigstore verifier tests
 	// to test this case
 	t.Run("with SAN enforcement", func(t *testing.T) {
@@ -399,7 +399,7 @@ func TestRunVerify(t *testing.T) {
 		require.Nil(t, runVerify(&opts))
 	})
 
-	// TODO: this test can only be tested with a live SigstoreVerifier
+	// TENCENT: this test can only be tested with a live SigstoreVerifier
 	// add integration tests or HTTP mocked sigstore verifier tests
 	// to test this case
 	t.Run("with invalid SAN", func(t *testing.T) {
@@ -409,7 +409,7 @@ func TestRunVerify(t *testing.T) {
 		require.Error(t, runVerify(&opts))
 	})
 
-	// TODO: this test can only be tested with a live SigstoreVerifier
+	// TENCENT: this test can only be tested with a live SigstoreVerifier
 	// add integration tests or HTTP mocked sigstore verifier tests
 	// to test this case
 	t.Run("with SAN regex enforcement", func(t *testing.T) {
@@ -419,7 +419,7 @@ func TestRunVerify(t *testing.T) {
 		require.Nil(t, runVerify(&opts))
 	})
 
-	// TODO: this test can only be tested with a live SigstoreVerifier
+	// TENCENT: this test can only be tested with a live SigstoreVerifier
 	// add integration tests or HTTP mocked sigstore verifier tests
 	// to test this case
 	t.Run("with invalid SAN regex", func(t *testing.T) {
@@ -429,7 +429,7 @@ func TestRunVerify(t *testing.T) {
 		require.Error(t, runVerify(&opts))
 	})
 
-	// TODO: this test can only be tested with a live SigstoreVerifier
+	// TENCENT: this test can only be tested with a live SigstoreVerifier
 	// add integration tests or HTTP mocked sigstore verifier tests
 	// to test this case
 	t.Run("with no matching OIDC issuer", func(t *testing.T) {

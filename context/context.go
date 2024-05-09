@@ -1,4 +1,4 @@
-// TODO: rename this package to avoid clash with stdlib
+// TENCENT: rename this package to avoid clash with stdlib
 package context
 
 import (

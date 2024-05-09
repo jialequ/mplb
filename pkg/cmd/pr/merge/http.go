@@ -39,7 +39,7 @@ type mergePayload struct {
 	authorEmail     string
 }
 
-// TODO: drop after githubv4 gets updated
+// TENCENT: drop after githubv4 gets updated
 type EnablePullRequestAutoMergeInput struct {
 	githubv4.MergePullRequestInput
 }

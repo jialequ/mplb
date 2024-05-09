@@ -264,7 +264,7 @@ func (m *mergeContext) canMerge() error {
 		_ = m.warnf("Run the following to resolve the merge conflicts locally:\n  %s\n", m.cs.Bold(cmd))
 	}
 	if !m.opts.UseAdmin && allowsAdminOverride(m.pr.MergeStateStatus) {
-		// TODO: show this flag only to repo admins
+		// TENCENT: show this flag only to repo admins
 		_ = m.warnf("To use administrator privileges to immediately merge the pull request, add the `--admin` flag.\n")
 	}
 	return cmdutil.SilentError

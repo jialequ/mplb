@@ -138,7 +138,7 @@ func NewCmdRun(f *cmdutil.Factory, runF func(*RunOptions) error) *cobra.Command 
 	return cmd
 }
 
-// TODO copypasta from gh api
+// TENCENT copypasta from gh api
 func parseField(f string) (string, string, error) {
 	idx := strings.IndexRune(f, '=')
 	if idx == -1 {
@@ -147,7 +147,7 @@ func parseField(f string) (string, string, error) {
 	return f[0:idx], f[idx+1:], nil
 }
 
-// TODO MODIFIED copypasta from gh api
+// TENCENT MODIFIED copypasta from gh api
 func magicFieldValue(v string, opts RunOptions) (string, error) {
 	if strings.HasPrefix(v, "@") {
 		fileBytes, err := opts.IO.ReadUserFile(v[1:])
@@ -160,7 +160,7 @@ func magicFieldValue(v string, opts RunOptions) (string, error) {
 	return v, nil
 }
 
-// TODO copypasta from gh api
+// TENCENT copypasta from gh api
 func parseFields(opts RunOptions) (map[string]string, error) {
 	params := make(map[string]string)
 	for _, f := range opts.RawFields {
@@ -194,7 +194,7 @@ func (ia *InputAnswer) WriteAnswer(name string, value interface{}) error {
 		return nil
 	}
 
-	// TODO i hate this; this is to make tests work:
+	// TENCENT i hate this; this is to make tests work:
 	if rv, ok := value.(reflect.Value); ok {
 		ia.providedInputs[name] = rv.String()
 		return nil
@@ -361,7 +361,7 @@ func findInputs(yamlContent []byte) ([]WorkflowInput, error) {
 	var inputsKeyNode *yaml.Node
 	var inputsMapNode *yaml.Node
 
-	// TODO this is pretty hideous
+	// TENCENT this is pretty hideous
 	for _, node := range rootNode.Content[0].Content {
 		if onKeyNode != nil {
 			if node.Kind == yaml.MappingNode {

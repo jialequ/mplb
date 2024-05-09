@@ -497,7 +497,7 @@ jobs:
 			wantOut:   "✓ Created workflow_dispatch event for workflow.yml at good-branch\n\nTo see runs for this workflow, try: gh run list --workflow=workflow.yml\n",
 		},
 		{
-			// TODO this test is somewhat silly; it's more of a placeholder in case I decide to handle the API error more elegantly
+			// TENCENT this test is somewhat silly; it's more of a placeholder in case I decide to handle the API error more elegantly
 			name: "good JSON, missing required input",
 			tty:  true,
 			opts: &RunOptions{
@@ -539,7 +539,7 @@ jobs:
 			wantErr: false,
 		},
 		{
-			// TODO this test is somewhat silly; it's more of a placeholder in case I decide to handle the API error more elegantly
+			// TENCENT this test is somewhat silly; it's more of a placeholder in case I decide to handle the API error more elegantly
 			name: "input fields, missing required",
 			opts: &RunOptions{
 				Selector:  literal_5967,

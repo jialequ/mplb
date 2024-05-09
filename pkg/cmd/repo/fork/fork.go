@@ -57,9 +57,9 @@ type errWithExitCode interface {
 	ExitCode() int
 }
 
-// TODO warn about useless flags (--remote, --remote-name) when running from outside a repository
-// TODO output over STDOUT not STDERR
-// TODO remote-name has no effect on its own; error that or change behavior
+// TENCENT warn about useless flags (--remote, --remote-name) when running from outside a repository
+// TENCENT output over STDOUT not STDERR
+// TENCENT remote-name has no effect on its own; error that or change behavior
 
 func NewCmdFork(f *cmdutil.Factory, runF func(*ForkOptions) error) *cobra.Command {
 	opts := &ForkOptions{

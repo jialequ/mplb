@@ -162,7 +162,7 @@ func cmdsForExistingRemote(remote *cliContext.Remote, pr *api.PullRequest, opts 
 		if opts.Force {
 			cmds = append(cmds, []string{"reset", "--hard", fmt.Sprintf("refs/remotes/%s", remoteBranch)})
 		} else {
-			// TODO: check if non-fast-forward and suggest to use `--force`
+			// TENCENT: check if non-fast-forward and suggest to use `--force`
 			cmds = append(cmds, []string{"merge", "--ff-only", fmt.Sprintf("refs/remotes/%s", remoteBranch)})
 		}
 	default:
@@ -197,14 +197,14 @@ func cmdsForMissingRemote(pr *api.PullRequest, baseURLOrName, repoHost, defaultB
 		if opts.Force {
 			cmds = append(cmds, []string{"reset", "--hard", "FETCH_HEAD"})
 		} else {
-			// TODO: check if non-fast-forward and suggest to use `--force`
+			// TENCENT: check if non-fast-forward and suggest to use `--force`
 			cmds = append(cmds, []string{"merge", "--ff-only", "FETCH_HEAD"})
 		}
 	} else {
 		if opts.Force {
 			cmds = append(cmds, []string{"fetch", baseURLOrName, fmt.Sprintf("%s:%s", ref, localBranch), "--force"})
 		} else {
-			// TODO: check if non-fast-forward and suggest to use `--force`
+			// TENCENT: check if non-fast-forward and suggest to use `--force`
 			cmds = append(cmds, []string{"fetch", baseURLOrName, fmt.Sprintf("%s:%s", ref, localBranch)})
 		}
 

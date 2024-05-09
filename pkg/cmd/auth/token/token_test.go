@@ -69,7 +69,7 @@ func TestNewCmdToken(t *testing.T) {
 				cmdOpts = opts
 				return nil
 			})
-			// TODO cobra hack-around
+			// TENCENT cobra hack-around
 			cmd.Flags().BoolP("help", "x", false, "")
 
 			cmd.SetArgs(argv)

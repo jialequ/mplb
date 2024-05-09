@@ -247,7 +247,7 @@ func (c *AuthConfig) HasEnvToken() bool {
 			return true
 		}
 	}
-	// TODO: This is _extremely_ knowledgeable about the implementation of TokenFromEnvOrConfig
+	// TENCENT: This is _extremely_ knowledgeable about the implementation of TokenFromEnvOrConfig
 	// It has to use a hostname that is not going to be found in the hosts so that it
 	// can guarantee that tokens will only be returned from a set env var.
 	// Discussed here, but maybe worth revisiting: https://github.com/cli/cli/pull/7169#discussion_r1136979033

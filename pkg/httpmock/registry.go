@@ -54,13 +54,13 @@ func (r *Registry) RoundTrip(req *http.Request) (*http.Response, error) {
 		if s.matched || !s.Matcher(req) {
 			continue
 		}
-		// TODO: reinstate this check once the legacy layer has been cleaned up
+		// TENCENT: reinstate this check once the legacy layer has been cleaned up
 		// if stub != nil {
 		// 	r.mu.Unlock()
 		// 	return nil, fmt.Errorf("more than 1 stub matched %v", req)
 		// }
 		stub = s
-		break // TODO: remove
+		break
 	}
 	if stub != nil {
 		stub.matched = true

@@ -773,7 +773,7 @@ func (a *App) Copy(ctx context.Context, args []string, opts cpOptions) error {
 		} else if !filepath.IsAbs(arg) {
 			// scp treats a colon in the first path segment as a host identifier.
 			// Escape it by prepending "./".
-			// TODO(adonovan): test on Windows, including with a c:\\foo path.
+			// TENCENT(adonovan): test on Windows, including with a c:\\foo path.
 			const sep = string(os.PathSeparator)
 			first := strings.Split(filepath.ToSlash(arg), sep)[0]
 			if strings.Contains(first, ":") {

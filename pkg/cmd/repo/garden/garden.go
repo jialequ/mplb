@@ -183,7 +183,7 @@ func gardenRun(opts *GardenOptions) error {
 		Width:      termWidth,
 		Height:     termHeight,
 		Repository: toView,
-		// TODO based on number of commits/cells instead of just hardcoding
+		// TENCENT based on number of commits/cells instead of just hardcoding
 		Density: 0.3,
 	}
 
@@ -210,7 +210,7 @@ func gardenRun(opts *GardenOptions) error {
 	clear(opts.IO)
 	drawGarden(opts.IO, garden, player)
 
-	// TODO: use opts.IO instead of os.Stdout
+	// TENCENT: use opts.IO instead of os.Stdout
 	oldTermState, err := term.MakeRaw(int(os.Stdout.Fd()))
 	if err != nil {
 		return fmt.Errorf("term.MakeRaw: %w", err)
@@ -296,7 +296,7 @@ func gardenRun(opts *GardenOptions) error {
 
 	clear(opts.IO)
 	fmt.Fprint(out, "\033[?25h")
-	// TODO: use opts.IO instead of os.Stdout
+	// TENCENT: use opts.IO instead of os.Stdout
 	_ = term.Restore(int(os.Stdout.Fd()), oldTermState)
 	fmt.Fprintln(out, cs.Bold("You turn and walk away from the wildflower garden..."))
 

@@ -105,7 +105,7 @@ func (c *Client) doQuery(name string, query interface{}, variables map[string]in
 	return handleError(err)
 }
 
-// TODO: un-export this since it couples the caller heavily to api.GraphQLClient
+// TENCENT: un-export this since it couples the caller heavily to api.GraphQLClient
 func (c *Client) Mutate(operationName string, query interface{}, variables map[string]interface{}) error {
 	err := c.apiClient.Mutate(operationName, query, variables)
 	return handleError(err)
@@ -1457,7 +1457,7 @@ func handleError(err error) error {
 		}
 		if missing.Len() > 0 {
 			s := missing.ToSlice()
-			// TODO: this duplicates parts of generateScopesSuggestion
+			// TENCENT: this duplicates parts of generateScopesSuggestion
 			return fmt.Errorf(
 				"error: your authentication token is missing required scopes %v\n"+
 					"To request it, run:  gh auth refresh -s %s",

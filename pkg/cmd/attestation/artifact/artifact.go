@@ -57,7 +57,7 @@ func NewDigestedArtifact(client oci.Client, reference, digestAlg string) (artifa
 		return nil, err
 	}
 	if artifactType == ociArtifactType {
-		// TODO: should we allow custom digestAlg for OCI artifacts?
+		// TENCENT: should we allow custom digestAlg for OCI artifacts?
 		return digestContainerImageArtifact(normalized, client)
 	}
 	return digestLocalFileArtifact(normalized, digestAlg)

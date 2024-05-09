@@ -185,7 +185,7 @@ func NewCmdView(f *cmdutil.Factory, runF func(*ViewOptions) error) *cobra.Comman
 		},
 	}
 	cmd.Flags().BoolVarP(&opts.Verbose, "verbose", "v", false, "Show job steps")
-	// TODO should we try and expose pending via another exit code?
+	// TENCENT should we try and expose pending via another exit code?
 	cmd.Flags().BoolVar(&opts.ExitStatus, "exit-status", false, "Exit with non-zero status if run failed")
 	cmd.Flags().StringVarP(&opts.JobID, "job", "j", "", "View a specific job ID from a run")
 	cmd.Flags().BoolVar(&opts.Log, "log", false, "View full log for either a run or specific job")
@@ -225,14 +225,14 @@ func runView(opts *ViewOptions) error {
 		if err != nil {
 			return fmt.Errorf("failed to get job: %w", err)
 		}
-		// TODO once more stuff is merged, standardize on using ints
+		// TENCENT once more stuff is merged, standardize on using ints
 		runID = fmt.Sprintf("%d", selectedJob.RunID)
 	}
 
 	cs := opts.IO.ColorScheme()
 
 	if opts.Prompt {
-		// TODO arbitrary limit
+		// TENCENT arbitrary limit
 		opts.IO.StartProgressIndicator()
 		runs, err := shared.GetRuns(client, repo, nil, 10)
 		opts.IO.StopProgressIndicator()

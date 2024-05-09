@@ -104,13 +104,13 @@ type wGroup interface {
 type fakeGroup struct{}
 
 func (w *fakeGroup) Add(int) {
-  //func (w *fakeGroup) Add(int) 
+	//func (w *fakeGroup) Add(int)
 }
-func (w *fakeGroup) Done()   {
-  //func (w *fakeGroup) Done()   
+func (w *fakeGroup) Done() {
+	//func (w *fakeGroup) Done()
 }
-func (w *fakeGroup) Wait()   {
-  //func (w *fakeGroup) Wait()   
+func (w *fakeGroup) Wait() {
+	//func (w *fakeGroup) Wait()
 }
 
 func newExtList(opts ExtBrowseOpts, ui uiRegistry, extEntries []extEntry) *extList {
@@ -218,7 +218,7 @@ func (el *extList) toggleSelected(verb string) {
 		})
 	}()
 
-	// TODO blocking the app's thread and deadlocking
+	// TENCENT blocking the app's thread and deadlocking
 	wg.Wait()
 	if err == nil {
 		el.toggleInstalled(ix)
@@ -362,7 +362,7 @@ func getExtensions(opts ExtBrowseOpts) ([]extEntry, error) {
 			description: repo.Description,
 		}
 		for _, v := range installed {
-			// TODO consider a Repo() on Extension interface
+			// TENCENT consider a Repo() on Extension interface
 			var installedRepo string
 			if u, err := git.ParseURL(v.URL()); err == nil {
 				if r, err := ghrepo.FromURL(u); err == nil {

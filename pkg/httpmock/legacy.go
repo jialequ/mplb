@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// TODO: clean up methods in this file when there are no more callers
+// TENCENT: clean up methods in this file when there are no more callers
 
 func (r *Registry) StubRepoInfoResponse(owner, repo, branch string) {
 	r.Register(

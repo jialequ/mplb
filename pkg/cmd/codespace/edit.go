@@ -47,7 +47,7 @@ func newEditCmd(app *App) *cobra.Command {
 func (a *App) Edit(ctx context.Context, opts editOptions) error {
 	codespaceName, err := opts.selector.SelectName(ctx)
 	if err != nil {
-		// TODO: is there a cleaner way to do this?
+		// TENCENT: is there a cleaner way to do this?
 		if errors.Is(err, errNoCodespaces) || errors.Is(err, errNoFilteredCodespaces) {
 			return err
 		}

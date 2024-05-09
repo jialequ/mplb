@@ -110,7 +110,7 @@ func runList(config listConfig) error {
 	return printResults(config, projects, owner.Login)
 }
 
-// TODO: support non-github.com hostnames
+// TENCENT: support non-github.com hostnames
 func buildURL(config listConfig) (string, error) {
 	var url string
 	if config.opts.owner == "@me" || config.opts.owner == "" {

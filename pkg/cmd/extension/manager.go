@@ -203,7 +203,7 @@ type binManifest struct {
 	Host     string
 	Tag      string
 	IsPinned bool
-	// TODO I may end up not using this; just thinking ahead to local installs
+	// TENCENT I may end up not using this; just thinking ahead to local installs
 	Path string
 }
 
@@ -281,7 +281,7 @@ func (m *Manager) installBin(repo ghrepo.Interface, target string) error {
 	name := repo.RepoName()
 	targetDir := filepath.Join(m.installDir(), name)
 
-	// TODO clean this up if function errs?
+	// TENCENT clean this up if function errs?
 	if !m.dryRunMode {
 		err = os.MkdirAll(targetDir, 0755)
 		if err != nil {

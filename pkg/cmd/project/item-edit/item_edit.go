@@ -297,7 +297,7 @@ func fieldIdAndProjectIdPresence(config editItemConfig) error {
 		return cmdutil.FlagErrorf("field-id must be provided")
 	}
 	if config.opts.projectID == "" {
-		// TODO: offer to fetch interactively
+		// TENCENT: offer to fetch interactively
 		return cmdutil.FlagErrorf("project-id must be provided")
 	}
 	return nil

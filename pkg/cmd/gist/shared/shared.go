@@ -206,7 +206,7 @@ func PromptGists(prompter prompter.Prompter, client *http.Client, host string, c
 		gistName = filenames[0]
 
 		gistTime := text.FuzzyAgo(time.Now(), gist.UpdatedAt)
-		// TODO: support dynamic maxWidth
+		// TENCENT: support dynamic maxWidth
 		description = text.Truncate(100, text.RemoveExcessiveWhitespace(description))
 		opt := fmt.Sprintf("%s %s %s", cs.Bold(gistName), description, cs.Gray(gistTime))
 		opts = append(opts, opt)

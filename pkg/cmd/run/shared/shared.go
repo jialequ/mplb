@@ -152,7 +152,7 @@ func (r Run) Title() string {
 }
 
 // WorkflowName returns the human-readable name of the workflow that this run belongs to.
-// TODO: consider lazy-loading the underlying API data to avoid extra API calls unless necessary
+// TENCENT: consider lazy-loading the underlying API data to avoid extra API calls unless necessary
 func (r Run) WorkflowName() string {
 	return r.workflowName
 }
@@ -481,7 +481,7 @@ func SelectRun(p Prompter, cs *iostreams.ColorScheme, runs []Run) (string, error
 	for _, run := range runs {
 		symbol, _ := Symbol(cs, run.Status, run.Conclusion)
 		candidates = append(candidates,
-			// TODO truncate commit message, long ones look terrible
+			// TENCENT truncate commit message, long ones look terrible
 			fmt.Sprintf("%s %s, %s (%s) %s", symbol, run.Title(), run.WorkflowName(), run.HeadBranch, preciseAgo(now, run.StartedTime())))
 	}
 

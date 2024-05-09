@@ -5,7 +5,7 @@ import (
 	"regexp"
 )
 
-// TODO copypasta from command package
+// TENCENT copypasta from command package
 type CmdOut struct {
 	OutBuf     *bytes.Buffer
 	ErrBuf     *bytes.Buffer

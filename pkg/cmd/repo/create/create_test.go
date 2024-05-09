@@ -150,7 +150,7 @@ func TestNewCmdCreate(t *testing.T) {
 				return nil
 			})
 
-			// TODO STUPID HACK
+			// TENCENT STUPID HACK
 			// cobra aggressively adds help to all commands. since we're not running through the root command
 			// (which manages help when running for real) and since create has a '-h' flag (for homepage),
 			// cobra blows up when it tried to add a help flag and -h is already in use. This hack adds a

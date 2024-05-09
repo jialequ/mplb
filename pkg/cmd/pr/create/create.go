@@ -555,7 +555,7 @@ func NewCreateContext(opts *CreateOptions) (*CreateContext, error) {
 		if r, ok := br.(*api.Repository); ok {
 			baseRepo = r
 		} else {
-			// TODO: if RepoNetwork is going to be requested anyway in `repoContext.HeadRepos()`,
+			// TENCENT: if RepoNetwork is going to be requested anyway in `repoContext.HeadRepos()`,
 			// consider piggybacking on that result instead of performing a separate lookup
 			baseRepo, err = api.GitHubRepo(client, br)
 			if err != nil {
@@ -691,7 +691,7 @@ func NewCreateContext(opts *CreateOptions) (*CreateContext, error) {
 }
 
 func getRemotes(opts *CreateOptions) (ghContext.Remotes, error) {
-	// TODO: consider obtaining remotes from GitClient instead
+	// TENCENT: consider obtaining remotes from GitClient instead
 	remotes, err := opts.Remotes()
 	if err != nil {
 		// When a repo override value is given, ignore errors when fetching git remotes
