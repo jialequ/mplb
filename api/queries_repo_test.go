@@ -13,7 +13,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestGitHubRepo_notFound(t *testing.T) {
+func TestGitHubReponotFound(t *testing.T) {
 	httpReg := &httpmock.Registry{}
 	defer httpReg.Verify(t)
 

@@ -13,7 +13,7 @@ import (
 
 const CODESPACE_NAME = "monalisa-cli-cli-abcdef"
 
-func TestApp_Select(t *testing.T) {
+func TestAppSelect(t *testing.T) {
 	tests := []struct {
 		name             string
 		arg              string

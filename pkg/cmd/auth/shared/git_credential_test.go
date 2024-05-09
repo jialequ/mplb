@@ -7,7 +7,7 @@ import (
 	"github.com/jialequ/mplb/internal/run"
 )
 
-func TestGitCredentialSetup_configureExisting(t *testing.T) {
+func TestGitCredentialSetupconfigureExisting(t *testing.T) {
 	cs, restoreRun := run.Stub()
 	defer restoreRun(t)
 	cs.Register(`git credential reject`, 0, "")
@@ -24,7 +24,7 @@ func TestGitCredentialSetup_configureExisting(t *testing.T) {
 	}
 }
 
-func TestGitCredentialsSetup_setOurs_GH(t *testing.T) {
+func TestGitCredentialsSetupsetOursGH(t *testing.T) {
 	cs, restoreRun := run.Stub()
 	defer restoreRun(t)
 	cs.Register(`git config --global --replace-all credential\.`, 0, "", func(args []string) {
@@ -72,7 +72,7 @@ func TestGitCredentialsSetup_setOurs_GH(t *testing.T) {
 
 }
 
-func TestGitCredentialSetup_setOurs_nonGH(t *testing.T) {
+func TestGitCredentialSetupsetOursnonGH(t *testing.T) {
 	cs, restoreRun := run.Stub()
 	defer restoreRun(t)
 	cs.Register(`git config --global --replace-all credential\.`, 0, "", func(args []string) {

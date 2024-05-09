@@ -56,7 +56,7 @@ func TestCreateCmdFlagError(t *testing.T) {
 	}
 }
 
-func TestApp_Create(t *testing.T) {
+func TestAppCreate(t *testing.T) {
 	type fields struct {
 		apiClient apiClient
 	}

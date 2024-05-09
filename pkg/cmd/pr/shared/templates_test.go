@@ -13,7 +13,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestTemplateManager_hasAPI(t *testing.T) {
+func TestTemplateManagerhasAPI(t *testing.T) {
 	rootDir := t.TempDir()
 	legacyTemplateFile := filepath.Join(rootDir, ".github", "ISSUE_TEMPLATE.md")
 	_ = os.MkdirAll(filepath.Dir(legacyTemplateFile), 0755)
@@ -64,7 +64,7 @@ func TestTemplateManager_hasAPI(t *testing.T) {
 	assert.Equal(t, "I need a feature", string(tpl.Body()))
 }
 
-func TestTemplateManager_hasAPI_PullRequest(t *testing.T) {
+func TestTemplateManagerhasAPIPullRequest(t *testing.T) {
 	rootDir := t.TempDir()
 	legacyTemplateFile := filepath.Join(rootDir, ".github", "PULL_REQUEST_TEMPLATE.md")
 	_ = os.MkdirAll(filepath.Dir(legacyTemplateFile), 0755)

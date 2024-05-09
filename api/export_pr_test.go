@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestIssue_ExportData(t *testing.T) {
+func TestIssueExportData(t *testing.T) {
 	tests := []struct {
 		name       string
 		fields     []string
@@ -125,7 +125,7 @@ func TestIssue_ExportData(t *testing.T) {
 	}
 }
 
-func TestPullRequest_ExportData(t *testing.T) {
+func TestPullRequestExportData(t *testing.T) {
 	tests := []struct {
 		name       string
 		fields     []string

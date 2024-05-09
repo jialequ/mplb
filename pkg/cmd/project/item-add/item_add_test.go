@@ -100,7 +100,7 @@ func TestNewCmdaddItem(t *testing.T) {
 	}
 }
 
-func TestRunAddItem_User(t *testing.T) {
+func TestRunAddItemUser(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -212,7 +212,7 @@ func TestRunAddItem_User(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunAddItem_Org(t *testing.T) {
+func TestRunAddItemOrg(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get org ID
@@ -323,7 +323,7 @@ func TestRunAddItem_Org(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunAddItem_Me(t *testing.T) {
+func TestRunAddItemMe(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get viewer ID
@@ -424,7 +424,7 @@ func TestRunAddItem_Me(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunAddItem_JSON(t *testing.T) {
+func TestRunAddItemJSON(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 

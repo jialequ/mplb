@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestChecksStatus_NoCheckRunsOrStatusContexts(t *testing.T) {
+func TestChecksStatusNoCheckRunsOrStatusContexts(t *testing.T) {
 	t.Parallel()
 
 	payload := `
@@ -26,7 +26,7 @@ func TestChecksStatus_NoCheckRunsOrStatusContexts(t *testing.T) {
 	require.Equal(t, expectedChecksStatus, pr.ChecksStatus())
 }
 
-func TestChecksStatus_SummarisingCheckRuns(t *testing.T) {
+func TestChecksStatusSummarisingCheckRuns(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct {
@@ -139,7 +139,7 @@ func TestChecksStatus_SummarisingCheckRuns(t *testing.T) {
 	}
 }
 
-func TestChecksStatus_SummarisingStatusContexts(t *testing.T) {
+func TestChecksStatusSummarisingStatusContexts(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct {
@@ -192,7 +192,7 @@ func TestChecksStatus_SummarisingStatusContexts(t *testing.T) {
 	}
 }
 
-func TestChecksStatus_SummarisingCheckRunsAndStatusContexts(t *testing.T) {
+func TestChecksStatusSummarisingCheckRunsAndStatusContexts(t *testing.T) {
 	t.Parallel()
 
 	// This might look a bit intimidating, but we're just inserting three nodes
@@ -227,7 +227,7 @@ func TestChecksStatus_SummarisingCheckRunsAndStatusContexts(t *testing.T) {
 	require.Equal(t, expectedChecksStatus, pr.ChecksStatus())
 }
 
-func TestChecksStatus_SummarisingCheckRunAndStatusContextCountsByState(t *testing.T) {
+func TestChecksStatusSummarisingCheckRunAndStatusContextCountsByState(t *testing.T) {
 	t.Parallel()
 
 	payload := `

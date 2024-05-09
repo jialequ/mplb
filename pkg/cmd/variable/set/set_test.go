@@ -172,7 +172,7 @@ func TestNewCmdSet(t *testing.T) {
 	}
 }
 
-func TestSetRun_repo(t *testing.T) {
+func TestSetRunrepo(t *testing.T) {
 	tests := []struct {
 		name      string
 		httpStubs func(*httpmock.Registry)
@@ -238,7 +238,7 @@ func TestSetRun_repo(t *testing.T) {
 	}
 }
 
-func TestSetRun_env(t *testing.T) {
+func TestSetRunenv(t *testing.T) {
 	tests := []struct {
 		name      string
 		opts      *SetOptions
@@ -312,7 +312,7 @@ func TestSetRun_env(t *testing.T) {
 	}
 }
 
-func TestSetRun_org(t *testing.T) {
+func TestSetRunorg(t *testing.T) {
 	tests := []struct {
 		name             string
 		opts             *SetOptions
@@ -416,7 +416,7 @@ func TestSetRun_org(t *testing.T) {
 	}
 }
 
-func TestGetBody_prompt(t *testing.T) {
+func TestGetBodyprompt(t *testing.T) {
 	ios, _, _, _ := iostreams.Test()
 	ios.SetStdinTTY(true)
 	ios.SetStdoutTTY(true)

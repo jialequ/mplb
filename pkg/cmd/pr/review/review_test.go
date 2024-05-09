@@ -257,7 +257,7 @@ func TestPRReview(t *testing.T) {
 	}
 }
 
-func TestPRReview_interactive(t *testing.T) {
+func TestPRReviewinteractive(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -289,7 +289,7 @@ func TestPRReview_interactive(t *testing.T) {
 	assert.Equal(t, "✓ Approved pull request OWNER/REPO#123\n", output.Stderr())
 }
 
-func TestPRReview_interactive_no_body(t *testing.T) {
+func TestPRReviewinteractivenobody(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -304,7 +304,7 @@ func TestPRReview_interactive_no_body(t *testing.T) {
 	assert.EqualError(t, err, "this type of review cannot be blank")
 }
 
-func TestPRReview_interactive_blank_approve(t *testing.T) {
+func TestPRReviewinteractiveblankapprove(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 

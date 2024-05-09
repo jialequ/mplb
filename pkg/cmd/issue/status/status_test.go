@@ -85,7 +85,7 @@ func TestIssueStatus(t *testing.T) {
 	}
 }
 
-func TestIssueStatus_blankSlate(t *testing.T) {
+func TestIssueStatusblankSlate(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -125,7 +125,7 @@ Issues opened by you
 	}
 }
 
-func TestIssueStatus_disabledIssues(t *testing.T) {
+func TestIssueStatusdisabledIssues(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 

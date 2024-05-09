@@ -275,7 +275,7 @@ func TestNewCmdLogin(t *testing.T) {
 	}
 }
 
-func TestLoginRun_nontty(t *testing.T) {
+func TestLoginRunnontty(t *testing.T) {
 	tests := []struct {
 		name            string
 		opts            *LoginOptions
@@ -491,7 +491,7 @@ func TestLoginRun_nontty(t *testing.T) {
 	}
 }
 
-func TestLoginRun_Survey(t *testing.T) {
+func TestLoginRunSurvey(t *testing.T) {
 	stubHomeDir(t, t.TempDir())
 
 	tests := []struct {

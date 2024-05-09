@@ -264,7 +264,7 @@ func runCommand(rt http.RoundTripper, remotes context.Remotes, branch string, cl
 	}, err
 }
 
-func TestPRCheckout_sameRepo(t *testing.T) {
+func TestPRCheckoutsameRepo(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -285,7 +285,7 @@ func TestPRCheckout_sameRepo(t *testing.T) {
 	assert.Equal(t, "", output.Stderr())
 }
 
-func TestPRCheckout_existingBranch(t *testing.T) {
+func TestPRCheckoutexistingBranch(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -306,7 +306,7 @@ func TestPRCheckout_existingBranch(t *testing.T) {
 	assert.Equal(t, "", output.Stderr())
 }
 
-func TestPRCheckout_differentRepo_remoteExists(t *testing.T) {
+func TestPRCheckoutdifferentReporemoteExists(t *testing.T) {
 	remotes := context.Remotes{
 		{
 			Remote: &git.Remote{Name: "origin"},
@@ -338,7 +338,7 @@ func TestPRCheckout_differentRepo_remoteExists(t *testing.T) {
 	assert.Equal(t, "", output.Stderr())
 }
 
-func TestPRCheckout_differentRepo(t *testing.T) {
+func TestPRCheckoutdifferentRepo(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -362,7 +362,7 @@ func TestPRCheckout_differentRepo(t *testing.T) {
 	assert.Equal(t, "", output.Stderr())
 }
 
-func TestPRCheckout_differentRepo_existingBranch(t *testing.T) {
+func TestPRCheckoutdifferentRepoexistingBranch(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -382,7 +382,7 @@ func TestPRCheckout_differentRepo_existingBranch(t *testing.T) {
 	assert.Equal(t, "", output.Stderr())
 }
 
-func TestPRCheckout_detachedHead(t *testing.T) {
+func TestPRCheckoutdetachedHead(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -402,7 +402,7 @@ func TestPRCheckout_detachedHead(t *testing.T) {
 	assert.Equal(t, "", output.Stderr())
 }
 
-func TestPRCheckout_differentRepo_currentBranch(t *testing.T) {
+func TestPRCheckoutdifferentRepocurrentBranch(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -422,7 +422,7 @@ func TestPRCheckout_differentRepo_currentBranch(t *testing.T) {
 	assert.Equal(t, "", output.Stderr())
 }
 
-func TestPRCheckout_differentRepo_invalidBranchName(t *testing.T) {
+func TestPRCheckoutdifferentRepoinvalidBranchName(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -438,7 +438,7 @@ func TestPRCheckout_differentRepo_invalidBranchName(t *testing.T) {
 	assert.Equal(t, "", output.Stderr())
 }
 
-func TestPRCheckout_maintainerCanModify(t *testing.T) {
+func TestPRCheckoutmaintainerCanModify(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -462,7 +462,7 @@ func TestPRCheckout_maintainerCanModify(t *testing.T) {
 	assert.Equal(t, "", output.Stderr())
 }
 
-func TestPRCheckout_recurseSubmodules(t *testing.T) {
+func TestPRCheckoutrecurseSubmodules(t *testing.T) {
 	http := &httpmock.Registry{}
 
 	baseRepo, pr := stubPR(literal_4920, literal_3587)
@@ -484,7 +484,7 @@ func TestPRCheckout_recurseSubmodules(t *testing.T) {
 	assert.Equal(t, "", output.Stderr())
 }
 
-func TestPRCheckout_force(t *testing.T) {
+func TestPRCheckoutforce(t *testing.T) {
 	http := &httpmock.Registry{}
 
 	baseRepo, pr := stubPR(literal_4920, literal_3587)
@@ -505,7 +505,7 @@ func TestPRCheckout_force(t *testing.T) {
 	assert.Equal(t, "", output.Stderr())
 }
 
-func TestPRCheckout_detach(t *testing.T) {
+func TestPRCheckoutdetach(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 

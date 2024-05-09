@@ -8,7 +8,7 @@ import (
 	"gopkg.in/h2non/gock.v1"
 )
 
-func TestProjectItems_DefaultLimit(t *testing.T) {
+func TestProjectItemsDefaultLimit(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -61,7 +61,7 @@ func TestProjectItems_DefaultLimit(t *testing.T) {
 	assert.Len(t, project.Items.Nodes, 3)
 }
 
-func TestProjectItems_LowerLimit(t *testing.T) {
+func TestProjectItemsLowerLimit(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -111,7 +111,7 @@ func TestProjectItems_LowerLimit(t *testing.T) {
 	assert.Len(t, project.Items.Nodes, 2)
 }
 
-func TestProjectItems_NoLimit(t *testing.T) {
+func TestProjectItemsNoLimit(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -164,7 +164,7 @@ func TestProjectItems_NoLimit(t *testing.T) {
 	assert.Len(t, project.Items.Nodes, 3)
 }
 
-func TestProjectFields_LowerLimit(t *testing.T) {
+func TestProjectFieldsLowerLimit(t *testing.T) {
 
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
@@ -214,7 +214,7 @@ func TestProjectFields_LowerLimit(t *testing.T) {
 	assert.Len(t, project.Fields.Nodes, 2)
 }
 
-func TestProjectFields_DefaultLimit(t *testing.T) {
+func TestProjectFieldsDefaultLimit(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -268,7 +268,7 @@ func TestProjectFields_DefaultLimit(t *testing.T) {
 	assert.Len(t, project.Fields.Nodes, 3)
 }
 
-func TestProjectFields_NoLimit(t *testing.T) {
+func TestProjectFieldsNoLimit(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -352,20 +352,20 @@ func TestRequiredScopesFromServerMessage(t *testing.T) {
 	}
 }
 
-func TestNewProject_nonTTY(t *testing.T) {
+func TestNewProjectnonTTY(t *testing.T) {
 	client := NewTestClient()
 	_, err := client.NewProject(false, &Owner{}, 0, false)
 	assert.EqualError(t, err, "project number is required when not running interactively")
 }
 
-func TestNewOwner_nonTTY(t *testing.T) {
+func TestNewOwnernonTTY(t *testing.T) {
 	client := NewTestClient()
 	_, err := client.NewOwner(false, "")
 	assert.EqualError(t, err, "owner is required when not running interactively")
 
 }
 
-func TestProjectItems_FieldTitle(t *testing.T) {
+func TestProjectItemsFieldTitle(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 

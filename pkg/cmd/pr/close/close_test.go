@@ -126,7 +126,7 @@ func TestPrClose(t *testing.T) {
 	assert.Equal(t, "✓ Closed pull request OWNER/REPO#96 (The title of the PR)\n", output.Stderr())
 }
 
-func TestPrClose_alreadyClosed(t *testing.T) {
+func TestPrClosealreadyClosed(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -141,7 +141,7 @@ func TestPrClose_alreadyClosed(t *testing.T) {
 	assert.Equal(t, "! Pull request OWNER/REPO#96 (The title of the PR) is already closed\n", output.Stderr())
 }
 
-func TestPrClose_deleteBranch_sameRepo(t *testing.T) {
+func TestPrClosedeleteBranchsameRepo(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -175,7 +175,7 @@ func TestPrClose_deleteBranch_sameRepo(t *testing.T) {
 	`), output.Stderr())
 }
 
-func TestPrClose_deleteBranch_crossRepo(t *testing.T) {
+func TestPrClosedeleteBranchcrossRepo(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -207,7 +207,7 @@ func TestPrClose_deleteBranch_crossRepo(t *testing.T) {
 	`), output.Stderr())
 }
 
-func TestPrClose_deleteBranch_sameBranch(t *testing.T) {
+func TestPrClosedeleteBranchsameBranch(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -242,7 +242,7 @@ func TestPrClose_deleteBranch_sameBranch(t *testing.T) {
 	`), output.Stderr())
 }
 
-func TestPrClose_deleteBranch_notInGitRepo(t *testing.T) {
+func TestPrClosedeleteBranchnotInGitRepo(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -276,7 +276,7 @@ func TestPrClose_deleteBranch_notInGitRepo(t *testing.T) {
 	`), output.Stderr())
 }
 
-func TestPrClose_withComment(t *testing.T) {
+func TestPrClosewithComment(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 

@@ -182,7 +182,7 @@ func TestNewCmdLink(t *testing.T) {
 	}
 }
 
-func TestRunLink_Repo(t *testing.T) {
+func TestRunLinkRepo(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -292,7 +292,7 @@ func TestRunLink_Repo(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunLink_Team(t *testing.T) {
+func TestRunLinkTeam(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 

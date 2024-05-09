@@ -96,7 +96,7 @@ func TestNewCmdTransfer(t *testing.T) {
 	}
 }
 
-func TestTransferRun_noflags(t *testing.T) {
+func TestTransferRunnoflags(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 

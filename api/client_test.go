@@ -136,7 +136,7 @@ func TestRESTError(t *testing.T) {
 	}
 }
 
-func TestHandleHTTPError_GraphQL502(t *testing.T) {
+func TestHandleHTTPErrorGraphQL502(t *testing.T) {
 	req, err := http.NewRequest("GET", "https://api.github.com/user", nil)
 	if err != nil {
 		t.Fatal(err)
@@ -153,7 +153,7 @@ func TestHandleHTTPError_GraphQL502(t *testing.T) {
 	}
 }
 
-func TestHTTPError_ScopesSuggestion(t *testing.T) {
+func TestHTTPErrorScopesSuggestion(t *testing.T) {
 	makeResponse := func(s int, u, haveScopes, needScopes string) *http.Response {
 		req, err := http.NewRequest("GET", u, nil)
 		if err != nil {

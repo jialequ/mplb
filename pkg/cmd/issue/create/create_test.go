@@ -430,7 +430,7 @@ func TestIssueCreate(t *testing.T) {
 	assert.Equal(t, literal_9648, output.String())
 }
 
-func TestIssueCreate_recover(t *testing.T) {
+func TestIssueCreaterecover(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -513,7 +513,7 @@ func TestIssueCreate_recover(t *testing.T) {
 	assert.Equal(t, literal_9648, output.String())
 }
 
-func TestIssueCreate_nonLegacyTemplate(t *testing.T) {
+func TestIssueCreatenonLegacyTemplate(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -576,7 +576,7 @@ func TestIssueCreate_nonLegacyTemplate(t *testing.T) {
 	assert.Equal(t, "", output.BrowsedURL)
 }
 
-func TestIssueCreate_continueInBrowser(t *testing.T) {
+func TestIssueCreatecontinueInBrowser(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -623,7 +623,7 @@ func TestIssueCreate_continueInBrowser(t *testing.T) {
 	assert.Equal(t, "https://github.com/OWNER/REPO/issues/new?body=body&title=hello", output.BrowsedURL)
 }
 
-func TestIssueCreate_metadata(t *testing.T) {
+func TestIssueCreatemetadata(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -722,7 +722,7 @@ func TestIssueCreate_metadata(t *testing.T) {
 	assert.Equal(t, literal_9648, output.String())
 }
 
-func TestIssueCreate_disabledIssues(t *testing.T) {
+func TestIssueCreatedisabledIssues(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -741,7 +741,7 @@ func TestIssueCreate_disabledIssues(t *testing.T) {
 	}
 }
 
-func TestIssueCreate_AtMeAssignee(t *testing.T) {
+func TestIssueCreateAtMeAssignee(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -794,7 +794,7 @@ func TestIssueCreate_AtMeAssignee(t *testing.T) {
 	assert.Equal(t, literal_9648, output.String())
 }
 
-func TestIssueCreate_projectsV2(t *testing.T) {
+func TestIssueCreateprojectsV2(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 

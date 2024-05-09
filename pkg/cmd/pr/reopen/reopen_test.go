@@ -74,7 +74,7 @@ func TestPRReopen(t *testing.T) {
 	assert.Equal(t, "✓ Reopened pull request OWNER/REPO#123 (The title of the PR)\n", output.Stderr())
 }
 
-func TestPRReopen_alreadyOpen(t *testing.T) {
+func TestPRReopenalreadyOpen(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -91,7 +91,7 @@ func TestPRReopen_alreadyOpen(t *testing.T) {
 	assert.Equal(t, "! Pull request OWNER/REPO#123 (The title of the PR) is already open\n", output.Stderr())
 }
 
-func TestPRReopen_alreadyMerged(t *testing.T) {
+func TestPRReopenalreadyMerged(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -108,7 +108,7 @@ func TestPRReopen_alreadyMerged(t *testing.T) {
 	assert.Equal(t, "X Pull request OWNER/REPO#123 (The title of the PR) can't be reopened because it was already merged\n", output.Stderr())
 }
 
-func TestPRReopen_withComment(t *testing.T) {
+func TestPRReopenwithComment(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 

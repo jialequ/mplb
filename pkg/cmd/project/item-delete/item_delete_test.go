@@ -100,7 +100,7 @@ func TestNewCmdDeleteItem(t *testing.T) {
 	}
 }
 
-func TestRunDelete_User(t *testing.T) {
+func TestRunDeleteUser(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get user ID
@@ -189,7 +189,7 @@ func TestRunDelete_User(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunDelete_Org(t *testing.T) {
+func TestRunDeleteOrg(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get org ID
@@ -278,7 +278,7 @@ func TestRunDelete_Org(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunDelete_Me(t *testing.T) {
+func TestRunDeleteMe(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get viewer ID
@@ -357,7 +357,7 @@ func TestRunDelete_Me(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunDelete_JSON(t *testing.T) {
+func TestRunDeleteJSON(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get user ID

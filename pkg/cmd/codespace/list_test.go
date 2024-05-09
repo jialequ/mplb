@@ -63,7 +63,7 @@ func TestListCmdFlagError(t *testing.T) {
 	}
 }
 
-func TestApp_List(t *testing.T) {
+func TestAppList(t *testing.T) {
 	type fields struct {
 		apiClient apiClient
 	}

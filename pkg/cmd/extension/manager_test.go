@@ -60,7 +60,7 @@ func newTestManager(dir string, client *http.Client, gitClient gitClient, ios *i
 	}
 }
 
-func TestManager_List(t *testing.T) {
+func TestManagerList(t *testing.T) {
 	tempDir := t.TempDir()
 	assert.NoError(t, stubExtension(filepath.Join(tempDir, "extensions", literal_4682, literal_4682)))
 	assert.NoError(t, stubExtension(filepath.Join(tempDir, "extensions", literal_9362, literal_9362)))
@@ -92,7 +92,7 @@ func TestManager_List(t *testing.T) {
 	gcTwo.AssertExpectations(t)
 }
 
-func TestManager_list_includeMetadata(t *testing.T) {
+func TestManagerlistincludeMetadata(t *testing.T) {
 	tempDir := t.TempDir()
 
 	assert.NoError(t, stubBinaryExtension(
@@ -131,7 +131,7 @@ func TestManager_list_includeMetadata(t *testing.T) {
 	assert.Equal(t, "https://example.com/owner/gh-bin-ext", exts[0].URL())
 }
 
-func TestManager_Remove(t *testing.T) {
+func TestManagerRemove(t *testing.T) {
 	tempDir := t.TempDir()
 	assert.NoError(t, stubExtension(filepath.Join(tempDir, "extensions", literal_4682, literal_4682)))
 	assert.NoError(t, stubExtension(filepath.Join(tempDir, "extensions", literal_9362, literal_9362)))
@@ -146,7 +146,7 @@ func TestManager_Remove(t *testing.T) {
 	assert.Equal(t, literal_9362, items[0].Name())
 }
 
-func TestManager_Upgrade_NoExtensions(t *testing.T) {
+func TestManagerUpgradeNoExtensions(t *testing.T) {
 	tempDir := t.TempDir()
 	ios, _, stdout, stderr := iostreams.Test()
 	m := newTestManager(tempDir, nil, nil, ios)
@@ -156,7 +156,7 @@ func TestManager_Upgrade_NoExtensions(t *testing.T) {
 	assert.Equal(t, "", stderr.String())
 }
 
-func TestManager_Upgrade_NoMatchingExtension(t *testing.T) {
+func TestManagerUpgradeNoMatchingExtension(t *testing.T) {
 	tempDir := t.TempDir()
 	extDir := filepath.Join(tempDir, "extensions", literal_4682)
 	assert.NoError(t, stubExtension(filepath.Join(tempDir, "extensions", literal_4682, literal_4682)))
@@ -172,7 +172,7 @@ func TestManager_Upgrade_NoMatchingExtension(t *testing.T) {
 	gcOne.AssertExpectations(t)
 }
 
-func TestManager_UpgradeExtensions(t *testing.T) {
+func TestManagerUpgradeExtensions(t *testing.T) {
 	tempDir := t.TempDir()
 	dirOne := filepath.Join(tempDir, "extensions", literal_4682)
 	dirTwo := filepath.Join(tempDir, "extensions", literal_9362)
@@ -210,7 +210,7 @@ func TestManager_UpgradeExtensions(t *testing.T) {
 	gcTwo.AssertExpectations(t)
 }
 
-func TestManager_UpgradeExtensions_DryRun(t *testing.T) {
+func TestManagerUpgradeExtensionsDryRun(t *testing.T) {
 	tempDir := t.TempDir()
 	dirOne := filepath.Join(tempDir, "extensions", literal_4682)
 	dirTwo := filepath.Join(tempDir, "extensions", literal_9362)
@@ -247,7 +247,7 @@ func TestManager_UpgradeExtensions_DryRun(t *testing.T) {
 	gcTwo.AssertExpectations(t)
 }
 
-func TestManager_UpgradeExtension_LocalExtension(t *testing.T) {
+func TestManagerUpgradeExtensionLocalExtension(t *testing.T) {
 	tempDir := t.TempDir()
 	assert.NoError(t, stubLocalExtension(tempDir, filepath.Join(tempDir, "extensions", literal_9374, literal_9374)))
 
@@ -262,7 +262,7 @@ func TestManager_UpgradeExtension_LocalExtension(t *testing.T) {
 	assert.Equal(t, "", stderr.String())
 }
 
-func TestManager_UpgradeExtension_LocalExtension_DryRun(t *testing.T) {
+func TestManagerUpgradeExtensionLocalExtensionDryRun(t *testing.T) {
 	tempDir := t.TempDir()
 	assert.NoError(t, stubLocalExtension(tempDir, filepath.Join(tempDir, "extensions", literal_9374, literal_9374)))
 
@@ -278,7 +278,7 @@ func TestManager_UpgradeExtension_LocalExtension_DryRun(t *testing.T) {
 	assert.Equal(t, "", stderr.String())
 }
 
-func TestManager_UpgradeExtension_GitExtension(t *testing.T) {
+func TestManagerUpgradeExtensionGitExtension(t *testing.T) {
 	tempDir := t.TempDir()
 	extensionDir := filepath.Join(tempDir, "extensions", literal_1539)
 	assert.NoError(t, stubExtension(filepath.Join(tempDir, "extensions", literal_1539, literal_1539)))
@@ -302,7 +302,7 @@ func TestManager_UpgradeExtension_GitExtension(t *testing.T) {
 	gcOne.AssertExpectations(t)
 }
 
-func TestManager_UpgradeExtension_GitExtension_DryRun(t *testing.T) {
+func TestManagerUpgradeExtensionGitExtensionDryRun(t *testing.T) {
 	tempDir := t.TempDir()
 	extDir := filepath.Join(tempDir, "extensions", literal_1539)
 	assert.NoError(t, stubExtension(filepath.Join(tempDir, "extensions", literal_1539, literal_1539)))
@@ -326,7 +326,7 @@ func TestManager_UpgradeExtension_GitExtension_DryRun(t *testing.T) {
 	gcOne.AssertExpectations(t)
 }
 
-func TestManager_UpgradeExtension_GitExtension_Force(t *testing.T) {
+func TestManagerUpgradeExtensionGitExtensionForce(t *testing.T) {
 	tempDir := t.TempDir()
 	extensionDir := filepath.Join(tempDir, "extensions", literal_1539)
 	assert.NoError(t, stubExtension(filepath.Join(tempDir, "extensions", literal_1539, literal_1539)))
@@ -351,7 +351,7 @@ func TestManager_UpgradeExtension_GitExtension_Force(t *testing.T) {
 	gcOne.AssertExpectations(t)
 }
 
-func TestManager_MigrateToBinaryExtension(t *testing.T) {
+func TestManagerMigrateToBinaryExtension(t *testing.T) {
 	tempDir := t.TempDir()
 	assert.NoError(t, stubExtension(filepath.Join(tempDir, "extensions", literal_1539, literal_1539)))
 	ios, _, stdout, stderr := iostreams.Test()
@@ -429,7 +429,7 @@ func TestManager_MigrateToBinaryExtension(t *testing.T) {
 	assert.Equal(t, literal_7048, string(fakeBin))
 }
 
-func TestManager_UpgradeExtension_BinaryExtension(t *testing.T) {
+func TestManagerUpgradeExtensionBinaryExtension(t *testing.T) {
 	tempDir := t.TempDir()
 
 	reg := httpmock.Registry{}
@@ -493,7 +493,7 @@ func TestManager_UpgradeExtension_BinaryExtension(t *testing.T) {
 	assert.Equal(t, "", stderr.String())
 }
 
-func TestManager_UpgradeExtension_BinaryExtension_Pinned_Force(t *testing.T) {
+func TestManagerUpgradeExtensionBinaryExtensionPinnedForce(t *testing.T) {
 	tempDir := t.TempDir()
 
 	reg := httpmock.Registry{}
@@ -558,7 +558,7 @@ func TestManager_UpgradeExtension_BinaryExtension_Pinned_Force(t *testing.T) {
 	assert.Equal(t, "", stderr.String())
 }
 
-func TestManager_UpgradeExtension_BinaryExtension_DryRun(t *testing.T) {
+func TestManagerUpgradeExtensionBinaryExtensionDryRun(t *testing.T) {
 	tempDir := t.TempDir()
 	reg := httpmock.Registry{}
 	defer reg.Verify(t)
@@ -611,7 +611,7 @@ func TestManager_UpgradeExtension_BinaryExtension_DryRun(t *testing.T) {
 	assert.Equal(t, "", stderr.String())
 }
 
-func TestManager_UpgradeExtension_BinaryExtension_Pinned(t *testing.T) {
+func TestManagerUpgradeExtensionBinaryExtensionPinned(t *testing.T) {
 	tempDir := t.TempDir()
 
 	assert.NoError(t, stubBinaryExtension(
@@ -636,7 +636,7 @@ func TestManager_UpgradeExtension_BinaryExtension_Pinned(t *testing.T) {
 	assert.Equal(t, err, pinnedExtensionUpgradeError)
 }
 
-func TestManager_UpgradeExtension_GitExtension_Pinned(t *testing.T) {
+func TestManagerUpgradeExtensionGitExtensionPinned(t *testing.T) {
 	tempDir := t.TempDir()
 	extDir := filepath.Join(tempDir, "extensions", literal_1539)
 	assert.NoError(t, stubPinnedExtension(filepath.Join(extDir, literal_1539), "abcd1234"))
@@ -664,7 +664,7 @@ func TestManager_UpgradeExtension_GitExtension_Pinned(t *testing.T) {
 	gcOne.AssertExpectations(t)
 }
 
-func TestManager_Install_git(t *testing.T) {
+func TestManagerInstallgit(t *testing.T) {
 	tempDir := t.TempDir()
 
 	reg := httpmock.Registry{}
@@ -703,7 +703,7 @@ func TestManager_Install_git(t *testing.T) {
 	gc.AssertExpectations(t)
 }
 
-func TestManager_Install_git_pinned(t *testing.T) {
+func TestManagerInstallgitpinned(t *testing.T) {
 	tempDir := t.TempDir()
 
 	reg := httpmock.Registry{}
@@ -748,7 +748,7 @@ func TestManager_Install_git_pinned(t *testing.T) {
 	gcOne.AssertExpectations(t)
 }
 
-func TestManager_Install_binary_pinned(t *testing.T) {
+func TestManagerInstallbinarypinned(t *testing.T) {
 	repo := ghrepo.NewWithHost("owner", literal_9176, literal_8564)
 
 	reg := httpmock.Registry{}
@@ -814,7 +814,7 @@ func TestManager_Install_binary_pinned(t *testing.T) {
 
 }
 
-func TestManager_Install_binary_unsupported(t *testing.T) {
+func TestManagerInstallbinaryunsupported(t *testing.T) {
 	repo := ghrepo.NewWithHost("owner", literal_9176, literal_8564)
 
 	reg := httpmock.Registry{}
@@ -857,7 +857,7 @@ func TestManager_Install_binary_unsupported(t *testing.T) {
 	assert.Equal(t, "", stderr.String())
 }
 
-func TestManager_Install_binary(t *testing.T) {
+func TestManagerInstallbinary(t *testing.T) {
 	repo := ghrepo.NewWithHost("owner", literal_9176, literal_8564)
 
 	reg := httpmock.Registry{}
@@ -921,7 +921,7 @@ func TestManager_Install_binary(t *testing.T) {
 	assert.Equal(t, "", stderr.String())
 }
 
-func TestManager_repo_not_found(t *testing.T) {
+func TestManagerreponotfound(t *testing.T) {
 	repo := ghrepo.NewWithHost("owner", literal_9176, literal_8564)
 
 	reg := httpmock.Registry{}
@@ -947,7 +947,7 @@ func TestManager_repo_not_found(t *testing.T) {
 	assert.Equal(t, "", stderr.String())
 }
 
-func TestManager_Create(t *testing.T) {
+func TestManagerCreate(t *testing.T) {
 	chdirTemp(t)
 	err := os.MkdirAll(literal_7215, 0755)
 	assert.NoError(t, err)
@@ -974,7 +974,7 @@ func TestManager_Create(t *testing.T) {
 	gcOne.AssertExpectations(t)
 }
 
-func TestManager_Create_other_binary(t *testing.T) {
+func TestManagerCreateotherbinary(t *testing.T) {
 	chdirTemp(t)
 	err := os.MkdirAll(literal_7215, 0755)
 	assert.NoError(t, err)

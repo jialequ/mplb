@@ -190,7 +190,7 @@ func prFromFixtures(fixtures map[string]string) (*api.PullRequest, error) {
 	return response.Data.Repository.PullRequest, nil
 }
 
-func TestPRView_Preview_nontty(t *testing.T) {
+func TestPRViewPreviewnontty(t *testing.T) {
 	tests := map[string]struct {
 		branch          string
 		args            string
@@ -367,7 +367,7 @@ func TestPRView_Preview_nontty(t *testing.T) {
 	}
 }
 
-func TestPRView_Preview(t *testing.T) {
+func TestPRViewPreview(t *testing.T) {
 	tests := map[string]struct {
 		branch          string
 		args            string
@@ -575,7 +575,7 @@ func TestPRView_Preview(t *testing.T) {
 	}
 }
 
-func TestPRView_web_currentBranch(t *testing.T) {
+func TestPRViewwebcurrentBranch(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -594,7 +594,7 @@ func TestPRView_web_currentBranch(t *testing.T) {
 	assert.Equal(t, "https://github.com/OWNER/REPO/pull/10", output.BrowsedURL)
 }
 
-func TestPRView_web_noResultsForBranch(t *testing.T) {
+func TestPRViewwebnoResultsForBranch(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -609,7 +609,7 @@ func TestPRView_web_noResultsForBranch(t *testing.T) {
 	}
 }
 
-func TestPRView_tty_Comments(t *testing.T) {
+func TestPRViewttyComments(t *testing.T) {
 	tests := map[string]struct {
 		branch          string
 		cli             string
@@ -708,7 +708,7 @@ func TestPRView_tty_Comments(t *testing.T) {
 	}
 }
 
-func TestPRView_nontty_Comments(t *testing.T) {
+func TestPRViewnonttyComments(t *testing.T) {
 	tests := map[string]struct {
 		branch          string
 		cli             string

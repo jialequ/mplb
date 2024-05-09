@@ -1147,7 +1147,7 @@ func TestCreateRun(t *testing.T) {
 	}
 }
 
-func TestCreateRun_interactive(t *testing.T) {
+func TestCreateRuninteractive(t *testing.T) {
 	tests := []struct {
 		name          string
 		httpStubs     func(*httpmock.Registry)

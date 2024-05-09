@@ -249,7 +249,7 @@ func TestRunList(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunList_tty(t *testing.T) {
+func TestRunListtty(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get user ID
@@ -329,7 +329,7 @@ func TestRunList_tty(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunList_Me(t *testing.T) {
+func TestRunListMe(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -675,7 +675,7 @@ func TestRunListWithClosed(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunListWeb_User(t *testing.T) {
+func TestRunListWebUser(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get user ID
@@ -722,7 +722,7 @@ func TestRunListWeb_User(t *testing.T) {
 	assert.Equal(t, "https://github.com/users/monalisa/projects", buf.String())
 }
 
-func TestRunListWeb_Org(t *testing.T) {
+func TestRunListWebOrg(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get org ID
@@ -769,7 +769,7 @@ func TestRunListWeb_Org(t *testing.T) {
 	assert.Equal(t, "https://github.com/orgs/github/projects", buf.String())
 }
 
-func TestRunListWeb_Me(t *testing.T) {
+func TestRunListWebMe(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -809,7 +809,7 @@ func TestRunListWeb_Me(t *testing.T) {
 	assert.Equal(t, "https://github.com/users/theviewer/projects", buf.String())
 }
 
-func TestRunListWeb_Empty(t *testing.T) {
+func TestRunListWebEmpty(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -848,7 +848,7 @@ func TestRunListWeb_Empty(t *testing.T) {
 	assert.Equal(t, "https://github.com/users/theviewer/projects", buf.String())
 }
 
-func TestRunListWeb_Closed(t *testing.T) {
+func TestRunListWebClosed(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -888,7 +888,7 @@ func TestRunListWeb_Closed(t *testing.T) {
 	assert.Equal(t, "https://github.com/users/theviewer/projects?query=is%3Aclosed", buf.String())
 }
 
-func TestRunList_JSON(t *testing.T) {
+func TestRunListJSON(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get user ID

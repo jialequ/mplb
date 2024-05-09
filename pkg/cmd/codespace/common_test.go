@@ -7,7 +7,7 @@ import (
 	"github.com/jialequ/mplb/internal/codespaces/api"
 )
 
-func TestCodespace_displayName(t *testing.T) {
+func TestCodespacedisplayName(t *testing.T) {
 	type fields struct {
 		Codespace *api.Codespace
 	}

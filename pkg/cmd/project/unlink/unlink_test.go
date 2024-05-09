@@ -182,7 +182,7 @@ func TestNewCmdUnlink(t *testing.T) {
 	}
 }
 
-func TestRunUnlink_Repo(t *testing.T) {
+func TestRunUnlinkRepo(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -292,7 +292,7 @@ func TestRunUnlink_Repo(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunUnlink_Team(t *testing.T) {
+func TestRunUnlinkTeam(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 

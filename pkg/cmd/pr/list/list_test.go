@@ -95,7 +95,7 @@ func TestPRList(t *testing.T) {
 	assert.Equal(t, ``, output.Stderr())
 }
 
-func TestPRList_nontty(t *testing.T) {
+func TestPRListnontty(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -114,7 +114,7 @@ func TestPRList_nontty(t *testing.T) {
 `, output.String())
 }
 
-func TestPRList_filtering(t *testing.T) {
+func TestPRListfiltering(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -131,7 +131,7 @@ func TestPRList_filtering(t *testing.T) {
 	assert.Equal(t, "", output.Stderr())
 }
 
-func TestPRList_filteringRemoveDuplicate(t *testing.T) {
+func TestPRListfilteringRemoveDuplicate(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -152,7 +152,7 @@ func TestPRList_filteringRemoveDuplicate(t *testing.T) {
 	assert.Equal(t, idx, strings.LastIndex(out, literal_7462))
 }
 
-func TestPRList_filteringClosed(t *testing.T) {
+func TestPRListfilteringClosed(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -166,7 +166,7 @@ func TestPRList_filteringClosed(t *testing.T) {
 	assert.Error(t, err)
 }
 
-func TestPRList_filteringHeadBranch(t *testing.T) {
+func TestPRListfilteringHeadBranch(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -180,7 +180,7 @@ func TestPRList_filteringHeadBranch(t *testing.T) {
 	assert.Error(t, err)
 }
 
-func TestPRList_filteringAssignee(t *testing.T) {
+func TestPRListfilteringAssignee(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -194,7 +194,7 @@ func TestPRList_filteringAssignee(t *testing.T) {
 	assert.Error(t, err)
 }
 
-func TestPRList_filteringDraft(t *testing.T) {
+func TestPRListfilteringDraft(t *testing.T) {
 	tests := []struct {
 		name          string
 		cli           string
@@ -229,7 +229,7 @@ func TestPRList_filteringDraft(t *testing.T) {
 	}
 }
 
-func TestPRList_filteringAuthor(t *testing.T) {
+func TestPRListfilteringAuthor(t *testing.T) {
 	tests := []struct {
 		name          string
 		cli           string
@@ -274,14 +274,14 @@ func TestPRList_filteringAuthor(t *testing.T) {
 	}
 }
 
-func TestPRList_withInvalidLimitFlag(t *testing.T) {
+func TestPRListwithInvalidLimitFlag(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 	_, err := runCommand(http, true, `--limit=0`)
 	assert.EqualError(t, err, "invalid value for --limit: 0")
 }
 
-func TestPRList_web(t *testing.T) {
+func TestPRListweb(t *testing.T) {
 	tests := []struct {
 		name               string
 		cli                string
@@ -324,7 +324,7 @@ func TestPRList_web(t *testing.T) {
 	}
 }
 
-func TestPRList_withProjectItems(t *testing.T) {
+func TestPRListwithProjectItems(t *testing.T) {
 	reg := &httpmock.Registry{}
 	defer reg.Verify(t)
 
@@ -397,7 +397,7 @@ func TestPRList_withProjectItems(t *testing.T) {
 	require.Equal(t, prsAndTotalCount.PullRequests[0].ProjectItems.Nodes[0].Status, expectedStatus)
 }
 
-func TestPRList_Search_withProjectItems(t *testing.T) {
+func TestPRListSearchwithProjectItems(t *testing.T) {
 	reg := &httpmock.Registry{}
 	defer reg.Verify(t)
 

@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestRemotes_FindByName(t *testing.T) {
+func TestRemotesFindByName(t *testing.T) {
 	list := Remotes{
 		&Remote{Remote: &git.Remote{Name: "mona"}, Repo: ghrepo.New("monalisa", "myfork")},
 		&Remote{Remote: &git.Remote{Name: "origin"}, Repo: ghrepo.New("monalisa", "octo-cat")},
@@ -28,7 +28,7 @@ func TestRemotes_FindByName(t *testing.T) {
 	assert.Error(t, err, "no GitHub remotes found")
 }
 
-func TestRemotes_FindByRepo(t *testing.T) {
+func TestRemotesFindByRepo(t *testing.T) {
 	list := Remotes{
 		&Remote{Remote: &git.Remote{Name: "remote-0"}, Repo: ghrepo.New("owner", "repo")},
 		&Remote{Remote: &git.Remote{Name: "remote-1"}, Repo: ghrepo.New("another-owner", "another-repo")},

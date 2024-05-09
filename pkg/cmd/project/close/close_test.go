@@ -88,7 +88,7 @@ func TestNewCmdClose(t *testing.T) {
 	}
 }
 
-func TestRunClose_User(t *testing.T) {
+func TestRunCloseUser(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -184,7 +184,7 @@ func TestRunClose_User(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunClose_Org(t *testing.T) {
+func TestRunCloseOrg(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -275,7 +275,7 @@ func TestRunClose_Org(t *testing.T) {
 	assert.Equal(t, "", stdout.String())
 }
 
-func TestRunClose_Me(t *testing.T) {
+func TestRunCloseMe(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -356,7 +356,7 @@ func TestRunClose_Me(t *testing.T) {
 	assert.Equal(t, "", stdout.String())
 }
 
-func TestRunClose_Reopen(t *testing.T) {
+func TestRunCloseReopen(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -453,7 +453,7 @@ func TestRunClose_Reopen(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunClose_JSON(t *testing.T) {
+func TestRunCloseJSON(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 

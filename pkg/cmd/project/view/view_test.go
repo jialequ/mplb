@@ -91,7 +91,7 @@ func TestNewCmdview(t *testing.T) {
 	}
 }
 
-func TestRunView_User(t *testing.T) {
+func TestRunViewUser(t *testing.T) {
 	defer gock.Off()
 
 	// get user ID
@@ -163,7 +163,7 @@ func TestRunView_User(t *testing.T) {
 
 }
 
-func TestRunView_Viewer(t *testing.T) {
+func TestRunViewViewer(t *testing.T) {
 	defer gock.Off()
 
 	// get viewer ID
@@ -226,7 +226,7 @@ func TestRunView_Viewer(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestRunView_Org(t *testing.T) {
+func TestRunViewOrg(t *testing.T) {
 	defer gock.Off()
 
 	// get org ID
@@ -298,7 +298,7 @@ func TestRunView_Org(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestRunViewWeb_User(t *testing.T) {
+func TestRunViewWebUser(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get user ID
@@ -376,7 +376,7 @@ func TestRunViewWeb_User(t *testing.T) {
 	assert.Equal(t, "https://github.com/users/monalisa/projects/8", buf.String())
 }
 
-func TestRunViewWeb_Org(t *testing.T) {
+func TestRunViewWebOrg(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get org ID
@@ -454,7 +454,7 @@ func TestRunViewWeb_Org(t *testing.T) {
 	assert.Equal(t, "https://github.com/orgs/github/projects/8", buf.String())
 }
 
-func TestRunViewWeb_Me(t *testing.T) {
+func TestRunViewWebMe(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get viewer ID
@@ -529,7 +529,7 @@ func TestRunViewWeb_Me(t *testing.T) {
 	assert.Equal(t, "https://github.com/users/theviewer/projects/8", buf.String())
 }
 
-func TestRunViewWeb_TTY(t *testing.T) {
+func TestRunViewWebTTY(t *testing.T) {
 	tests := []struct {
 		name           string
 		setup          func(*viewOpts, *testing.T) func()

@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestUpdateAvailable_IsLocal(t *testing.T) {
+func TestUpdateAvailableIsLocal(t *testing.T) {
 	e := &Extension{
 		kind: LocalKind,
 	}
@@ -15,7 +15,7 @@ func TestUpdateAvailable_IsLocal(t *testing.T) {
 	assert.False(t, e.UpdateAvailable())
 }
 
-func TestUpdateAvailable_NoCurrentVersion(t *testing.T) {
+func TestUpdateAvailableNoCurrentVersion(t *testing.T) {
 	e := &Extension{
 		kind: LocalKind,
 	}
@@ -23,7 +23,7 @@ func TestUpdateAvailable_NoCurrentVersion(t *testing.T) {
 	assert.False(t, e.UpdateAvailable())
 }
 
-func TestUpdateAvailable_NoLatestVersion(t *testing.T) {
+func TestUpdateAvailableNoLatestVersion(t *testing.T) {
 	e := &Extension{
 		kind:           BinaryKind,
 		currentVersion: "1.0.0",
@@ -32,7 +32,7 @@ func TestUpdateAvailable_NoLatestVersion(t *testing.T) {
 	assert.False(t, e.UpdateAvailable())
 }
 
-func TestUpdateAvailable_CurrentVersionIsLatestVersion(t *testing.T) {
+func TestUpdateAvailableCurrentVersionIsLatestVersion(t *testing.T) {
 	e := &Extension{
 		kind:           BinaryKind,
 		currentVersion: "1.0.0",

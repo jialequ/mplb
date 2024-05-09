@@ -9,7 +9,7 @@ import (
 	"github.com/jialequ/mplb/pkg/iostreams"
 )
 
-func TestApp_VSCode(t *testing.T) {
+func TestAppVSCode(t *testing.T) {
 	type args struct {
 		codespaceName string
 		useInsiders   bool

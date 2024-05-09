@@ -255,7 +255,7 @@ func TestListRun(t *testing.T) {
 	}
 }
 
-func TestGetVariables_pagination(t *testing.T) {
+func TestGetVariablespagination(t *testing.T) {
 	reg := &httpmock.Registry{}
 	defer reg.Verify(t)
 	reg.Register(

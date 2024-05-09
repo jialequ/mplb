@@ -110,7 +110,7 @@ func TestListURLWithQuery(t *testing.T) {
 	}
 }
 
-func TestMeReplacer_Replace(t *testing.T) {
+func TestMeReplacerReplace(t *testing.T) {
 	rtSuccess := &httpmock.Registry{}
 	rtSuccess.Register(
 		httpmock.GraphQL(`query UserCurrent\b`),

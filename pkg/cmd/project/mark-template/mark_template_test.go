@@ -89,7 +89,7 @@ func TestNewCmdMarkTemplate(t *testing.T) {
 	}
 }
 
-func TestRunMarkTemplate_Org(t *testing.T) {
+func TestRunMarkTemplateOrg(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -181,7 +181,7 @@ func TestRunMarkTemplate_Org(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunUnmarkTemplate_Org(t *testing.T) {
+func TestRunUnmarkTemplateOrg(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -274,7 +274,7 @@ func TestRunUnmarkTemplate_Org(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunMarkTemplate_JSON(t *testing.T) {
+func TestRunMarkTemplateJSON(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 

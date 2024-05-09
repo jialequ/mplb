@@ -145,7 +145,7 @@ func TestPRReady(t *testing.T) {
 	assert.Equal(t, "✓ Pull request OWNER/REPO#123 is marked as \"ready for review\"\n", output.Stderr())
 }
 
-func TestPRReady_alreadyReady(t *testing.T) {
+func TestPRReadyalreadyReady(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -187,7 +187,7 @@ func TestPRReadyUndo(t *testing.T) {
 	assert.Equal(t, "✓ Pull request OWNER/REPO#123 is converted to \"draft\"\n", output.Stderr())
 }
 
-func TestPRReadyUndo_alreadyDraft(t *testing.T) {
+func TestPRReadyUndoalreadyDraft(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -204,7 +204,7 @@ func TestPRReadyUndo_alreadyDraft(t *testing.T) {
 	assert.Equal(t, "! Pull request OWNER/REPO#123 is already \"in draft\"\n", output.Stderr())
 }
 
-func TestPRReady_closed(t *testing.T) {
+func TestPRReadyclosed(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 

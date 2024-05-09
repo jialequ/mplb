@@ -134,7 +134,7 @@ func createHttpClient() (*http.Client, error) {
 	return &http.Client{}, nil
 }
 
-func TestNew_APIURL_dotcomConfig(t *testing.T) {
+func TestNewAPIURLdotcomConfig(t *testing.T) {
 	t.Setenv("GITHUB_API_URL", "")
 	t.Setenv("GITHUB_SERVER_URL", literal_0782)
 	cfg := &config.ConfigMock{
@@ -157,7 +157,7 @@ func TestNew_APIURL_dotcomConfig(t *testing.T) {
 	}
 }
 
-func TestNew_APIURL_customConfig(t *testing.T) {
+func TestNewAPIURLcustomConfig(t *testing.T) {
 	t.Setenv("GITHUB_API_URL", "")
 	t.Setenv("GITHUB_SERVER_URL", "https://github.mycompany.com")
 	cfg := &config.ConfigMock{
@@ -182,7 +182,7 @@ func TestNew_APIURL_customConfig(t *testing.T) {
 	}
 }
 
-func TestNew_APIURL_env(t *testing.T) {
+func TestNewAPIURLenv(t *testing.T) {
 	t.Setenv("GITHUB_API_URL", literal_5824)
 	t.Setenv("GITHUB_SERVER_URL", literal_3178)
 	cfg := &config.ConfigMock{
@@ -205,7 +205,7 @@ func TestNew_APIURL_env(t *testing.T) {
 	}
 }
 
-func TestNew_APIURL_dotcomFallback(t *testing.T) {
+func TestNewAPIURLdotcomFallback(t *testing.T) {
 	t.Setenv("GITHUB_API_URL", "")
 	f := &cmdutil.Factory{
 		Config: func() (config.Config, error) {
@@ -219,7 +219,7 @@ func TestNew_APIURL_dotcomFallback(t *testing.T) {
 	}
 }
 
-func TestNew_ServerURL_dotcomConfig(t *testing.T) {
+func TestNewServerURLdotcomConfig(t *testing.T) {
 	t.Setenv("GITHUB_SERVER_URL", "")
 	t.Setenv("GITHUB_API_URL", literal_8513)
 	cfg := &config.ConfigMock{
@@ -242,7 +242,7 @@ func TestNew_ServerURL_dotcomConfig(t *testing.T) {
 	}
 }
 
-func TestNew_ServerURL_customConfig(t *testing.T) {
+func TestNewServerURLcustomConfig(t *testing.T) {
 	t.Setenv("GITHUB_SERVER_URL", "")
 	t.Setenv("GITHUB_API_URL", "https://github.mycompany.com/api/v3")
 	cfg := &config.ConfigMock{
@@ -267,7 +267,7 @@ func TestNew_ServerURL_customConfig(t *testing.T) {
 	}
 }
 
-func TestNew_ServerURL_env(t *testing.T) {
+func TestNewServerURLenv(t *testing.T) {
 	t.Setenv("GITHUB_SERVER_URL", literal_3178)
 	t.Setenv("GITHUB_API_URL", literal_5824)
 	cfg := &config.ConfigMock{
@@ -290,7 +290,7 @@ func TestNew_ServerURL_env(t *testing.T) {
 	}
 }
 
-func TestNew_ServerURL_dotcomFallback(t *testing.T) {
+func TestNewServerURLdotcomFallback(t *testing.T) {
 	t.Setenv("GITHUB_SERVER_URL", "")
 	f := &cmdutil.Factory{
 		Config: func() (config.Config, error) {
@@ -333,7 +333,7 @@ func TestCreateCodespaces(t *testing.T) {
 	}
 }
 
-func TestCreateCodespaces_displayName(t *testing.T) {
+func TestCreateCodespacesdisplayName(t *testing.T) {
 	svr := createFakeCreateEndpointServer(t, http.StatusCreated)
 	defer svr.Close()
 
@@ -358,7 +358,7 @@ func TestCreateCodespaces_displayName(t *testing.T) {
 	}
 }
 
-func TestCreateCodespaces_Pending(t *testing.T) {
+func TestCreateCodespacesPending(t *testing.T) {
 	svr := createFakeCreateEndpointServer(t, http.StatusAccepted)
 	defer svr.Close()
 
@@ -385,7 +385,7 @@ func TestCreateCodespaces_Pending(t *testing.T) {
 	}
 }
 
-func TestListCodespaces_limited(t *testing.T) {
+func TestListCodespaceslimited(t *testing.T) {
 	svr := createFakeListEndpointServer(t, 200, 200)
 	defer svr.Close()
 
@@ -410,7 +410,7 @@ func TestListCodespaces_limited(t *testing.T) {
 	}
 }
 
-func TestListCodespaces_unlimited(t *testing.T) {
+func TestListCodespacesunlimited(t *testing.T) {
 	svr := createFakeListEndpointServer(t, 200, 200)
 	defer svr.Close()
 
@@ -586,7 +586,7 @@ func TestRetries(t *testing.T) {
 	}
 }
 
-func TestCodespace_ExportData(t *testing.T) {
+func TestCodespaceExportData(t *testing.T) {
 	type fields struct {
 		Name        string
 		CreatedAt   string
@@ -708,7 +708,7 @@ func createFakeEditServer(t *testing.T, codespaceName string) *httptest.Server {
 	}))
 }
 
-func TestAPI_EditCodespace(t *testing.T) {
+func TestAPIEditCodespace(t *testing.T) {
 	type args struct {
 		ctx           context.Context
 		codespaceName string
@@ -775,7 +775,7 @@ func createFakeEditPendingOpServer(t *testing.T) *httptest.Server {
 	}))
 }
 
-func TestAPI_EditCodespacePendingOperation(t *testing.T) {
+func TestAPIEditCodespacePendingOperation(t *testing.T) {
 	svr := createFakeEditPendingOpServer(t)
 	defer svr.Close()
 

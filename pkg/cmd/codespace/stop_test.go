@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestApp_StopCodespace(t *testing.T) {
+func TestAppStopCodespace(t *testing.T) {
 	type fields struct {
 		apiClient apiClient
 	}

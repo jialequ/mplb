@@ -126,7 +126,7 @@ type hostUsers struct {
 
 type tokenAssertion func(t *testing.T, cfg config.Config)
 
-func TestLogoutRun_tty(t *testing.T) {
+func TestLogoutRuntty(t *testing.T) {
 	tests := []struct {
 		name          string
 		opts          *LogoutOptions
@@ -363,7 +363,7 @@ func TestLogoutRun_tty(t *testing.T) {
 	}
 }
 
-func TestLogoutRun_nontty(t *testing.T) {
+func TestLogoutRunnontty(t *testing.T) {
 	tests := []struct {
 		name          string
 		opts          *LogoutOptions

@@ -158,7 +158,7 @@ func TestNewCmdeditItem(t *testing.T) {
 	}
 }
 
-func TestRunItemEdit_Draft(t *testing.T) {
+func TestRunItemEditDraft(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -201,7 +201,7 @@ func TestRunItemEdit_Draft(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunItemEdit_Text(t *testing.T) {
+func TestRunItemEditText(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -248,7 +248,7 @@ func TestRunItemEdit_Text(t *testing.T) {
 	assert.Equal(t, "", stdout.String())
 }
 
-func TestRunItemEdit_Number(t *testing.T) {
+func TestRunItemEditNumber(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -300,7 +300,7 @@ func TestRunItemEdit_Number(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunItemEdit_Date(t *testing.T) {
+func TestRunItemEditDate(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -347,7 +347,7 @@ func TestRunItemEdit_Date(t *testing.T) {
 	assert.Equal(t, "", stdout.String())
 }
 
-func TestRunItemEdit_SingleSelect(t *testing.T) {
+func TestRunItemEditSingleSelect(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -394,7 +394,7 @@ func TestRunItemEdit_SingleSelect(t *testing.T) {
 	assert.Equal(t, "", stdout.String())
 }
 
-func TestRunItemEdit_Iteration(t *testing.T) {
+func TestRunItemEditIteration(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -446,7 +446,7 @@ func TestRunItemEdit_Iteration(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunItemEdit_NoChanges(t *testing.T) {
+func TestRunItemEditNoChanges(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -467,7 +467,7 @@ func TestRunItemEdit_NoChanges(t *testing.T) {
 	assert.Equal(t, "error: no changes to make\n", stderr.String())
 }
 
-func TestRunItemEdit_InvalidID(t *testing.T) {
+func TestRunItemEditInvalidID(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -485,7 +485,7 @@ func TestRunItemEdit_InvalidID(t *testing.T) {
 	assert.Error(t, err, "ID must be the ID of the draft issue content which is prefixed with `DI_`")
 }
 
-func TestRunItemEdit_Clear(t *testing.T) {
+func TestRunItemEditClear(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -533,7 +533,7 @@ func TestRunItemEdit_Clear(t *testing.T) {
 	assert.Equal(t, literal_2158, stdout.String())
 }
 
-func TestRunItemEdit_JSON(t *testing.T) {
+func TestRunItemEditJSON(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 

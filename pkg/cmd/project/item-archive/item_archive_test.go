@@ -109,7 +109,7 @@ func TestNewCmdarchiveItem(t *testing.T) {
 	}
 }
 
-func TestRunArchive_User(t *testing.T) {
+func TestRunArchiveUser(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -201,7 +201,7 @@ func TestRunArchive_User(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunArchive_Org(t *testing.T) {
+func TestRunArchiveOrg(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get org ID
@@ -292,7 +292,7 @@ func TestRunArchive_Org(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunArchive_Me(t *testing.T) {
+func TestRunArchiveMe(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get viewer ID
@@ -373,7 +373,7 @@ func TestRunArchive_Me(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunArchive_User_Undo(t *testing.T) {
+func TestRunArchiveUserUndo(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get user ID
@@ -464,7 +464,7 @@ func TestRunArchive_User_Undo(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunArchive_Org_Undo(t *testing.T) {
+func TestRunArchiveOrgUndo(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get org ID
@@ -556,7 +556,7 @@ func TestRunArchive_Org_Undo(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunArchive_Me_Undo(t *testing.T) {
+func TestRunArchiveMeUndo(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get viewer ID
@@ -637,7 +637,7 @@ func TestRunArchive_Me_Undo(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunArchive_JSON(t *testing.T) {
+func TestRunArchiveJSON(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 

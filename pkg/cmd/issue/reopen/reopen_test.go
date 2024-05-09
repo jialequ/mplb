@@ -87,7 +87,7 @@ func TestIssueReopen(t *testing.T) {
 	}
 }
 
-func TestIssueReopen_alreadyOpen(t *testing.T) {
+func TestIssueReopenalreadyOpen(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -112,7 +112,7 @@ func TestIssueReopen_alreadyOpen(t *testing.T) {
 	}
 }
 
-func TestIssueReopen_issuesDisabled(t *testing.T) {
+func TestIssueReopenissuesDisabled(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -145,7 +145,7 @@ func TestIssueReopen_issuesDisabled(t *testing.T) {
 	}
 }
 
-func TestIssueReopen_withComment(t *testing.T) {
+func TestIssueReopenwithComment(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 

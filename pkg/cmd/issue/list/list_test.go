@@ -68,7 +68,7 @@ func runCommand(rt http.RoundTripper, isTTY bool, cli string) (*test.CmdOut, err
 	}, err
 }
 
-func TestIssueList_nontty(t *testing.T) {
+func TestIssueListnontty(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -89,7 +89,7 @@ func TestIssueList_nontty(t *testing.T) {
 		`4[\t]+number fore[\t]+label[\t]+\d+`)
 }
 
-func TestIssueList_tty(t *testing.T) {
+func TestIssueListtty(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -114,7 +114,7 @@ func TestIssueList_tty(t *testing.T) {
 	assert.Equal(t, ``, output.Stderr())
 }
 
-func TestIssueList_tty_withFlags(t *testing.T) {
+func TestIssueListttywithFlags(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -138,7 +138,7 @@ func TestIssueList_tty_withFlags(t *testing.T) {
 	assert.Equal(t, "", output.Stderr())
 }
 
-func TestIssueList_tty_withAppFlag(t *testing.T) {
+func TestIssueListttywithAppFlag(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -159,7 +159,7 @@ func TestIssueList_tty_withAppFlag(t *testing.T) {
 	assert.Equal(t, "", output.Stderr())
 }
 
-func TestIssueList_withInvalidLimitFlag(t *testing.T) {
+func TestIssueListwithInvalidLimitFlag(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -170,7 +170,7 @@ func TestIssueList_withInvalidLimitFlag(t *testing.T) {
 	}
 }
 
-func TestIssueList_disabledIssues(t *testing.T) {
+func TestIssueListdisabledIssues(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -188,7 +188,7 @@ func TestIssueList_disabledIssues(t *testing.T) {
 	}
 }
 
-func TestIssueList_web(t *testing.T) {
+func TestIssueListweb(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 	ios.SetStdoutTTY(true)
 	ios.SetStderrTTY(true)
@@ -459,7 +459,7 @@ func TestIssueList(t *testing.T) {
 	}
 }
 
-func TestIssueList_withProjectItems(t *testing.T) {
+func TestIssueListwithProjectItems(t *testing.T) {
 	reg := &httpmock.Registry{}
 	defer reg.Verify(t)
 
@@ -532,7 +532,7 @@ func TestIssueList_withProjectItems(t *testing.T) {
 	require.Equal(t, issuesAndTotalCount.Issues[0].ProjectItems.Nodes[0].Status, expectedStatus)
 }
 
-func TestIssueList_Search_withProjectItems(t *testing.T) {
+func TestIssueListSearchwithProjectItems(t *testing.T) {
 	reg := &httpmock.Registry{}
 	defer reg.Verify(t)
 

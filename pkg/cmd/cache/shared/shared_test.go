@@ -73,7 +73,7 @@ func TestGetCaches(t *testing.T) {
 	}
 }
 
-func TestCache_ExportData(t *testing.T) {
+func TestCacheExportData(t *testing.T) {
 	src := heredoc.Doc(
 		`
 		{

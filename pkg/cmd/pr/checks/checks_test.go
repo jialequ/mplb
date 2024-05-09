@@ -611,7 +611,7 @@ func TestChecksRun(t *testing.T) {
 	}
 }
 
-func TestChecksRun_web(t *testing.T) {
+func TestChecksRunweb(t *testing.T) {
 	tests := []struct {
 		name       string
 		isTTY      bool

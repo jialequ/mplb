@@ -8,7 +8,7 @@ import (
 )
 
 // Regression test from before ExportData was implemented.
-func TestJSONProject_User(t *testing.T) {
+func TestJSONProjectUser(t *testing.T) {
 	project := Project{
 		ID:               "123",
 		Number:           2,
@@ -29,7 +29,7 @@ func TestJSONProject_User(t *testing.T) {
 }
 
 // Regression test from before ExportData was implemented.
-func TestJSONProject_Org(t *testing.T) {
+func TestJSONProjectOrg(t *testing.T) {
 	project := Project{
 		ID:               "123",
 		Number:           2,
@@ -92,7 +92,7 @@ func TestJSONProjects(t *testing.T) {
 		string(b))
 }
 
-func TestJSONProjectField_FieldType(t *testing.T) {
+func TestJSONProjectFieldFieldType(t *testing.T) {
 	field := ProjectField{}
 	field.TypeName = "ProjectV2Field"
 	field.Field.ID = "123"
@@ -104,7 +104,7 @@ func TestJSONProjectField_FieldType(t *testing.T) {
 	assert.Equal(t, `{"id":"123","name":"name","type":"ProjectV2Field"}`, string(b))
 }
 
-func TestJSONProjectField_SingleSelectType(t *testing.T) {
+func TestJSONProjectFieldSingleSelectType(t *testing.T) {
 	field := ProjectField{}
 	field.TypeName = "ProjectV2SingleSelectField"
 	field.SingleSelectField.ID = "123"
@@ -126,7 +126,7 @@ func TestJSONProjectField_SingleSelectType(t *testing.T) {
 	assert.JSONEq(t, `{"id":"123","name":"name","type":"ProjectV2SingleSelectField","options":[{"id":"123","name":"name"},{"id":"456","name":"name2"}]}`, string(b))
 }
 
-func TestJSONProjectField_ProjectV2IterationField(t *testing.T) {
+func TestJSONProjectFieldProjectV2IterationField(t *testing.T) {
 	field := ProjectField{}
 	field.TypeName = "ProjectV2IterationField"
 	field.IterationField.ID = "123"
@@ -175,7 +175,7 @@ func TestJSONProjectFields(t *testing.T) {
 	assert.JSONEq(t, `{"fields":[{"id":"123","name":"name","type":"ProjectV2Field"},{"id":"123","name":"name","type":"ProjectV2SingleSelectField","options":[{"id":"123","name":"name"},{"id":"456","name":"name2"}]}],"totalCount":5}`, string(b))
 }
 
-func TestJSONProjectItem_DraftIssue(t *testing.T) {
+func TestJSONProjectItemDraftIssue(t *testing.T) {
 	item := ProjectItem{}
 	item.Content.TypeName = "DraftIssue"
 	item.Id = "123"
@@ -188,7 +188,7 @@ func TestJSONProjectItem_DraftIssue(t *testing.T) {
 	assert.JSONEq(t, `{"id":"123","title":"title","body":literal_5230,"type":"DraftIssue"}`, string(b))
 }
 
-func TestJSONProjectItem_Issue(t *testing.T) {
+func TestJSONProjectItemIssue(t *testing.T) {
 	item := ProjectItem{}
 	item.Content.TypeName = "Issue"
 	item.Id = "123"
@@ -202,7 +202,7 @@ func TestJSONProjectItem_Issue(t *testing.T) {
 	assert.JSONEq(t, `{"id":"123","title":"title","body":literal_5230,"type":"Issue","url":"a-url"}`, string(b))
 }
 
-func TestJSONProjectItem_PullRequest(t *testing.T) {
+func TestJSONProjectItemPullRequest(t *testing.T) {
 	item := ProjectItem{}
 	item.Content.TypeName = "PullRequest"
 	item.Id = "123"
@@ -287,7 +287,7 @@ func TestJSONProjectDraftIssue(t *testing.T) {
 	assert.JSONEq(t, `{"id":"123","title":"title","body":literal_5230,"type":"DraftIssue"}`, string(b))
 }
 
-func TestJSONProjectItem_DraftIssue_ProjectV2ItemFieldIterationValue(t *testing.T) {
+func TestJSONProjectItemDraftIssueProjectV2ItemFieldIterationValue(t *testing.T) {
 	iterationField := ProjectField{TypeName: "ProjectV2IterationField"}
 	iterationField.IterationField.ID = "sprint"
 	iterationField.IterationField.Name = "Sprint"
@@ -326,7 +326,7 @@ func TestJSONProjectItem_DraftIssue_ProjectV2ItemFieldIterationValue(t *testing.
 
 }
 
-func TestJSONProjectItem_DraftIssue_ProjectV2ItemFieldMilestoneValue(t *testing.T) {
+func TestJSONProjectItemDraftIssueProjectV2ItemFieldMilestoneValue(t *testing.T) {
 	milestoneField := ProjectField{TypeName: "ProjectV2IterationField"}
 	milestoneField.IterationField.ID = "milestone"
 	milestoneField.IterationField.Name = "Milestone"

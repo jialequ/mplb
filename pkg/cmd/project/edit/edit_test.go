@@ -130,7 +130,7 @@ func TestNewCmdEdit(t *testing.T) {
 	}
 }
 
-func TestRunUpdate_User(t *testing.T) {
+func TestRunUpdateUser(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -229,7 +229,7 @@ func TestRunUpdate_User(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunUpdate_Org(t *testing.T) {
+func TestRunUpdateOrg(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get org ID
@@ -327,7 +327,7 @@ func TestRunUpdate_Org(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunUpdate_Me(t *testing.T) {
+func TestRunUpdateMe(t *testing.T) {
 	defer gock.Off()
 	// get viewer ID
 	gock.New(literal_4571).
@@ -415,7 +415,7 @@ func TestRunUpdate_Me(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunUpdate_OmitParams(t *testing.T) {
+func TestRunUpdateOmitParams(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get user ID
@@ -510,7 +510,7 @@ func TestRunUpdate_OmitParams(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunUpdate_JSON(t *testing.T) {
+func TestRunUpdateJSON(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 

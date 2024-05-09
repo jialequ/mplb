@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestLabelList_pagination(t *testing.T) {
+func TestLabelListpagination(t *testing.T) {
 	reg := &httpmock.Registry{}
 	client := &http.Client{Transport: reg}
 

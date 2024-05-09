@@ -18,7 +18,7 @@ func (mf *metadataFetcher) RepoMetadataFetch(input api.RepoMetadataInput) (*api.
 	return mf.metadataResult, nil
 }
 
-func TestMetadataSurvey_selectAll(t *testing.T) {
+func TestMetadataSurveyselectAll(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 
 	repo := ghrepo.New("OWNER", "REPO")
@@ -81,7 +81,7 @@ func TestMetadataSurvey_selectAll(t *testing.T) {
 	assert.Equal(t, []string{}, state.Milestones)
 }
 
-func TestMetadataSurvey_keepExisting(t *testing.T) {
+func TestMetadataSurveykeepExisting(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 
 	repo := ghrepo.New("OWNER", "REPO")

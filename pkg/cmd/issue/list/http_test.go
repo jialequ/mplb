@@ -84,7 +84,7 @@ func TestIssueList1(t *testing.T) {
 	}
 }
 
-func TestIssueList_pagination(t *testing.T) {
+func TestIssueListpagination(t *testing.T) {
 	reg := &httpmock.Registry{}
 	httpClient := &http.Client{}
 	httpmock.ReplaceTripper(httpClient, reg)

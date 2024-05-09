@@ -115,7 +115,7 @@ func TestRunDeleteField(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunDeleteField_JSON(t *testing.T) {
+func TestRunDeleteFieldJSON(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 

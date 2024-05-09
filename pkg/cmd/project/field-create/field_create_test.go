@@ -116,7 +116,7 @@ func TestNewCmdCreateField(t *testing.T) {
 	}
 }
 
-func TestRunCreateField_User(t *testing.T) {
+func TestRunCreateFieldUser(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -209,7 +209,7 @@ func TestRunCreateField_User(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunCreateField_Org(t *testing.T) {
+func TestRunCreateFieldOrg(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -302,7 +302,7 @@ func TestRunCreateField_Org(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunCreateField_Me(t *testing.T) {
+func TestRunCreateFieldMe(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get viewer ID
@@ -384,7 +384,7 @@ func TestRunCreateField_Me(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunCreateField_TEXT(t *testing.T) {
+func TestRunCreateFieldTEXT(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get viewer ID
@@ -466,7 +466,7 @@ func TestRunCreateField_TEXT(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunCreateField_DATE(t *testing.T) {
+func TestRunCreateFieldDATE(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get viewer ID
@@ -548,7 +548,7 @@ func TestRunCreateField_DATE(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunCreateField_NUMBER(t *testing.T) {
+func TestRunCreateFieldNUMBER(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get viewer ID
@@ -630,7 +630,7 @@ func TestRunCreateField_NUMBER(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunCreateField_JSON(t *testing.T) {
+func TestRunCreateFieldJSON(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 

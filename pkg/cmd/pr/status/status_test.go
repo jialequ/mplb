@@ -113,7 +113,7 @@ func TestPRStatus(t *testing.T) {
 	}
 }
 
-func TestPRStatus_reviewsAndChecks(t *testing.T) {
+func TestPRStatusreviewsAndChecks(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 	// status,conclusion matches the old StatusContextRollup query
@@ -138,7 +138,7 @@ func TestPRStatus_reviewsAndChecks(t *testing.T) {
 	}
 }
 
-func TestPRStatus_reviewsAndChecksWithStatesByCount(t *testing.T) {
+func TestPRStatusreviewsAndChecksWithStatesByCount(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 	// checkRunCount,checkRunCountsByState matches the new StatusContextRollup query
@@ -163,7 +163,7 @@ func TestPRStatus_reviewsAndChecksWithStatesByCount(t *testing.T) {
 	}
 }
 
-func TestPRStatus_currentBranch_showTheMostRecentPR(t *testing.T) {
+func TestPRStatuscurrentBranchshowTheMostRecentPR(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 	http.Register(httpmock.GraphQL(`query PullRequestStatus\b`), httpmock.FileResponse("./fixtures/prStatusCurrentBranch.json"))
@@ -191,7 +191,7 @@ func TestPRStatus_currentBranch_showTheMostRecentPR(t *testing.T) {
 	}
 }
 
-func TestPRStatus_currentBranch_defaultBranch(t *testing.T) {
+func TestPRStatuscurrentBranchdefaultBranch(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 	http.Register(httpmock.GraphQL(`query PullRequestStatus\b`), httpmock.FileResponse("./fixtures/prStatusCurrentBranch.json"))
@@ -208,7 +208,7 @@ func TestPRStatus_currentBranch_defaultBranch(t *testing.T) {
 	}
 }
 
-func TestPRStatus_currentBranch_defaultBranch_repoFlag(t *testing.T) {
+func TestPRStatuscurrentBranchdefaultBranchrepoFlag(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 	http.Register(httpmock.GraphQL(`query PullRequestStatus\b`), httpmock.FileResponse("./fixtures/prStatusCurrentBranchClosedOnDefaultBranch.json"))
@@ -225,7 +225,7 @@ func TestPRStatus_currentBranch_defaultBranch_repoFlag(t *testing.T) {
 	}
 }
 
-func TestPRStatus_currentBranch_Closed(t *testing.T) {
+func TestPRStatuscurrentBranchClosed(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 	http.Register(httpmock.GraphQL(`query PullRequestStatus\b`), httpmock.FileResponse("./fixtures/prStatusCurrentBranchClosed.json"))
@@ -242,7 +242,7 @@ func TestPRStatus_currentBranch_Closed(t *testing.T) {
 	}
 }
 
-func TestPRStatus_currentBranch_Closed_defaultBranch(t *testing.T) {
+func TestPRStatuscurrentBranchCloseddefaultBranch(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 	http.Register(httpmock.GraphQL(`query PullRequestStatus\b`), httpmock.FileResponse("./fixtures/prStatusCurrentBranchClosedOnDefaultBranch.json"))
@@ -259,7 +259,7 @@ func TestPRStatus_currentBranch_Closed_defaultBranch(t *testing.T) {
 	}
 }
 
-func TestPRStatus_currentBranch_Merged(t *testing.T) {
+func TestPRStatuscurrentBranchMerged(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 	http.Register(httpmock.GraphQL(`query PullRequestStatus\b`), httpmock.FileResponse("./fixtures/prStatusCurrentBranchMerged.json"))
@@ -276,7 +276,7 @@ func TestPRStatus_currentBranch_Merged(t *testing.T) {
 	}
 }
 
-func TestPRStatus_currentBranch_Merged_defaultBranch(t *testing.T) {
+func TestPRStatuscurrentBranchMergeddefaultBranch(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 	http.Register(httpmock.GraphQL(`query PullRequestStatus\b`), httpmock.FileResponse("./fixtures/prStatusCurrentBranchMergedOnDefaultBranch.json"))
@@ -293,7 +293,7 @@ func TestPRStatus_currentBranch_Merged_defaultBranch(t *testing.T) {
 	}
 }
 
-func TestPRStatus_blankSlate(t *testing.T) {
+func TestPRStatusblankSlate(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 	http.Register(httpmock.GraphQL(`query PullRequestStatus\b`), httpmock.StringResponse(`{"data": {}}`))
@@ -321,7 +321,7 @@ Requesting a code review from you
 	}
 }
 
-func TestPRStatus_blankSlateRepoOverride(t *testing.T) {
+func TestPRStatusblankSlateRepoOverride(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 	http.Register(httpmock.GraphQL(`query PullRequestStatus\b`), httpmock.StringResponse(`{"data": {}}`))
@@ -346,7 +346,7 @@ Requesting a code review from you
 	}
 }
 
-func TestPRStatus_detachedHead(t *testing.T) {
+func TestPRStatusdetachedHead(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 	http.Register(httpmock.GraphQL(`query PullRequestStatus\b`), httpmock.StringResponse(`{"data": {}}`))

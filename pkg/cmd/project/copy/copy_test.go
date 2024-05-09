@@ -112,7 +112,7 @@ func TestNewCmdCopy(t *testing.T) {
 	}
 }
 
-func TestRunCopy_User(t *testing.T) {
+func TestRunCopyUser(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -234,7 +234,7 @@ func TestRunCopy_User(t *testing.T) {
 	assert.Equal(t, "", stdout.String())
 }
 
-func TestRunCopy_Org(t *testing.T) {
+func TestRunCopyOrg(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -355,7 +355,7 @@ func TestRunCopy_Org(t *testing.T) {
 	assert.Equal(t, "", stdout.String())
 }
 
-func TestRunCopy_Me(t *testing.T) {
+func TestRunCopyMe(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -460,7 +460,7 @@ func TestRunCopy_Me(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunCopy_JSON(t *testing.T) {
+func TestRunCopyJSON(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 

@@ -75,7 +75,7 @@ func TestTypeForFilename(t *testing.T) {
 	}
 }
 
-func TestUploadWithDelete_retry(t *testing.T) {
+func TestUploadWithDeleteretry(t *testing.T) {
 	retryInterval = 0
 	ctx := context.Background()
 

@@ -344,7 +344,7 @@ func TestPrMerge(t *testing.T) {
 	}
 }
 
-func TestPrMerge_blocked(t *testing.T) {
+func TestPrMergeblocked(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -375,7 +375,7 @@ func TestPrMerge_blocked(t *testing.T) {
 		`, "`"), output.Stderr())
 }
 
-func TestPrMerge_dirty(t *testing.T) {
+func TestPrMergedirty(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -409,7 +409,7 @@ func TestPrMerge_dirty(t *testing.T) {
 	`, "`"), output.Stderr())
 }
 
-func TestPrMerge_nontty(t *testing.T) {
+func TestPrMergenontty(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -447,7 +447,7 @@ func TestPrMerge_nontty(t *testing.T) {
 	assert.Equal(t, "", output.Stderr())
 }
 
-func TestPrMerge_editMessage_nontty(t *testing.T) {
+func TestPrMergeeditMessagenontty(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -486,7 +486,7 @@ func TestPrMerge_editMessage_nontty(t *testing.T) {
 	assert.Equal(t, "", output.Stderr())
 }
 
-func TestPrMerge_withRepoFlag(t *testing.T) {
+func TestPrMergewithRepoFlag(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -525,7 +525,7 @@ func TestPrMerge_withRepoFlag(t *testing.T) {
 	}
 }
 
-func TestPrMerge_withMatchCommitHeadFlag(t *testing.T) {
+func TestPrMergewithMatchCommitHeadFlag(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -566,7 +566,7 @@ func TestPrMerge_withMatchCommitHeadFlag(t *testing.T) {
 	}
 }
 
-func TestPrMerge_withAuthorFlag(t *testing.T) {
+func TestPrMergewithAuthorFlag(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -608,7 +608,7 @@ func TestPrMerge_withAuthorFlag(t *testing.T) {
 	}
 }
 
-func TestPrMerge_deleteBranch(t *testing.T) {
+func TestPrMergedeleteBranch(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -659,7 +659,7 @@ func TestPrMerge_deleteBranch(t *testing.T) {
 	`), output.Stderr())
 }
 
-func TestPrMerge_deleteBranch_nonDefault(t *testing.T) {
+func TestPrMergedeleteBranchnonDefault(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -710,7 +710,7 @@ func TestPrMerge_deleteBranch_nonDefault(t *testing.T) {
 	`), output.Stderr())
 }
 
-func TestPrMerge_deleteBranch_onlyLocally(t *testing.T) {
+func TestPrMergedeleteBranchonlyLocally(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -758,7 +758,7 @@ func TestPrMerge_deleteBranch_onlyLocally(t *testing.T) {
 	`), output.Stderr())
 }
 
-func TestPrMerge_deleteBranch_checkoutNewBranch(t *testing.T) {
+func TestPrMergedeleteBranchcheckoutNewBranch(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -809,7 +809,7 @@ func TestPrMerge_deleteBranch_checkoutNewBranch(t *testing.T) {
 	`), output.Stderr())
 }
 
-func TestPrMerge_deleteNonCurrentBranch(t *testing.T) {
+func TestPrMergedeleteNonCurrentBranch(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -976,7 +976,7 @@ func TestPullRequestWithoutCommits(t *testing.T) {
 	`), output.Stderr())
 }
 
-func TestPrMerge_rebase(t *testing.T) {
+func TestPrMergerebase(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -1017,7 +1017,7 @@ func TestPrMerge_rebase(t *testing.T) {
 	}
 }
 
-func TestPrMerge_squash(t *testing.T) {
+func TestPrMergesquash(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -1057,7 +1057,7 @@ func TestPrMerge_squash(t *testing.T) {
 	`), output.Stderr())
 }
 
-func TestPrMerge_alreadyMerged(t *testing.T) {
+func TestPrMergealreadyMerged(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -1102,7 +1102,7 @@ func TestPrMerge_alreadyMerged(t *testing.T) {
 	`), output.Stderr())
 }
 
-func TestPrMerge_alreadyMerged_withMergeStrategy(t *testing.T) {
+func TestPrMergealreadyMergedwithMergeStrategy(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -1132,7 +1132,7 @@ func TestPrMerge_alreadyMerged_withMergeStrategy(t *testing.T) {
 	assert.Equal(t, "! Pull request OWNER/REPO#4 was already merged\n", output.Stderr())
 }
 
-func TestPrMerge_alreadyMerged_withMergeStrategy_TTY(t *testing.T) {
+func TestPrMergealreadyMergedwithMergeStrategyTTY(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -1173,7 +1173,7 @@ func TestPrMerge_alreadyMerged_withMergeStrategy_TTY(t *testing.T) {
 	assert.Equal(t, "✓ Deleted local branch \n✓ Deleted remote branch \n", output.Stderr())
 }
 
-func TestPrMerge_alreadyMerged_withMergeStrategy_crossRepo(t *testing.T) {
+func TestPrMergealreadyMergedwithMergeStrategycrossRepo(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -1278,7 +1278,7 @@ func TestPRMergeTTY(t *testing.T) {
 	assert.Equal(t, "Merging pull request OWNER/REPO#3 (It was the best of times)\n✓ Merged pull request OWNER/REPO#3 (It was the best of times)\n", output.Stderr())
 }
 
-func TestPRMergeTTY_withDeleteBranch(t *testing.T) {
+func TestPRMergeTTYwithDeleteBranch(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -1353,7 +1353,7 @@ func TestPRMergeTTY_withDeleteBranch(t *testing.T) {
 	`), output.Stderr())
 }
 
-func TestPRMergeTTY_squashEditCommitMsgAndSubject(t *testing.T) {
+func TestPRMergeTTYsquashEditCommitMsgAndSubject(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 	ios.SetStdinTTY(true)
 	ios.SetStdoutTTY(true)
@@ -1468,7 +1468,7 @@ func TestPRMergeEmptyStrategyNonTTY(t *testing.T) {
 	assert.Equal(t, "", output.Stderr())
 }
 
-func TestPRTTY_cancelled(t *testing.T) {
+func TestPRTTYcancelled(t *testing.T) {
 	http := initFakeHTTP()
 	defer http.Verify(t)
 
@@ -1542,7 +1542,7 @@ func TestMergeMethodSurvey(t *testing.T) {
 	assert.Equal(t, PullRequestMergeMethodRebase, method)
 }
 
-func TestMergeRun_autoMerge(t *testing.T) {
+func TestMergeRunautoMerge(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 	ios.SetStdoutTTY(true)
 	ios.SetStderrTTY(true)
@@ -1579,7 +1579,7 @@ func TestMergeRun_autoMerge(t *testing.T) {
 	assert.Equal(t, "✓ Pull request OWNER/REPO#123 will be automatically merged via squash when all requirements are met\n", stderr.String())
 }
 
-func TestMergeRun_autoMerge_directMerge(t *testing.T) {
+func TestMergeRunautoMergedirectMerge(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 	ios.SetStdoutTTY(true)
 	ios.SetStderrTTY(true)
@@ -1617,7 +1617,7 @@ func TestMergeRun_autoMerge_directMerge(t *testing.T) {
 	assert.Equal(t, "✓ Merged pull request OWNER/REPO#123 ()\n", stderr.String())
 }
 
-func TestMergeRun_disableAutoMerge(t *testing.T) {
+func TestMergeRundisableAutoMerge(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 	ios.SetStdoutTTY(true)
 	ios.SetStderrTTY(true)

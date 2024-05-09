@@ -93,7 +93,7 @@ func TestIssueDelete(t *testing.T) {
 	}
 }
 
-func TestIssueDelete_confirm(t *testing.T) {
+func TestIssueDeleteconfirm(t *testing.T) {
 	httpRegistry := &httpmock.Registry{}
 	defer httpRegistry.Verify(t)
 
@@ -125,7 +125,7 @@ func TestIssueDelete_confirm(t *testing.T) {
 	}
 }
 
-func TestIssueDelete_cancel(t *testing.T) {
+func TestIssueDeletecancel(t *testing.T) {
 	httpRegistry := &httpmock.Registry{}
 	defer httpRegistry.Verify(t)
 
@@ -152,7 +152,7 @@ func TestIssueDelete_cancel(t *testing.T) {
 	}
 }
 
-func TestIssueDelete_doesNotExist(t *testing.T) {
+func TestIssueDeletedoesNotExist(t *testing.T) {
 	httpRegistry := &httpmock.Registry{}
 	defer httpRegistry.Verify(t)
 
@@ -171,7 +171,7 @@ func TestIssueDelete_doesNotExist(t *testing.T) {
 	}
 }
 
-func TestIssueDelete_issuesDisabled(t *testing.T) {
+func TestIssueDeleteissuesDisabled(t *testing.T) {
 	httpRegistry := &httpmock.Registry{}
 	defer httpRegistry.Verify(t)
 

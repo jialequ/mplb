@@ -89,7 +89,7 @@ func TestNewCmdList(t *testing.T) {
 	}
 }
 
-func TestRunList_User_tty(t *testing.T) {
+func TestRunListUsertty(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -199,7 +199,7 @@ func TestRunList_User_tty(t *testing.T) {
   `), stdout.String())
 }
 
-func TestRunList_User(t *testing.T) {
+func TestRunListUser(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -306,7 +306,7 @@ func TestRunList_User(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunList_Org(t *testing.T) {
+func TestRunListOrg(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -413,7 +413,7 @@ func TestRunList_Org(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunList_Me(t *testing.T) {
+func TestRunListMe(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 
@@ -510,7 +510,7 @@ func TestRunList_Me(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunList_JSON(t *testing.T) {
+func TestRunListJSON(t *testing.T) {
 	defer gock.Off()
 	// gock.Observe(gock.DumpRequest)
 

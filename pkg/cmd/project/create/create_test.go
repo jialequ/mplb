@@ -79,7 +79,7 @@ func TestNewCmdCreate(t *testing.T) {
 	}
 }
 
-func TestRunCreate_User(t *testing.T) {
+func TestRunCreateUser(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 
@@ -149,7 +149,7 @@ func TestRunCreate_User(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunCreate_Org(t *testing.T) {
+func TestRunCreateOrg(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get org ID
@@ -217,7 +217,7 @@ func TestRunCreate_Org(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunCreate_Me(t *testing.T) {
+func TestRunCreateMe(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get viewer ID
@@ -276,7 +276,7 @@ func TestRunCreate_Me(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunCreate_JSON(t *testing.T) {
+func TestRunCreateJSON(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 

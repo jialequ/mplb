@@ -398,7 +398,7 @@ func TestDownloadRun(t *testing.T) {
 	}
 }
 
-func TestDownloadRun_cloberAndSkip(t *testing.T) {
+func TestDownloadRuncloberAndSkip(t *testing.T) {
 	oldAssetContents := "older copy to be clobbered"
 	oldZipballContents := "older zipball to be clobbered"
 	// this should be shorter than oldAssetContents and oldZipballContents
@@ -554,7 +554,7 @@ func TestDownloadRun_cloberAndSkip(t *testing.T) {
 	}
 }
 
-func TestDownloadRun_windowsReservedFilename(t *testing.T) {
+func TestDownloadRunwindowsReservedFilename(t *testing.T) {
 	if runtime.GOOS != "windows" {
 		t.SkipNow()
 	}

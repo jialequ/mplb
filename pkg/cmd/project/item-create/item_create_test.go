@@ -108,7 +108,7 @@ func TestNewCmdCreateItem(t *testing.T) {
 	}
 }
 
-func TestRunCreateItem_Draft_User(t *testing.T) {
+func TestRunCreateItemDraftUser(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get user ID
@@ -199,7 +199,7 @@ func TestRunCreateItem_Draft_User(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunCreateItem_Draft_Org(t *testing.T) {
+func TestRunCreateItemDraftOrg(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get org ID
@@ -290,7 +290,7 @@ func TestRunCreateItem_Draft_Org(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunCreateItem_Draft_Me(t *testing.T) {
+func TestRunCreateItemDraftMe(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get viewer ID
@@ -372,7 +372,7 @@ func TestRunCreateItem_Draft_Me(t *testing.T) {
 		stdout.String())
 }
 
-func TestRunCreateItem_JSON(t *testing.T) {
+func TestRunCreateItemJSON(t *testing.T) {
 	defer gock.Off()
 	gock.Observe(gock.DumpRequest)
 	// get user ID

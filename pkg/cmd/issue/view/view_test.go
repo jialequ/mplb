@@ -58,7 +58,7 @@ func runCommand(rt http.RoundTripper, isTTY bool, cli string) (*test.CmdOut, err
 	}, err
 }
 
-func TestIssueView_web(t *testing.T) {
+func TestIssueViewweb(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 	ios.SetStdoutTTY(true)
 	ios.SetStderrTTY(true)
@@ -100,7 +100,7 @@ func TestIssueView_web(t *testing.T) {
 	browser.Verify(t, "https://github.com/OWNER/REPO/issues/123")
 }
 
-func TestIssueView_nontty_Preview(t *testing.T) {
+func TestIssueViewnonttyPreview(t *testing.T) {
 	tests := map[string]struct {
 		fixture         string
 		expectedOutputs []string
@@ -175,7 +175,7 @@ func TestIssueView_nontty_Preview(t *testing.T) {
 	}
 }
 
-func TestIssueView_tty_Preview(t *testing.T) {
+func TestIssueViewttyPreview(t *testing.T) {
 	tests := map[string]struct {
 		fixture         string
 		expectedOutputs []string
@@ -260,7 +260,7 @@ func TestIssueView_tty_Preview(t *testing.T) {
 	}
 }
 
-func TestIssueView_web_notFound(t *testing.T) {
+func TestIssueViewwebnotFound(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -282,7 +282,7 @@ func TestIssueView_web_notFound(t *testing.T) {
 	}
 }
 
-func TestIssueView_disabledIssues(t *testing.T) {
+func TestIssueViewdisabledIssues(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -316,7 +316,7 @@ func TestIssueView_disabledIssues(t *testing.T) {
 	}
 }
 
-func TestIssueView_tty_Comments(t *testing.T) {
+func TestIssueViewttyComments(t *testing.T) {
 	tests := map[string]struct {
 		cli             string
 		fixtures        map[string]string
@@ -388,7 +388,7 @@ func TestIssueView_tty_Comments(t *testing.T) {
 	}
 }
 
-func TestIssueView_nontty_Comments(t *testing.T) {
+func TestIssueViewnonttyComments(t *testing.T) {
 	tests := map[string]struct {
 		cli             string
 		fixtures        map[string]string
