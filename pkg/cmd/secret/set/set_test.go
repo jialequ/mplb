@@ -220,7 +220,7 @@ func TestNewCmdSet(t *testing.T) {
 	}
 }
 
-func TestSetRun_repo(t *testing.T) {
+func TestSetRunrepo(t *testing.T) {
 	tests := []struct {
 		name    string
 		opts    *SetOptions
@@ -292,7 +292,7 @@ func TestSetRun_repo(t *testing.T) {
 	}
 }
 
-func TestSetRun_env(t *testing.T) {
+func TestSetRunenv(t *testing.T) {
 	reg := &httpmock.Registry{}
 
 	reg.Register(httpmock.REST("GET", "repos/owner/repo/environments/development/secrets/public-key"),
@@ -331,7 +331,7 @@ func TestSetRun_env(t *testing.T) {
 	assert.Equal(t, payload.EncryptedValue, literal_4276)
 }
 
-func TestSetRun_org(t *testing.T) {
+func TestSetRunorg(t *testing.T) {
 	tests := []struct {
 		name                       string
 		opts                       *SetOptions
@@ -444,7 +444,7 @@ func TestSetRun_org(t *testing.T) {
 	}
 }
 
-func TestSetRun_user(t *testing.T) {
+func TestSetRunuser(t *testing.T) {
 	tests := []struct {
 		name             string
 		opts             *SetOptions
@@ -514,7 +514,7 @@ func TestSetRun_user(t *testing.T) {
 	}
 }
 
-func TestSetRun_shouldNotStore(t *testing.T) {
+func TestSetRunshouldNotStore(t *testing.T) {
 	reg := &httpmock.Registry{}
 	defer reg.Verify(t)
 

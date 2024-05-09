@@ -211,7 +211,7 @@ func TestAddFormatFlags(t *testing.T) {
 	}
 }
 
-func TestExportFormat_Write(t *testing.T) {
+func TestExportFormatWrite(t *testing.T) {
 	type args struct {
 		data interface{}
 	}

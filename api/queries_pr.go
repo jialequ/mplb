@@ -561,7 +561,6 @@ func CreatePullRequest(client *Client, repo *Repository, params map[string]inter
 		reviewParams["teamIds"] = ids
 	}
 
-	//TODO: How much work to extract this into own method and use for create and edit?
 	if len(reviewParams) > 0 {
 		reviewQuery := `
 		mutation PullRequestCreateRequestReviews($input: RequestReviewsInput!) {

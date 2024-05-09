@@ -319,7 +319,7 @@ func TestOverrideBaseRepo(t *testing.T) {
 	}
 }
 
-func TestIoStreams_pager(t *testing.T) {
+func TestIoStreamspager(t *testing.T) {
 	tests := []struct {
 		name      string
 		env       map[string]string
@@ -387,7 +387,7 @@ func TestIoStreams_pager(t *testing.T) {
 	}
 }
 
-func TestIoStreams_prompt(t *testing.T) {
+func TestIoStreamsprompt(t *testing.T) {
 	tests := []struct {
 		name           string
 		config         config.Config

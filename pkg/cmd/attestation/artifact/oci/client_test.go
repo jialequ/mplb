@@ -12,7 +12,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestGetImageDigest_Success(t *testing.T) {
+func TestGetImageDigestSuccess(t *testing.T) {
 	expectedDigest := v1.Hash{
 		Hex:       "1234567890abcdef",
 		Algorithm: "sha256",
@@ -35,7 +35,7 @@ func TestGetImageDigest_Success(t *testing.T) {
 	require.Equal(t, &expectedDigest, digest)
 }
 
-func TestGetImageDigest_ReferenceFail(t *testing.T) {
+func TestGetImageDigestReferenceFail(t *testing.T) {
 	c := LiveClient{
 		parseReference: func(string, ...name.Option) (name.Reference, error) {
 			return nil, fmt.Errorf("failed to parse reference")
@@ -50,7 +50,7 @@ func TestGetImageDigest_ReferenceFail(t *testing.T) {
 	require.Nil(t, digest)
 }
 
-func TestGetImageDigest_AuthFail(t *testing.T) {
+func TestGetImageDigestAuthFail(t *testing.T) {
 	c := LiveClient{
 		parseReference: func(string, ...name.Option) (name.Reference, error) {
 			return name.Tag{}, nil
@@ -66,7 +66,7 @@ func TestGetImageDigest_AuthFail(t *testing.T) {
 	require.Nil(t, digest)
 }
 
-func TestGetImageDigest_Denied(t *testing.T) {
+func TestGetImageDigestDenied(t *testing.T) {
 	c := LiveClient{
 		parseReference: func(string, ...name.Option) (name.Reference, error) {
 			return name.Tag{}, nil

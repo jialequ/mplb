@@ -173,7 +173,7 @@ func TestEditRun(t *testing.T) {
 	}
 }
 
-func TestEditRun_interactive(t *testing.T) {
+func TestEditRuninteractive(t *testing.T) {
 	editList := []string{
 		"Default Branch Name",
 		"Description",

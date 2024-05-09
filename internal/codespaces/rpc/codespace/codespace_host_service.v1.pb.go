@@ -60,7 +60,7 @@ func (x *NotifyCodespaceOfClientActivityRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use NotifyCodespaceOfClientActivityRequest.ProtoReflect.Descriptor instead.
 func (*NotifyCodespaceOfClientActivityRequest) Descriptor() ([]byte, []int) {
-	return file_codespace_codespace_host_service_v1_proto_rawDescGZIP(), []int{0}
+	return FileCodespaceGZIP(), []int{0}
 }
 
 func (x *NotifyCodespaceOfClientActivityRequest) GetClientId() string {
@@ -117,7 +117,7 @@ func (x *NotifyCodespaceOfClientActivityResponse) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use NotifyCodespaceOfClientActivityResponse.ProtoReflect.Descriptor instead.
 func (*NotifyCodespaceOfClientActivityResponse) Descriptor() ([]byte, []int) {
-	return file_codespace_codespace_host_service_v1_proto_rawDescGZIP(), []int{1}
+	return FileCodespaceGZIP(), []int{1}
 }
 
 func (x *NotifyCodespaceOfClientActivityResponse) GetResult() bool {
@@ -173,7 +173,7 @@ func (x *RebuildContainerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RebuildContainerRequest.ProtoReflect.Descriptor instead.
 func (*RebuildContainerRequest) Descriptor() ([]byte, []int) {
-	return file_codespace_codespace_host_service_v1_proto_rawDescGZIP(), []int{2}
+	return FileCodespaceGZIP(), []int{2}
 }
 
 func (x *RebuildContainerRequest) GetIncremental() bool {
@@ -222,7 +222,7 @@ func (x *RebuildContainerResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RebuildContainerResponse.ProtoReflect.Descriptor instead.
 func (*RebuildContainerResponse) Descriptor() ([]byte, []int) {
-	return file_codespace_codespace_host_service_v1_proto_rawDescGZIP(), []int{3}
+	return FileCodespaceGZIP(), []int{3}
 }
 
 func (x *RebuildContainerResponse) GetRebuildContainer() bool {
@@ -295,7 +295,7 @@ var (
 	file_codespace_codespace_host_service_v1_proto_rawDescData = file_codespace_codespace_host_service_v1_proto_rawDesc
 )
 
-func file_codespace_codespace_host_service_v1_proto_rawDescGZIP() []byte {
+func FileCodespaceGZIP() []byte {
 	file_codespace_codespace_host_service_v1_proto_rawDescOnce.Do(func() {
 		file_codespace_codespace_host_service_v1_proto_rawDescData = protoimpl.X.CompressGZIP(file_codespace_codespace_host_service_v1_proto_rawDescData)
 	})
@@ -321,8 +321,8 @@ var file_codespace_codespace_host_service_v1_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_codespace_codespace_host_service_v1_proto_init() }
-func file_codespace_codespace_host_service_v1_proto_init() {
+func init() { FileCodespaceInit() }
+func FileCodespaceInit() {
 	if File_codespace_codespace_host_service_v1_proto != nil {
 		return
 	}

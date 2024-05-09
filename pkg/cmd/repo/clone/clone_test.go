@@ -228,7 +228,7 @@ func TestRepoClone(t *testing.T) {
 	}
 }
 
-func TestRepoClone_hasParent(t *testing.T) {
+func TestRepoClonehasParent(t *testing.T) {
 	reg := &httpmock.Registry{}
 	defer reg.Verify(t)
 	reg.Register(
@@ -268,7 +268,7 @@ func TestRepoClone_hasParent(t *testing.T) {
 	}
 }
 
-func TestRepoClone_hasParent_upstreamRemoteName(t *testing.T) {
+func TestRepoClonehasParentupstreamRemoteName(t *testing.T) {
 	reg := &httpmock.Registry{}
 	defer reg.Verify(t)
 	reg.Register(
@@ -308,7 +308,7 @@ func TestRepoClone_hasParent_upstreamRemoteName(t *testing.T) {
 	}
 }
 
-func TestRepoClone_withoutUsername(t *testing.T) {
+func TestRepoClonewithoutUsername(t *testing.T) {
 	reg := &httpmock.Registry{}
 	defer reg.Verify(t)
 	reg.Register(

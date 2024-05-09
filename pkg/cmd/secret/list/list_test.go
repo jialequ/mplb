@@ -451,7 +451,7 @@ func TestListRun(t *testing.T) {
 //  1. The command is run in the TTY mode without the `--json <fields>` option.
 //  2. The command is run with `--json <fields>` option, and `numSelectedRepos`
 //     is among the selected fields. In this case, TTY mode is irrelevant.
-func TestListRun_populatesNumSelectedReposIfRequired(t *testing.T) {
+func TestListRunpopulatesNumSelectedReposIfRequired(t *testing.T) {
 	type secretKind string
 	const secretKindUser secretKind = "user"
 	const secretKindOrg secretKind = "org"
@@ -634,7 +634,7 @@ func TestListRun_populatesNumSelectedReposIfRequired(t *testing.T) {
 	}
 }
 
-func TestGetSecrets_pagination(t *testing.T) {
+func TestGetSecretspagination(t *testing.T) {
 	reg := &httpmock.Registry{}
 	defer reg.Verify(t)
 	reg.Register(

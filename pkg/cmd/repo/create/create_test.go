@@ -593,10 +593,7 @@ func TestCreateRun(t *testing.T) {
 			tty:  true,
 			promptStubs: func(p *prompter.PrompterMock) {
 				p.ConfirmFunc = func(message string, defaultValue bool) (bool, error) {
-					switch message {
-					default:
-						return false, fmt.Errorf(literal_6789, message)
-					}
+					return false, fmt.Errorf(literal_6789, message)
 				}
 				p.InputFunc = func(message, defaultValue string) (string, error) {
 					switch message {

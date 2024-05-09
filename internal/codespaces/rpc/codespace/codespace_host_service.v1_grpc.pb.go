@@ -86,7 +86,7 @@ func RegisterCodespaceHostServer(s grpc.ServiceRegistrar, srv CodespaceHostServe
 	s.RegisterService(&CodespaceHost_ServiceDesc, srv)
 }
 
-func _CodespaceHost_NotifyCodespaceOfClientActivity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func CodespaceHostNotifyCodespace(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(NotifyCodespaceOfClientActivityRequest)
 	if err := dec(in); err != nil {
 		return nil, err
@@ -104,7 +104,7 @@ func _CodespaceHost_NotifyCodespaceOfClientActivity_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CodespaceHost_RebuildContainerAsync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func CodespaceHostRebuildContainerAsyncHandler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RebuildContainerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
@@ -131,11 +131,11 @@ var CodespaceHost_ServiceDesc = grpc.ServiceDesc{
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "NotifyCodespaceOfClientActivity",
-			Handler:    _CodespaceHost_NotifyCodespaceOfClientActivity_Handler,
+			Handler:    CodespaceHostNotifyCodespace,
 		},
 		{
 			MethodName: "RebuildContainerAsync",
-			Handler:    _CodespaceHost_RebuildContainerAsync_Handler,
+			Handler:    CodespaceHostRebuildContainerAsyncHandler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

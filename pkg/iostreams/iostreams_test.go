@@ -24,7 +24,7 @@ func TestStopAlternateScreenBuffer(t *testing.T) {
 	}
 }
 
-func TestIOStreams_pager(t *testing.T) {
+func TestIOStreamspager(t *testing.T) {
 	t.Skip("TODO: fix this test in race detection mode")
 	ios, _, stdout, _ := Test()
 	ios.SetStdoutTTY(true)

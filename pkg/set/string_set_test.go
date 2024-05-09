@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestStringSlice_ToSlice(t *testing.T) {
+func TestStringSliceToSlice(t *testing.T) {
 	s := NewStringSet()
 	s.Add("one")
 	s.Add("two")
@@ -15,7 +15,7 @@ func TestStringSlice_ToSlice(t *testing.T) {
 	assert.Equal(t, []string{"one", "two", "three"}, s.ToSlice())
 }
 
-func TestStringSlice_Remove(t *testing.T) {
+func TestStringSliceRemove(t *testing.T) {
 	s := NewStringSet()
 	s.Add("one")
 	s.Add("two")

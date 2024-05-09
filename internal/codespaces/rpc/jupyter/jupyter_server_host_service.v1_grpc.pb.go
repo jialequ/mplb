@@ -72,7 +72,7 @@ func RegisterJupyterServerHostServer(s grpc.ServiceRegistrar, srv JupyterServerH
 	s.RegisterService(&JupyterServerHost_ServiceDesc, srv)
 }
 
-func _JupyterServerHost_GetRunningServer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func JupyterServerHostGetRunningServerHandler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRunningServerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
@@ -99,7 +99,7 @@ var JupyterServerHost_ServiceDesc = grpc.ServiceDesc{
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "GetRunningServer",
-			Handler:    _JupyterServerHost_GetRunningServer_Handler,
+			Handler:    JupyterServerHostGetRunningServerHandler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

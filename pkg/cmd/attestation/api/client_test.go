@@ -129,7 +129,7 @@ func TestGetByDigestGreaterThanLimitWithNextPage(t *testing.T) {
 	require.Equal(t, bundle.GetMediaType(), literal_0698)
 }
 
-func TestGetByDigest_NoAttestationsFound(t *testing.T) {
+func TestGetByDigestNoAttestationsFound(t *testing.T) {
 	fetcher := mockDataGenerator{
 		NumAttestations: 5,
 	}
@@ -152,7 +152,7 @@ func TestGetByDigest_NoAttestationsFound(t *testing.T) {
 	require.Nil(t, attestations)
 }
 
-func TestGetByDigest_Error(t *testing.T) {
+func TestGetByDigestError(t *testing.T) {
 	fetcher := mockDataGenerator{
 		NumAttestations: 5,
 	}

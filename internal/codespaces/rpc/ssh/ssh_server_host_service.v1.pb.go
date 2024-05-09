@@ -59,7 +59,7 @@ func (x *StartRemoteServerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartRemoteServerRequest.ProtoReflect.Descriptor instead.
 func (*StartRemoteServerRequest) Descriptor() ([]byte, []int) {
-	return file_ssh_ssh_server_host_service_v1_proto_rawDescGZIP(), []int{0}
+	return FileSshRawDescGZIP(), []int{0}
 }
 
 func (x *StartRemoteServerRequest) GetUserPublicKey() string {
@@ -111,7 +111,7 @@ func (x *StartRemoteServerResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartRemoteServerResponse.ProtoReflect.Descriptor instead.
 func (*StartRemoteServerResponse) Descriptor() ([]byte, []int) {
-	return file_ssh_ssh_server_host_service_v1_proto_rawDescGZIP(), []int{1}
+	return FileSshRawDescGZIP(), []int{1}
 }
 
 func (x *StartRemoteServerResponse) GetResult() bool {
@@ -182,7 +182,7 @@ var (
 	file_ssh_ssh_server_host_service_v1_proto_rawDescData = file_ssh_ssh_server_host_service_v1_proto_rawDesc
 )
 
-func file_ssh_ssh_server_host_service_v1_proto_rawDescGZIP() []byte {
+func FileSshRawDescGZIP() []byte {
 	file_ssh_ssh_server_host_service_v1_proto_rawDescOnce.Do(func() {
 		file_ssh_ssh_server_host_service_v1_proto_rawDescData = protoimpl.X.CompressGZIP(file_ssh_ssh_server_host_service_v1_proto_rawDescData)
 	})
@@ -204,8 +204,8 @@ var file_ssh_ssh_server_host_service_v1_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_ssh_ssh_server_host_service_v1_proto_init() }
-func file_ssh_ssh_server_host_service_v1_proto_init() {
+func init() { FileSshInit() }
+func FileSshInit() {
 	if File_ssh_ssh_server_host_service_v1_proto != nil {
 		return
 	}

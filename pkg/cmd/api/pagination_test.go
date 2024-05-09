@@ -225,7 +225,7 @@ func TestJsonArrayWriter(t *testing.T) {
 	}
 }
 
-func TestJsonArrayWriter_Copy(t *testing.T) {
+func TestJsonArrayWriterCopy(t *testing.T) {
 	tests := []struct {
 		name  string
 		limit int

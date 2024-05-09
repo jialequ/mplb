@@ -58,7 +58,7 @@ func TestGetAnnotations404(t *testing.T) {
 	assert.Equal(t, result, []Annotation{})
 }
 
-func TestRun_Duration(t *testing.T) {
+func TestRunDuration(t *testing.T) {
 	now, _ := time.Parse(time.RFC3339, "2022-07-20T11:22:58Z")
 
 	tests := []struct {

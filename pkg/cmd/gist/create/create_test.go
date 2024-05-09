@@ -33,7 +33,7 @@ func TestProcessFiles(t *testing.T) {
 	assert.Equal(t, "hey cool how is it going", files[literal_8296].Content)
 }
 
-func TestGuessGistName_stdin(t *testing.T) {
+func TestGuessGistNamestdin(t *testing.T) {
 	files := map[string]*shared.GistFile{
 		literal_8296: {Content: "sample content"},
 	}
@@ -42,7 +42,7 @@ func TestGuessGistName_stdin(t *testing.T) {
 	assert.Equal(t, "", gistName)
 }
 
-func TestGuessGistName_userFiles(t *testing.T) {
+func TestGuessGistNameuserFiles(t *testing.T) {
 	files := map[string]*shared.GistFile{
 		"fig.txt":    {Content: "I am a fig"},
 		"apple.txt":  {Content: "I am an apple"},

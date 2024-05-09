@@ -97,7 +97,7 @@ func TestNewCmdView(t *testing.T) {
 	}
 }
 
-func TestRepoView_Web(t *testing.T) {
+func TestRepoViewWeb(t *testing.T) {
 	tests := []struct {
 		name       string
 		stdoutTTY  bool
@@ -294,7 +294,7 @@ func TestViewRun(t *testing.T) {
 	}
 }
 
-func TestViewRun_NonMarkdownReadme(t *testing.T) {
+func TestViewRunNonMarkdownReadme(t *testing.T) {
 	tests := []struct {
 		name      string
 		stdoutTTY bool
@@ -364,7 +364,7 @@ func TestViewRun_NonMarkdownReadme(t *testing.T) {
 	}
 }
 
-func TestViewRun_NoReadme(t *testing.T) {
+func TestViewRunNoReadme(t *testing.T) {
 	tests := []struct {
 		name      string
 		stdoutTTY bool
@@ -430,7 +430,7 @@ func TestViewRun_NoReadme(t *testing.T) {
 	}
 }
 
-func TestViewRun_NoDescription(t *testing.T) {
+func TestViewRunNoDescription(t *testing.T) {
 	tests := []struct {
 		name      string
 		stdoutTTY bool
@@ -500,7 +500,7 @@ func TestViewRun_NoDescription(t *testing.T) {
 	}
 }
 
-func TestViewRun_WithoutUsername(t *testing.T) {
+func TestViewRunWithoutUsername(t *testing.T) {
 	reg := &httpmock.Registry{}
 	reg.Register(
 		httpmock.GraphQL(`query UserCurrent\b`),
@@ -549,7 +549,7 @@ func TestViewRun_WithoutUsername(t *testing.T) {
 	reg.Verify(t)
 }
 
-func TestViewRun_HandlesSpecialCharacters(t *testing.T) {
+func TestViewRunHandlesSpecialCharacters(t *testing.T) {
 	tests := []struct {
 		name       string
 		opts       *ViewOptions
@@ -632,7 +632,7 @@ func TestViewRun_HandlesSpecialCharacters(t *testing.T) {
 	}
 }
 
-func TestViewRun_json(t *testing.T) {
+func TestViewRunjson(t *testing.T) {
 	io, _, stdout, stderr := iostreams.Test()
 	io.SetStdoutTTY(false)
 

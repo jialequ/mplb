@@ -55,7 +55,7 @@ func TestExecutable(t *testing.T) {
 	}
 }
 
-func TestExecutable_relative(t *testing.T) {
+func TestExecutablerelative(t *testing.T) {
 	testExe, err := os.Executable()
 	if err != nil {
 		t.Fatal(err)
@@ -113,7 +113,7 @@ func TestExecutable_relative(t *testing.T) {
 	}
 }
 
-func TestExecutable_override(t *testing.T) {
+func TestExecutableoverride(t *testing.T) {
 	override := strings.Join([]string{"C:", "cygwin64", "home", "gh.exe"}, string(os.PathSeparator))
 	t.Setenv("GH_PATH", override)
 	f := Factory{}

@@ -24,7 +24,7 @@ func TestMinimumArgs(t *testing.T) {
 	}
 }
 
-func TestMinimumNs_with_error(t *testing.T) {
+func TestMinimumNswitherror(t *testing.T) {
 	tests := []struct {
 		N             int
 		CustomMessage string

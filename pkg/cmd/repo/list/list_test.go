@@ -306,7 +306,7 @@ func runCommand(rt http.RoundTripper, isTTY bool, cli string) (*test.CmdOut, err
 	}, err
 }
 
-func TestRepoList_nontty(t *testing.T) {
+func TestRepoListnontty(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 	ios.SetStdoutTTY(false)
 	ios.SetStdinTTY(false)
@@ -347,7 +347,7 @@ func TestRepoList_nontty(t *testing.T) {
 	`), stdout.String())
 }
 
-func TestRepoList_tty(t *testing.T) {
+func TestRepoListtty(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 	ios.SetStdoutTTY(true)
 	ios.SetStdinTTY(true)
@@ -392,7 +392,7 @@ func TestRepoList_tty(t *testing.T) {
 	`), stdout.String())
 }
 
-func TestRepoList_filtering(t *testing.T) {
+func TestRepoListfiltering(t *testing.T) {
 	http := &httpmock.Registry{}
 	defer http.Verify(t)
 
@@ -413,7 +413,7 @@ func TestRepoList_filtering(t *testing.T) {
 	assert.Equal(t, "\nNo results match your search\n\n", output.String())
 }
 
-func TestRepoList_noVisibilityField(t *testing.T) {
+func TestRepoListnoVisibilityField(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 	ios.SetStdoutTTY(false)
 	ios.SetStdinTTY(false)
@@ -454,7 +454,7 @@ func TestRepoList_noVisibilityField(t *testing.T) {
 	assert.Equal(t, "", stdout.String())
 }
 
-func TestRepoList_invalidOwner(t *testing.T) {
+func TestRepoListinvalidOwner(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 	ios.SetStdoutTTY(false)
 	ios.SetStdinTTY(false)

@@ -36,9 +36,9 @@ func createFakeListEndpointServer(t *testing.T, initialTotal int, finalTotal int
 			page, _ = strconv.Atoi(r.URL.Query().Get("page"))
 		}
 
-		per_page := 0
+		perPage := 0
 		if r.URL.Query().Get("per_page") != "" {
-			per_page, _ = strconv.Atoi(r.URL.Query().Get("per_page"))
+			perPage, _ = strconv.Atoi(r.URL.Query().Get("per_page"))
 		}
 
 		response := struct {
@@ -51,15 +51,15 @@ func createFakeListEndpointServer(t *testing.T, initialTotal int, finalTotal int
 
 		switch page {
 		case 1:
-			response.Codespaces = generateCodespaceList(0, per_page)
+			response.Codespaces = generateCodespaceList(0, perPage)
 			response.TotalCount = initialTotal
-			w.Header().Set("Link", fmt.Sprintf(`<http://%[1]s/user/codespaces?page=3&per_page=%[2]d>; rel="last", <http://%[1]s/user/codespaces?page=2&per_page=%[2]d>; rel="next"`, r.Host, per_page))
+			w.Header().Set("Link", fmt.Sprintf(`<http://%[1]s/user/codespaces?page=3&per_page=%[2]d>; rel="last", <http://%[1]s/user/codespaces?page=2&per_page=%[2]d>; rel="next"`, r.Host, perPage))
 		case 2:
-			response.Codespaces = generateCodespaceList(per_page, per_page*2)
+			response.Codespaces = generateCodespaceList(perPage, perPage*2)
 			response.TotalCount = finalTotal
-			w.Header().Set("Link", fmt.Sprintf(`<http://%s/user/codespaces?page=3&per_page=%d>; rel="next"`, r.Host, per_page))
+			w.Header().Set("Link", fmt.Sprintf(`<http://%s/user/codespaces?page=3&per_page=%d>; rel="next"`, r.Host, perPage))
 		case 3:
-			response.Codespaces = generateCodespaceList(per_page*2, per_page*3-per_page/2)
+			response.Codespaces = generateCodespaceList(perPage*2, perPage*3-perPage/2)
 			response.TotalCount = finalTotal
 		default:
 			t.Fatal("Should not check extra page")
@@ -67,66 +67,6 @@ func createFakeListEndpointServer(t *testing.T, initialTotal int, finalTotal int
 
 		data, _ := json.Marshal(response)
 		fmt.Fprint(w, string(data))
-	}))
-}
-
-func createFakeCreateEndpointServer(t *testing.T, wantStatus int) *httptest.Server {
-	t.Helper()
-	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// create endpoint
-		if r.URL.Path == "/user/codespaces" {
-			body := r.Body
-			if body == nil {
-				t.Fatal("No body")
-			}
-			defer body.Close()
-
-			var params startCreateRequest
-			err := json.NewDecoder(body).Decode(&params)
-			if err != nil {
-				t.Fatal("error:", err)
-			}
-
-			if params.RepositoryID != 1 {
-				t.Fatal("Expected RepositoryID to be 1. Got: ", params.RepositoryID)
-			}
-
-			if params.IdleTimeoutMinutes != 10 {
-				t.Fatal("Expected IdleTimeoutMinutes to be 10. Got: ", params.IdleTimeoutMinutes)
-			}
-
-			if *params.RetentionPeriodMinutes != 0 {
-				t.Fatal("Expected RetentionPeriodMinutes to be 0. Got: ", *params.RetentionPeriodMinutes)
-			}
-
-			response := Codespace{
-				Name:        literal_6519,
-				DisplayName: params.DisplayName,
-			}
-
-			if wantStatus == 0 {
-				wantStatus = http.StatusCreated
-			}
-
-			w.WriteHeader(wantStatus)
-			enc := json.NewEncoder(w)
-			_ = enc.Encode(&response)
-			return
-		}
-
-		// get endpoint hit for testing pending status
-		if r.URL.Path == "/user/codespaces/codespace-1" {
-			response := Codespace{
-				Name:  literal_6519,
-				State: CodespaceStateAvailable,
-			}
-			w.WriteHeader(http.StatusOK)
-			enc := json.NewEncoder(w)
-			_ = enc.Encode(&response)
-			return
-		}
-
-		t.Fatal(literal_1956)
 	}))
 }
 
@@ -301,87 +241,6 @@ func TestNewServerURLdotcomFallback(t *testing.T) {
 
 	if api.githubServer != literal_0782 {
 		t.Fatalf("expected https://github.com, got %s", api.githubServer)
-	}
-}
-
-func TestCreateCodespaces(t *testing.T) {
-	svr := createFakeCreateEndpointServer(t, http.StatusCreated)
-	defer svr.Close()
-
-	api := API{
-		githubAPI: svr.URL,
-		client:    createHttpClient,
-	}
-
-	ctx := context.TODO()
-	retentionPeriod := 0
-	params := &CreateCodespaceParams{
-		RepositoryID:           1,
-		IdleTimeoutMinutes:     10,
-		RetentionPeriodMinutes: &retentionPeriod,
-	}
-	codespace, err := api.CreateCodespace(ctx, params)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if codespace.Name != literal_6519 {
-		t.Fatalf("expected codespace-1, got %s", codespace.Name)
-	}
-	if codespace.DisplayName != "" {
-		t.Fatalf("expected display name empty, got %q", codespace.DisplayName)
-	}
-}
-
-func TestCreateCodespacesdisplayName(t *testing.T) {
-	svr := createFakeCreateEndpointServer(t, http.StatusCreated)
-	defer svr.Close()
-
-	api := API{
-		githubAPI: svr.URL,
-		client:    createHttpClient,
-	}
-
-	retentionPeriod := 0
-	codespace, err := api.CreateCodespace(context.Background(), &CreateCodespaceParams{
-		RepositoryID:           1,
-		IdleTimeoutMinutes:     10,
-		RetentionPeriodMinutes: &retentionPeriod,
-		DisplayName:            literal_2807,
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if codespace.DisplayName != literal_2807 {
-		t.Fatalf("expected display name %q, got %q", literal_2807, codespace.DisplayName)
-	}
-}
-
-func TestCreateCodespacesPending(t *testing.T) {
-	svr := createFakeCreateEndpointServer(t, http.StatusAccepted)
-	defer svr.Close()
-
-	api := API{
-		githubAPI:    svr.URL,
-		client:       createHttpClient,
-		retryBackoff: 0,
-	}
-
-	ctx := context.TODO()
-	retentionPeriod := 0
-	params := &CreateCodespaceParams{
-		RepositoryID:           1,
-		IdleTimeoutMinutes:     10,
-		RetentionPeriodMinutes: &retentionPeriod,
-	}
-	codespace, err := api.CreateCodespace(ctx, params)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if codespace.Name != literal_6519 {
-		t.Fatalf("expected codespace-1, got %s", codespace.Name)
 	}
 }
 

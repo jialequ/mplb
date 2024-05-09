@@ -72,7 +72,7 @@ func RegisterSshServerHostServer(s grpc.ServiceRegistrar, srv SshServerHostServe
 	s.RegisterService(&SshServerHost_ServiceDesc, srv)
 }
 
-func _SshServerHost_StartRemoteServerAsync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func SshServerHostHandler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(StartRemoteServerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
@@ -99,7 +99,7 @@ var SshServerHost_ServiceDesc = grpc.ServiceDesc{
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "StartRemoteServerAsync",
-			Handler:    _SshServerHost_StartRemoteServerAsync_Handler,
+			Handler:    SshServerHostHandler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

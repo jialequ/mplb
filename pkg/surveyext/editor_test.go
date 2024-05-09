@@ -52,7 +52,7 @@ func TestHelperProcess(t *testing.T) {
 	os.Exit(0)
 }
 
-func TestGhEditor_Prompt_skip(t *testing.T) {
+func TestGhEditorPromptskip(t *testing.T) {
 	pty := newTerminal(t)
 
 	e := &GhEditor{
@@ -85,7 +85,7 @@ func TestGhEditor_Prompt_skip(t *testing.T) {
 	assert.Equal(t, "", normalizeANSI(pty.Output()))
 }
 
-func TestGhEditor_Prompt_editorAppend(t *testing.T) {
+func TestGhEditorPrompteditorAppend(t *testing.T) {
 	pty := newTerminal(t)
 
 	e := &GhEditor{
@@ -116,7 +116,7 @@ func TestGhEditor_Prompt_editorAppend(t *testing.T) {
 	assert.Equal(t, "", normalizeANSI(pty.Output()))
 }
 
-func TestGhEditor_Prompt_editorTruncate(t *testing.T) {
+func TestGhEditorPrompteditorTruncate(t *testing.T) {
 	pty := newTerminal(t)
 
 	e := &GhEditor{

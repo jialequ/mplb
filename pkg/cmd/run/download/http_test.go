@@ -40,7 +40,7 @@ func TestList(t *testing.T) {
 	assert.Equal(t, "artifact-2", artifacts[1].Name)
 }
 
-func TestList_perRepository(t *testing.T) {
+func TestListperRepository(t *testing.T) {
 	reg := &httpmock.Registry{}
 	defer reg.Verify(t)
 

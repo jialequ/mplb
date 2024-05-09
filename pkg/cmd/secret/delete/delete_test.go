@@ -118,7 +118,7 @@ func TestNewCmdDelete(t *testing.T) {
 	}
 }
 
-func TestRemoveRun_repo(t *testing.T) {
+func TestRemoveRunrepo(t *testing.T) {
 	tests := []struct {
 		name     string
 		opts     *DeleteOptions
@@ -176,7 +176,7 @@ func TestRemoveRun_repo(t *testing.T) {
 	}
 }
 
-func TestRemoveRun_env(t *testing.T) {
+func TestRemoveRunenv(t *testing.T) {
 	reg := &httpmock.Registry{}
 
 	reg.Register(
@@ -206,7 +206,7 @@ func TestRemoveRun_env(t *testing.T) {
 	reg.Verify(t)
 }
 
-func TestRemoveRun_org(t *testing.T) {
+func TestRemoveRunorg(t *testing.T) {
 	tests := []struct {
 		name     string
 		opts     *DeleteOptions
@@ -267,7 +267,7 @@ func TestRemoveRun_org(t *testing.T) {
 	}
 }
 
-func TestRemoveRun_user(t *testing.T) {
+func TestRemoveRunuser(t *testing.T) {
 	reg := &httpmock.Registry{}
 
 	reg.Register(

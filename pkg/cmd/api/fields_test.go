@@ -50,7 +50,7 @@ func TestParseFields(t *testing.T) {
 	assert.Equal(t, expect, params)
 }
 
-func TestParseFields_nested(t *testing.T) {
+func TestParseFieldsnested(t *testing.T) {
 	ios, stdin, _, _ := iostreams.Test()
 	fmt.Fprint(stdin, literal_9203)
 
@@ -136,7 +136,7 @@ func TestParseFields_nested(t *testing.T) {
 	`), "\n"), string(jsonData))
 }
 
-func TestParseFields_errors(t *testing.T) {
+func TestParseFieldserrors(t *testing.T) {
 	ios, stdin, _, _ := iostreams.Test()
 	fmt.Fprint(stdin, literal_9203)
 

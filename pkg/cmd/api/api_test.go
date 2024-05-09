@@ -406,7 +406,7 @@ func TestNewCmdApi(t *testing.T) {
 	}
 }
 
-func TestNewCmdApi_WindowsAbsPath(t *testing.T) {
+func TestNewCmdApiWindowsAbsPath(t *testing.T) {
 	if runtime.GOOS != "windows" {
 		t.SkipNow()
 	}
@@ -687,7 +687,7 @@ func TestApiRun(t *testing.T) {
 	}
 }
 
-func TestApiRun_paginationREST(t *testing.T) {
+func TestApiRunpaginationREST(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 
 	requestCount := 0
@@ -759,7 +759,7 @@ func TestApiRun_paginationREST(t *testing.T) {
 	assert.Equal(t, literal_7294, responses[2].Request.URL.String())
 }
 
-func TestApiRun_arrayPaginationREST(t *testing.T) {
+func TestApiRunarrayPaginationREST(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 	ios.SetStdoutTTY(false)
 
@@ -831,7 +831,7 @@ func TestApiRun_arrayPaginationREST(t *testing.T) {
 	assert.Equal(t, literal_7294, responses[2].Request.URL.String())
 }
 
-func TestApiRun_arrayPaginationREST_with_headers(t *testing.T) {
+func TestApiRunarrayPaginationRESTwithheaders(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 
 	requestCount := 0
@@ -904,7 +904,7 @@ func TestApiRun_arrayPaginationREST_with_headers(t *testing.T) {
 	assert.Equal(t, literal_7294, responses[2].Request.URL.String())
 }
 
-func TestApiRun_paginationGraphQL(t *testing.T) {
+func TestApiRunpaginationGraphQL(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 
 	requestCount := 0
@@ -1003,7 +1003,7 @@ func TestApiRun_paginationGraphQL(t *testing.T) {
 	assert.Equal(t, "PAGE1_END", endCursor)
 }
 
-func TestApiRun_paginationGraphQL_slurp(t *testing.T) {
+func TestApiRunpaginationGraphQLslurp(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 
 	requestCount := 0
@@ -1106,7 +1106,7 @@ func TestApiRun_paginationGraphQL_slurp(t *testing.T) {
 	assert.Equal(t, "PAGE1_END", endCursor)
 }
 
-func TestApiRun_paginated_template(t *testing.T) {
+func TestApiRunpaginatedtemplate(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 	ios.SetStdoutTTY(true)
 
@@ -1202,7 +1202,7 @@ func TestApiRun_paginated_template(t *testing.T) {
 	assert.Equal(t, "PAGE1_END", endCursor)
 }
 
-func TestApiRun_DELETE(t *testing.T) {
+func TestApiRunDELETE(t *testing.T) {
 	ios, _, _, _ := iostreams.Test()
 
 	var gotRequest *http.Request
@@ -1232,7 +1232,7 @@ func TestApiRun_DELETE(t *testing.T) {
 	}
 }
 
-func TestApiRun_inputFile(t *testing.T) {
+func TestApiRuninputFile(t *testing.T) {
 	tests := []struct {
 		name          string
 		inputFile     string
@@ -1581,7 +1581,7 @@ func TestPreviewNamesToMIMETypes(t *testing.T) {
 	}
 }
 
-func TestProcessResponse_template(t *testing.T) {
+func TestProcessResponsetemplate(t *testing.T) {
 	ios, _, stdout, stderr := iostreams.Test()
 
 	resp := http.Response{
@@ -1707,7 +1707,7 @@ func TestParseErrorResponse(t *testing.T) {
 	}
 }
 
-func TestApiRun_acceptHeader(t *testing.T) {
+func TestApiRunacceptHeader(t *testing.T) {
 	tests := []struct {
 		name             string
 		options          ApiOptions
