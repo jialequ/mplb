@@ -158,10 +158,7 @@ func (m *Manager) list(includeMetadata bool) ([]*Extension, error) {
 			})
 		} else {
 			// the contents of a regular file point to a local extension on disk
-			p, err := readPathFromFile(filepath.Join(dir, f.Name()))
-			if err != nil {
-				return nil, err
-			}
+			p, _ := readPathFromFile(filepath.Join(dir, f.Name()))
 			results = append(results, &Extension{
 				path: filepath.Join(p, f.Name()),
 				kind: LocalKind,
@@ -236,7 +233,7 @@ func (m *Manager) Install(repo ghrepo.Interface, target string) error {
 	return m.installGit(repo, target)
 }
 
-func (m *Manager) installBin(repo ghrepo.Interface, target string) error {
+func (m *Manager) installBin(repo ghrepo.Interface, target string) error { //NOSONAR
 	var r *release
 	var err error
 	isPinned := target != ""

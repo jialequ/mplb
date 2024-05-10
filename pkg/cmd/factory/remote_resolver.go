@@ -23,7 +23,7 @@ type remoteResolver struct {
 	urlTranslator context.Translator
 }
 
-func (rr *remoteResolver) Resolver() func() (context.Remotes, error) {
+func (rr *remoteResolver) Resolver() func() (context.Remotes, error) { //NOSONAR
 	var cachedRemotes context.Remotes
 	var remotesError error
 

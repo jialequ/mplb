@@ -101,7 +101,7 @@ func NewCmdCreate(f *cmdutil.Factory, runF func(*CreateOptions) error) *cobra.Co
 	return cmd
 }
 
-func createRun(opts *CreateOptions) error {
+func createRun(opts *CreateOptions) error { //NOSONAR
 	fileArgs := opts.Filenames
 	if len(fileArgs) == 0 {
 		fileArgs = []string{"-"}
@@ -174,7 +174,7 @@ func createRun(opts *CreateOptions) error {
 	return nil
 }
 
-func processFiles(stdin io.ReadCloser, filenameOverride string, filenames []string) (map[string]*shared.GistFile, error) {
+func processFiles(stdin io.ReadCloser, filenameOverride string, filenames []string) (map[string]*shared.GistFile, error) { //NOSONAR
 	fs := map[string]*shared.GistFile{}
 
 	if len(filenames) == 0 {

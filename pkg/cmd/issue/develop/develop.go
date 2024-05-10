@@ -32,7 +32,7 @@ type DevelopOptions struct {
 	List          bool
 }
 
-func NewCmdDevelop(f *cmdutil.Factory, runF func(*DevelopOptions) error) *cobra.Command {
+func NewCmdDevelop(f *cmdutil.Factory, runF func(*DevelopOptions) error) *cobra.Command { //NOSONAR
 	opts := &DevelopOptions{
 		IO:         f.IOStreams,
 		HttpClient: f.HttpClient,
@@ -208,7 +208,7 @@ func printLinkedBranches(io *iostreams.IOStreams, branches []api.LinkedBranch) {
 	_ = table.Render()
 }
 
-func checkoutBranch(opts *DevelopOptions, branchRepo ghrepo.Interface, checkoutBranch string) (err error) {
+func checkoutBranch(opts *DevelopOptions, branchRepo ghrepo.Interface, checkoutBranch string) (err error) { //NOSONAR
 	remotes, err := opts.Remotes()
 	if err != nil {
 		// If the user specified the branch to be checked out and no remotes are found

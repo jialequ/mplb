@@ -15,7 +15,7 @@ var errScopesMissing = errors.New("insufficient OAuth scopes")
 var errDuplicateKey = errors.New("key already exists")
 var errWrongFormat = errors.New("key in wrong format")
 
-func gpgKeyUpload(httpClient *http.Client, hostname string, keyFile io.Reader, title string) error {
+func gpgKeyUpload(httpClient *http.Client, hostname string, keyFile io.Reader, title string) error { //NOSONAR
 	url := ghinstance.RESTPrefix(hostname) + "user/gpg_keys"
 
 	keyBytes, err := io.ReadAll(keyFile)

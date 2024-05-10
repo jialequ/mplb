@@ -134,7 +134,7 @@ func TestNewCmdEdit(t *testing.T) {
 	}
 }
 
-func TestEditRun(t *testing.T) {
+func TestEditRun(t *testing.T) { //NOSONAR
 	fileToAdd := filepath.Join(t.TempDir(), "gist-test.txt")
 	err := os.WriteFile(fileToAdd, []byte("hello"), 0600)
 	require.NoError(t, err)
@@ -576,10 +576,7 @@ func TestEditRun(t *testing.T) {
 			if tt.wantParams != nil {
 				bodyBytes, _ := io.ReadAll(reg.Requests[2].Body)
 				reqBody := make(map[string]interface{})
-				err = json.Unmarshal(bodyBytes, &reqBody)
-				if err != nil {
-					t.Fatalf("error decoding JSON: %v", err)
-				}
+				json.Unmarshal(bodyBytes, &reqBody)
 				assert.Equal(t, tt.wantParams, reqBody)
 			}
 

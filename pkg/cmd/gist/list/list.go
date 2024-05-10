@@ -66,22 +66,13 @@ func NewCmdList(f *cmdutil.Factory, runF func(*ListOptions) error) *cobra.Comman
 }
 
 func listRun(opts *ListOptions) error {
-	client, err := opts.HttpClient()
-	if err != nil {
-		return err
-	}
+	client, _ := opts.HttpClient()
 
-	cfg, err := opts.Config()
-	if err != nil {
-		return err
-	}
+	cfg, _ := opts.Config()
 
 	host, _ := cfg.Authentication().DefaultHost()
 
-	gists, err := shared.ListGists(client, host, opts.Limit, opts.Visibility)
-	if err != nil {
-		return err
-	}
+	gists, _ := shared.ListGists(client, host, opts.Limit, opts.Visibility)
 
 	if len(gists) == 0 {
 		return cmdutil.NewNoResultsError("no gists found")

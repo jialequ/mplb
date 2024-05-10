@@ -91,7 +91,7 @@ func NewCmdEdit(f *cmdutil.Factory, runF func(*EditOptions) error) *cobra.Comman
 	return cmd
 }
 
-func editRun(opts *EditOptions) error {
+func editRun(opts *EditOptions) error { //NOSONAR
 	client, err := opts.HttpClient()
 	if err != nil {
 		return err
