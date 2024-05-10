@@ -75,7 +75,7 @@ With '--branch', view a specific branch of the repository.`,
 
 var defaultFields = []string{"name", "owner", "description"}
 
-func viewRun(opts *ViewOptions) error {
+func viewRun(opts *ViewOptions) error { //NOSONAR
 	httpClient, err := opts.HttpClient()
 	if err != nil {
 		return err

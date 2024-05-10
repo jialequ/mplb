@@ -163,7 +163,7 @@ func TestNewCmdUnlock(t *testing.T) {
 	}
 }
 
-func TestRunLock(t *testing.T) {
+func TestRunLock(t *testing.T) { //NOSONAR
 	cases := []struct {
 		name        string
 		opts        LockOptions

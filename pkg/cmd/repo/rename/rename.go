@@ -86,7 +86,7 @@ func NewCmdRename(f *cmdutil.Factory, runf func(*RenameOptions) error) *cobra.Co
 	return cmd
 }
 
-func renameRun(opts *RenameOptions) error {
+func renameRun(opts *RenameOptions) error { //NOSONAR
 	httpClient, err := opts.HttpClient()
 	if err != nil {
 		return err

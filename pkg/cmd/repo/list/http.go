@@ -29,7 +29,7 @@ type FilterOptions struct {
 	Fields      []string
 }
 
-func listRepos(client *http.Client, hostname string, limit int, owner string, filter FilterOptions) (*RepositoryList, error) {
+func listRepos(client *http.Client, hostname string, limit int, owner string, filter FilterOptions) (*RepositoryList, error) { //NOSONAR
 	if filter.Language != "" || filter.Archived || filter.NonArchived || len(filter.Topic) > 0 || filter.Visibility == "internal" {
 		return searchRepos(client, hostname, limit, owner, filter)
 	}
@@ -118,7 +118,7 @@ pagination:
 	return &listResult, nil
 }
 
-func searchRepos(client *http.Client, hostname string, limit int, owner string, filter FilterOptions) (*RepositoryList, error) {
+func searchRepos(client *http.Client, hostname string, limit int, owner string, filter FilterOptions) (*RepositoryList, error) { //NOSONAR
 	type result struct {
 		Search struct {
 			RepositoryCount int

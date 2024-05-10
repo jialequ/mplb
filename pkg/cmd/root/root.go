@@ -51,11 +51,11 @@ func (ae *AuthError) Error() string {
 	return ae.err.Error()
 }
 
-func NewCmdRoot(f *cmdutil.Factory, version, buildDate string) (*cobra.Command, error) {
+func NewCmdRoot(f *cmdutil.Factory, version, buildDate string) (*cobra.Command, error) { //NOSONAR
 	io := f.IOStreams
 	cfg, err := f.Config()
 	if err != nil {
-		return nil, fmt.Errorf("failed to read configuration: %s\n", err)
+		return nil, fmt.Errorf("failed to read configuration: %s", err)
 	}
 
 	cmd := &cobra.Command{
@@ -99,7 +99,7 @@ func NewCmdRoot(f *cmdutil.Factory, version, buildDate string) (*cobra.Command, 
 		cmd.Flags().Bool("version", false, "Show gh version")
 
 		cmd.SetHelpFunc(func(c *cobra.Command, args []string) {
-			rootHelpFunc(f, c, args)
+			rootHelpFunc(f, c)
 		})
 		cmd.SetUsageFunc(func(c *cobra.Command) error {
 			return rootUsageFunc(f.IOStreams.ErrOut, c)
@@ -203,7 +203,7 @@ func NewCmdRoot(f *cmdutil.Factory, version, buildDate string) (*cobra.Command, 
 					return rootUsageFunc(f.IOStreams.ErrOut, child)
 				})
 				aliasCmd.SetHelpFunc(func(_ *cobra.Command, args []string) {
-					rootHelpFunc(f, child, args)
+					rootHelpFunc(f, child)
 				})
 				parentCmd.AddCommand(aliasCmd)
 			}

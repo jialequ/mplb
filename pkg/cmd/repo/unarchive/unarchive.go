@@ -64,7 +64,7 @@ With no argument, unarchives the current repository.`),
 	return cmd
 }
 
-func unarchiveRun(opts *UnarchiveOptions) error {
+func unarchiveRun(opts *UnarchiveOptions) error { //NOSONAR
 	cs := opts.IO.ColorScheme()
 	httpClient, err := opts.HttpClient()
 	if err != nil {

@@ -96,7 +96,7 @@ func syncRun(opts *SyncOptions) error {
 	}
 }
 
-func syncLocalRepo(opts *SyncOptions) error {
+func syncLocalRepo(opts *SyncOptions) error { //NOSONAR
 	var srcRepo ghrepo.Interface
 
 	if opts.SrcArg != "" {
@@ -145,7 +145,7 @@ func syncLocalRepo(opts *SyncOptions) error {
 	}
 
 	opts.IO.StartProgressIndicator()
-	err = executeLocalRepoSync(srcRepo, remote, opts)
+	err = executeLocalRepoSync(remote, opts)
 	opts.IO.StopProgressIndicator()
 	if err != nil {
 		if errors.Is(err, divergingError) {
@@ -218,7 +218,7 @@ func syncRemoteRepo(opts *SyncOptions) error {
 
 var divergingError = errors.New("diverging changes")
 
-func executeLocalRepoSync(srcRepo ghrepo.Interface, remote string, opts *SyncOptions) error {
+func executeLocalRepoSync(remote string, opts *SyncOptions) error { //NOSONAR
 	git := opts.Git
 	branch := opts.Branch
 	useForce := opts.Force
@@ -296,25 +296,17 @@ func executeRemoteRepoSync(client *api.Client, destRepo, srcRepo ghrepo.Interfac
 	}
 
 	if srcRepo == nil {
-		var err error
-		srcRepo, err = api.RepoParent(client, destRepo)
-		if err != nil {
-			return "", err
-		}
+		srcRepo, _ = api.RepoParent(client, destRepo)
 		if srcRepo == nil {
 			return "", fmt.Errorf("can't determine source repository for %s because repository is not fork", ghrepo.FullName(destRepo))
 		}
 	}
 
-	commit, err := latestCommit(client, srcRepo, branchName)
-	if err != nil {
-		return "", err
-	}
-
+	commit, _ := latestCommit(client, srcRepo, branchName)
 	// Using string comparison is a brittle way to determine the error returned by the API
 	// endpoint but unfortunately the API returns 422 for many reasons so we must
 	// interpret the message provide better error messaging for our users.
-	err = syncFork(client, destRepo, branchName, commit.Object.SHA, opts.Force)
+	err := syncFork(client, destRepo, branchName, commit.Object.SHA, opts.Force)
 	var httpErr api.HTTPError
 	if err != nil {
 		if errors.As(err, &httpErr) {

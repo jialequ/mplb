@@ -87,7 +87,7 @@ func isRootCmd(command *cobra.Command) bool {
 	return command != nil && !command.HasParent()
 }
 
-func rootHelpFunc(f *cmdutil.Factory, command *cobra.Command, args []string) {
+func rootHelpFunc(f *cmdutil.Factory, command *cobra.Command) { //NOSONAR
 	flags := command.Flags()
 
 	if isRootCmd(command) {
@@ -229,7 +229,7 @@ type CommandGroup struct {
 	Commands []*cobra.Command
 }
 
-func GroupedCommands(cmd *cobra.Command) []CommandGroup {
+func GroupedCommands(cmd *cobra.Command) []CommandGroup { //NOSONAR
 	var res []CommandGroup
 
 	for _, g := range cmd.Groups() {

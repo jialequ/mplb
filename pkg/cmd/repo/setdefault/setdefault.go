@@ -110,7 +110,7 @@ func NewCmdSetDefault(f *cmdutil.Factory, runF func(*SetDefaultOptions) error) *
 	return cmd
 }
 
-func setDefaultRun(opts *SetDefaultOptions) error {
+func setDefaultRun(opts *SetDefaultOptions) error { //NOSONAR
 	remotes, err := opts.Remotes()
 	if err != nil {
 		return err

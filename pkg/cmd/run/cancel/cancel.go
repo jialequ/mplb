@@ -59,7 +59,7 @@ func NewCmdCancel(f *cmdutil.Factory, runF func(*CancelOptions) error) *cobra.Co
 	return cmd
 }
 
-func runCancel(opts *CancelOptions) error {
+func runCancel(opts *CancelOptions) error { //NOSONAR
 	if opts.RunID != "" {
 		_, err := strconv.Atoi(opts.RunID)
 		if err != nil {

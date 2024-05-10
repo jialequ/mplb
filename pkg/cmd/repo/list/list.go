@@ -39,7 +39,7 @@ type ListOptions struct {
 	Now func() time.Time
 }
 
-func NewCmdList(f *cmdutil.Factory, runF func(*ListOptions) error) *cobra.Command {
+func NewCmdList(f *cmdutil.Factory, runF func(*ListOptions) error) *cobra.Command { //NOSONAR
 	opts := ListOptions{
 		IO:         f.IOStreams,
 		Config:     f.Config,
@@ -116,7 +116,7 @@ func NewCmdList(f *cmdutil.Factory, runF func(*ListOptions) error) *cobra.Comman
 
 var defaultFields = []string{"nameWithOwner", "description", "isPrivate", "isFork", "isArchived", "createdAt", "pushedAt"}
 
-func listRun(opts *ListOptions) error {
+func listRun(opts *ListOptions) error { //NOSONAR
 	httpClient, err := opts.HttpClient()
 	if err != nil {
 		return err

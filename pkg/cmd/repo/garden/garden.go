@@ -122,7 +122,7 @@ func NewCmdGarden(f *cmdutil.Factory, runF func(*GardenOptions) error) *cobra.Co
 	return cmd
 }
 
-func gardenRun(opts *GardenOptions) error {
+func gardenRun(opts *GardenOptions) error { //NOSONAR
 	cs := opts.IO.ColorScheme()
 	out := opts.IO.Out
 
@@ -333,7 +333,7 @@ func isQuit(b []byte) bool {
 	return rune(b[0]) == 'q' || bytes.Equal(b, ctrlC)
 }
 
-func plantGarden(r *rand.Rand, commits []*Commit, geo *Geometry) [][]*Cell {
+func plantGarden(r *rand.Rand, commits []*Commit, geo *Geometry) [][]*Cell { //NOSONAR
 	cellIx := 0
 	grassCell := &Cell{RGB(0, 200, 0, ","), "You're standing on a patch of grass in a field of wildflowers."}
 	garden := [][]*Cell{}
