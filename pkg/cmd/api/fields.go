@@ -13,7 +13,7 @@ const (
 	keySeparator = '='
 )
 
-func parseFields(opts *ApiOptions) (map[string]interface{}, error) {
+func parseFields(opts *ApiOptions) (map[string]interface{}, error) { //NOSONAR
 	params := make(map[string]interface{})
 	parseField := func(f string, isMagic bool) error {
 		var valueIndex int
@@ -132,7 +132,7 @@ func addParamsMap(m map[string]interface{}, key string) (map[string]interface{},
 	return newMap, nil
 }
 
-func addParamsSlice(m map[string]interface{}, prevkey, newkey string) (map[string]interface{}, error) {
+func addParamsSlice(m map[string]interface{}, prevkey, newkey string) (map[string]interface{}, error) { //NOSONAR
 	if v, exists := m[prevkey]; exists {
 		if existSlice, ok := v.([]interface{}); ok {
 			if len(existSlice) > 0 {

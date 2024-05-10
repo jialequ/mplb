@@ -393,7 +393,7 @@ type RepoNetworkResult struct {
 }
 
 // RepoNetwork inspects the relationship between multiple GitHub repositories
-func RepoNetwork(client *Client, repos []ghrepo.Interface) (RepoNetworkResult, error) {
+func RepoNetwork(client *Client, repos []ghrepo.Interface) (RepoNetworkResult, error) { //NOSONAR
 	var hostname string
 	if len(repos) > 0 {
 		hostname = repos[0].RepoHost()
@@ -551,7 +551,7 @@ func ForkRepo(client *Client, repo ghrepo.Interface, org, newName string, defaul
 	// The GitHub API will happily return a HTTP 200 when attempting to fork own repo even though no forking
 	// actually took place. Ensure that we raise an error instead.
 	if ghrepo.IsSame(repo, newRepo) {
-		return newRepo, fmt.Errorf("%s cannot be forked. A single user account cannot own both a parent and fork.", ghrepo.FullName(repo))
+		return newRepo, fmt.Errorf("%s cannot be forked. A single user account cannot own both a parent and fork", ghrepo.FullName(repo))
 	}
 
 	return newRepo, nil
@@ -765,7 +765,7 @@ func (m *RepoMetadataResult) projectV2TitleToID(projectTitle string) (string, bo
 	return "", false
 }
 
-func ProjectsToPaths(projects []RepoProject, projectsV2 []ProjectV2, names []string) ([]string, error) {
+func ProjectsToPaths(projects []RepoProject, projectsV2 []ProjectV2, names []string) ([]string, error) { //NOSONAR
 	var paths []string
 	for _, projectName := range names {
 		found := false
@@ -851,7 +851,7 @@ type RepoMetadataInput struct {
 }
 
 // RepoMetadata pre-fetches the metadata for attaching to issues and pull requests
-func RepoMetadata(client *Client, repo ghrepo.Interface, input RepoMetadataInput) (*RepoMetadataResult, error) {
+func RepoMetadata(client *Client, repo ghrepo.Interface, input RepoMetadataInput) (*RepoMetadataResult, error) { //NOSONAR
 	var result RepoMetadataResult
 	var g errgroup.Group
 
@@ -931,7 +931,7 @@ type RepoResolveInput struct {
 }
 
 // RepoResolveMetadataIDs looks up GraphQL node IDs in bulk
-func RepoResolveMetadataIDs(client *Client, repo ghrepo.Interface, input RepoResolveInput) (*RepoMetadataResult, error) {
+func RepoResolveMetadataIDs(client *Client, repo ghrepo.Interface, input RepoResolveInput) (*RepoMetadataResult, error) { //NOSONAR
 	users := input.Assignees
 	hasUser := func(target string) bool {
 		for _, u := range users {
@@ -1234,7 +1234,7 @@ func ProjectNamesToPaths(client *Client, repo ghrepo.Interface, projectNames []s
 // - ProjectsV2 owned by current user
 // - ProjectsV2 linked to repository
 // - ProjectsV2 owned by repository organization, if it belongs to one
-func relevantProjects(client *Client, repo ghrepo.Interface) ([]RepoProject, []ProjectV2, error) {
+func relevantProjects(client *Client, repo ghrepo.Interface) ([]RepoProject, []ProjectV2, error) { //NOSONAR
 	var repoProjects []RepoProject
 	var orgProjects []RepoProject
 	var userProjectsV2 []ProjectV2

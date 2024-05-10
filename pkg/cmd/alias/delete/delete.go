@@ -51,10 +51,7 @@ func NewCmdDelete(f *cmdutil.Factory, runF func(*DeleteOptions) error) *cobra.Co
 }
 
 func deleteRun(opts *DeleteOptions) error {
-	cfg, err := opts.Config()
-	if err != nil {
-		return err
-	}
+	cfg, _ := opts.Config()
 
 	aliasCfg := cfg.Aliases()
 

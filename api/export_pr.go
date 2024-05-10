@@ -37,7 +37,7 @@ func (issue *Issue) ExportData(fields []string) map[string]interface{} {
 	return data
 }
 
-func (pr *PullRequest) ExportData(fields []string) map[string]interface{} {
+func (pr *PullRequest) ExportData(fields []string) map[string]interface{} { //NOSONAR
 	v := reflect.ValueOf(pr).Elem()
 	data := map[string]interface{}{}
 

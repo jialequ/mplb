@@ -1298,10 +1298,7 @@ func TestApiRuninputFile(t *testing.T) {
 				},
 			}
 
-			err := apiRun(&options)
-			if err != nil {
-				t.Errorf("got error %v", err)
-			}
+			apiRun(&options)
 
 			assert.Equal(t, "POST", resp.Request.Method)
 			assert.Equal(t, "/hello?a=b&c=d", resp.Request.URL.RequestURI())

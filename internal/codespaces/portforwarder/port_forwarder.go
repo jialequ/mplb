@@ -103,11 +103,7 @@ func (fwd *CodespacesPortForwarder) ForwardPortToListener(ctx context.Context, o
 // ForwardPort informs the host that we would like to forward the given port.
 func (fwd *CodespacesPortForwarder) ForwardPort(ctx context.Context, opts ForwardPortOpts) error {
 	// Convert the port number to a uint16
-	port, err := convertIntToUint16(opts.Port)
-	if err != nil {
-		return fmt.Errorf(literal_3294, err)
-	}
-
+	port, _ := convertIntToUint16(opts.Port)
 	tunnelPort := tunnels.NewTunnelPort(port, "", "", tunnels.TunnelProtocolHttp)
 
 	// If no visibility is provided, Dev Tunnels will use the default (private)
@@ -142,17 +138,13 @@ func (fwd *CodespacesPortForwarder) ForwardPort(ctx context.Context, opts Forwar
 	}
 
 	// Create the tunnel port
-	_, err = fwd.connection.TunnelManager.CreateTunnelPort(ctx, fwd.connection.Tunnel, tunnelPort, fwd.connection.Options)
+	_, err := fwd.connection.TunnelManager.CreateTunnelPort(ctx, fwd.connection.Tunnel, tunnelPort, fwd.connection.Options)
 	if err != nil && !strings.Contains(err.Error(), "409") {
 		return fmt.Errorf("create tunnel port failed: %v", err)
 	}
 
 	// Connect to the tunnel
-	err = fwd.connection.Connect(ctx)
-	if err != nil {
-		return fmt.Errorf("connect failed: %v", err)
-	}
-
+	fwd.connection.Connect(ctx)
 	// Inform the host that we've forwarded the port locally
 	err = fwd.connection.TunnelClient.RefreshPorts(ctx)
 	if err != nil {

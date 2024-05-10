@@ -91,7 +91,7 @@ func NewCmdImport(f *cmdutil.Factory, runF func(*ImportOptions) error) *cobra.Co
 	return cmd
 }
 
-func importRun(opts *ImportOptions) error {
+func importRun(opts *ImportOptions) error { //NOSONAR
 	cs := opts.IO.ColorScheme()
 	cfg, err := opts.Config()
 	if err != nil {

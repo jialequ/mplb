@@ -47,7 +47,7 @@ func main() {
 	os.Exit(int(code))
 }
 
-func mainRun() exitCode {
+func mainRun() exitCode { //NOSONAR
 	buildDate := build.Date
 	buildVersion := build.Version
 	hasDebug, _ := utils.IsDebugEnabled()

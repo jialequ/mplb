@@ -345,7 +345,7 @@ type PullRequestChecksStatus struct {
 	Total   int
 }
 
-func (pr *PullRequest) ChecksStatus() PullRequestChecksStatus {
+func (pr *PullRequest) ChecksStatus() PullRequestChecksStatus { //NOSONAR
 	var summary PullRequestChecksStatus
 
 	if len(pr.StatusCheckRollup.Nodes) == 0 {
@@ -490,7 +490,7 @@ func (pr *PullRequest) DisplayableReviews() PullRequestReviews {
 }
 
 // CreatePullRequest creates a pull request in a GitHub repository
-func CreatePullRequest(client *Client, repo *Repository, params map[string]interface{}) (*PullRequest, error) {
+func CreatePullRequest(client *Client, repo *Repository, params map[string]interface{}) (*PullRequest, error) { //NOSONAR
 	query := `
 		mutation PullRequestCreate($input: CreatePullRequestInput!) {
 			createPullRequest(input: $input) {

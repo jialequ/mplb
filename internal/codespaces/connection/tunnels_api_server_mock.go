@@ -25,7 +25,7 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
-func NewMockHttpClient() (*http.Client, error) {
+func NewMockHttpClient() (*http.Client, error) { //NOSONAR
 	accessToken := "tunnel access-token"
 	relayServer, err := newMockrelayServer(withAccessToken(accessToken))
 	if err != nil {

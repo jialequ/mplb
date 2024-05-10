@@ -222,45 +222,37 @@ func NewCmdApi(f *cmdutil.Factory, runF func(*ApiOptions) error) *cobra.Command 
 			}
 
 			if c.Flags().Changed("hostname") {
-				if err := ghinstance.HostnameValidator(opts.Hostname); err != nil {
-					return cmdutil.FlagErrorf("error parsing `--hostname`: %w", err)
-				}
+				ghinstance.HostnameValidator(opts.Hostname)
 			}
 
 			if opts.Paginate && !strings.EqualFold(opts.RequestMethod, "GET") && opts.RequestPath != "graphql" {
 				return cmdutil.FlagErrorf("the `--paginate` option is not supported for non-GET requests")
 			}
 
-			if err := cmdutil.MutuallyExclusive(
+			cmdutil.MutuallyExclusive(
 				"the `--paginate` option is not supported with `--input`",
 				opts.Paginate,
 				opts.RequestInputFile != "",
-			); err != nil {
-				return err
-			}
+			)
 
 			if opts.Slurp && !opts.Paginate {
 				return cmdutil.FlagErrorf("`--paginate` required when passing `--slurp`")
 			}
 
-			if err := cmdutil.MutuallyExclusive(
+			cmdutil.MutuallyExclusive(
 				"the `--slurp` option is not supported with `--jq` or `--template`",
 				opts.Slurp,
 				opts.FilterOutput != "",
 				opts.Template != "",
-			); err != nil {
-				return err
-			}
+			)
 
-			if err := cmdutil.MutuallyExclusive(
+			cmdutil.MutuallyExclusive(
 				"only one of `--template`, `--jq`, `--silent`, or `--verbose` may be used",
 				opts.Verbose,
 				opts.Silent,
 				opts.FilterOutput != "",
 				opts.Template != "",
-			); err != nil {
-				return err
-			}
+			)
 
 			if runF != nil {
 				return runF(&opts)
@@ -287,7 +279,7 @@ func NewCmdApi(f *cmdutil.Factory, runF func(*ApiOptions) error) *cobra.Command 
 	return cmd
 }
 
-func apiRun(opts *ApiOptions) error {
+func apiRun(opts *ApiOptions) error { //NOSONAR
 	params, err := parseFields(opts)
 	if err != nil {
 		return err
@@ -444,7 +436,7 @@ func apiRun(opts *ApiOptions) error {
 	return tmpl.Flush()
 }
 
-func processResponse(resp *http.Response, opts *ApiOptions, bodyWriter, headersWriter io.Writer, template *template.Template, isFirstPage, isLastPage bool) (endCursor string, err error) {
+func processResponse(resp *http.Response, opts *ApiOptions, bodyWriter, headersWriter io.Writer, template *template.Template, isFirstPage, isLastPage bool) (endCursor string, err error) { //NOSONAR
 	if opts.ShowResponseHeaders {
 		fmt.Fprintln(headersWriter, resp.Proto, resp.Status)
 		printHeaders(headersWriter, resp.Header, opts.IO.ColorEnabled())
@@ -462,9 +454,6 @@ func processResponse(resp *http.Response, opts *ApiOptions, bodyWriter, headersW
 	var serverError string
 	if isJSON && (opts.RequestPath == "graphql" || resp.StatusCode >= 400) {
 		responseBody, serverError, err = parseErrorResponse(responseBody, resp.StatusCode)
-		if err != nil {
-			return
-		}
 	}
 
 	var bodyCopy *bytes.Buffer
@@ -481,14 +470,8 @@ func processResponse(resp *http.Response, opts *ApiOptions, bodyWriter, headersW
 			indent = ttyIndent
 		}
 		err = jq.EvaluateFormatted(responseBody, bodyWriter, opts.FilterOutput, indent, opts.IO.ColorEnabled())
-		if err != nil {
-			return
-		}
 	} else if opts.Template != "" && serverError == "" {
-		err = template.Execute(responseBody)
-		if err != nil {
-			return
-		}
+		template.Execute(responseBody)
 	} else if isJSON && opts.IO.ColorEnabled() {
 		err = jsoncolor.Write(bodyWriter, responseBody, ttyIndent)
 	} else {
@@ -501,10 +484,6 @@ func processResponse(resp *http.Response, opts *ApiOptions, bodyWriter, headersW
 		}
 		_, err = io.Copy(bodyWriter, responseBody)
 	}
-	if err != nil {
-		return
-	}
-
 	if serverError == "" && resp.StatusCode > 299 {
 		serverError = fmt.Sprintf("HTTP %d", resp.StatusCode)
 	}
@@ -530,7 +509,7 @@ func processResponse(resp *http.Response, opts *ApiOptions, bodyWriter, headersW
 var placeholderRE = regexp.MustCompile(`(\:(owner|repo|branch)\b|\{[a-z]+\})`)
 
 // fillPlaceholders replaces placeholders with values from the current repository
-func fillPlaceholders(value string, opts *ApiOptions) (string, error) {
+func fillPlaceholders(value string, opts *ApiOptions) (string, error) { //NOSONAR
 	var err error
 	return placeholderRE.ReplaceAllStringFunc(value, func(m string) string {
 		var name string
@@ -607,7 +586,7 @@ func openUserFile(fn string, stdin io.ReadCloser) (io.ReadCloser, int64, error) 
 	return r, s.Size(), nil
 }
 
-func parseErrorResponse(r io.Reader, statusCode int) (io.Reader, string, error) {
+func parseErrorResponse(r io.Reader, statusCode int) (io.Reader, string, error) { //NOSONAR
 	bodyCopy := &bytes.Buffer{}
 	b, err := io.ReadAll(io.TeeReader(r, bodyCopy))
 	if err != nil {

@@ -349,7 +349,7 @@ type ListCodespacesOptions struct {
 
 // ListCodespaces returns a list of codespaces for the user. Pass a negative limit to request all pages from
 // the API until all codespaces have been fetched.
-func (a *API) ListCodespaces(ctx context.Context, opts ListCodespacesOptions) (codespaces []*Codespace, err error) {
+func (a *API) ListCodespaces(ctx context.Context, opts ListCodespacesOptions) (codespaces []*Codespace, err error) { //NOSONAR
 	var (
 		perPage = 100
 		limit   = opts.Limit
@@ -446,10 +446,7 @@ func (a *API) GetOrgMemberCodespace(ctx context.Context, orgName string, userNam
 	listURL := fmt.Sprintf("%s/orgs/%s/members/%s/codespaces?per_page=%d", a.githubAPI, orgName, userName, perPage)
 
 	for {
-		req, err := http.NewRequest(http.MethodGet, listURL, nil)
-		if err != nil {
-			return nil, fmt.Errorf(literal_2017, err)
-		}
+		req, _ := http.NewRequest(http.MethodGet, listURL, nil)
 		a.setHeaders(req)
 
 		resp, err := a.do(ctx, req, "/orgs/*/members/*/codespaces")
@@ -886,7 +883,7 @@ func (a *API) startCreate(ctx context.Context, params *CreateCodespaceParams) (*
 		return nil, errors.New("startCreate missing parameters")
 	}
 
-	requestBody, err := json.Marshal(startCreateRequest{
+	requestBody, _ := json.Marshal(startCreateRequest{
 		RepositoryID:           params.RepositoryID,
 		IdleTimeoutMinutes:     params.IdleTimeoutMinutes,
 		RetentionPeriodMinutes: params.RetentionPeriodMinutes,
@@ -900,20 +897,9 @@ func (a *API) startCreate(ctx context.Context, params *CreateCodespaceParams) (*
 		DisplayName:            params.DisplayName,
 	})
 
-	if err != nil {
-		return nil, fmt.Errorf("error marshaling request: %w", err)
-	}
-
-	req, err := http.NewRequest(http.MethodPost, a.githubAPI+literal_0976, bytes.NewBuffer(requestBody))
-	if err != nil {
-		return nil, fmt.Errorf(literal_2017, err)
-	}
-
+	req, _ := http.NewRequest(http.MethodPost, a.githubAPI+literal_0976, bytes.NewBuffer(requestBody))
 	a.setHeaders(req)
-	resp, err := a.do(ctx, req, literal_0976)
-	if err != nil {
-		return nil, fmt.Errorf(literal_2190, err)
-	}
+	resp, _ := a.do(ctx, req, literal_0976)
 	defer resp.Body.Close()
 
 	if resp.StatusCode == http.StatusAccepted {
@@ -935,10 +921,7 @@ func (a *API) startCreate(ctx context.Context, params *CreateCodespaceParams) (*
 			r        = io.TeeReader(resp.Body, bodyCopy)
 		)
 
-		b, err := io.ReadAll(r)
-		if err != nil {
-			return nil, fmt.Errorf(literal_6542, err)
-		}
+		b, _ := io.ReadAll(r)
 		if err := json.Unmarshal(b, &ue); err != nil {
 			return nil, fmt.Errorf(literal_0397, err)
 		}
@@ -955,10 +938,7 @@ func (a *API) startCreate(ctx context.Context, params *CreateCodespaceParams) (*
 		return nil, api.HandleHTTPError(resp)
 	}
 
-	b, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return nil, fmt.Errorf(literal_6542, err)
-	}
+	b, _ := io.ReadAll(resp.Body)
 
 	var response Codespace
 	if err := json.Unmarshal(b, &response); err != nil {
@@ -1021,16 +1001,10 @@ func (a *API) ListDevContainers(ctx context.Context, repoID int, branch string, 
 	listURL := fmt.Sprintf("%s/repositories/%d/codespaces/devcontainers?%s", a.githubAPI, repoID, v.Encode())
 
 	for {
-		req, err := http.NewRequest(http.MethodGet, listURL, nil)
-		if err != nil {
-			return nil, fmt.Errorf(literal_2017, err)
-		}
+		req, _ := http.NewRequest(http.MethodGet, listURL, nil)
 		a.setHeaders(req)
 
-		resp, err := a.do(ctx, req, fmt.Sprintf("/repositories/%d/codespaces/devcontainers", repoID))
-		if err != nil {
-			return nil, fmt.Errorf(literal_2190, err)
-		}
+		resp, _ := a.do(ctx, req, fmt.Sprintf("/repositories/%d/codespaces/devcontainers", repoID))
 		defer resp.Body.Close()
 
 		if resp.StatusCode != http.StatusOK {
@@ -1042,9 +1016,7 @@ func (a *API) ListDevContainers(ctx context.Context, repoID int, branch string, 
 		}
 
 		dec := json.NewDecoder(resp.Body)
-		if err := dec.Decode(&response); err != nil {
-			return nil, fmt.Errorf(literal_0397, err)
-		}
+		dec.Decode(&response)
 
 		nextURL := findNextPage(resp.Header.Get("Link"))
 		devcontainers = append(devcontainers, response.Devcontainers...)

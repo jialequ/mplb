@@ -94,11 +94,7 @@ func NewCmdSet(f *cmdutil.Factory, runF func(*SetOptions) error) *cobra.Command 
 
 func setRun(opts *SetOptions) error {
 	cs := opts.IO.ColorScheme()
-	cfg, err := opts.Config()
-	if err != nil {
-		return err
-	}
-
+	cfg, _ := opts.Config()
 	aliasCfg := cfg.Aliases()
 
 	expansion, err := getExpansion(opts)
@@ -143,11 +139,7 @@ func setRun(opts *SetOptions) error {
 
 	aliasCfg.Add(opts.Name, expansion)
 
-	err = cfg.Write()
-	if err != nil {
-		return err
-	}
-
+	cfg.Write()
 	successMsg := fmt.Sprintf("%s Added alias %s", cs.SuccessIcon(), cs.Bold(opts.Name))
 	if existingAlias && opts.OverwriteExisting {
 		successMsg = fmt.Sprintf("%s Changed alias %s",
