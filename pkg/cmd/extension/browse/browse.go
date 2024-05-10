@@ -633,15 +633,12 @@ func ExtBrowse(opts ExtBrowseOpts) error {
 		case tcell.KeyEscape:
 			filter.SetText("")
 			extList.Reset()
-		case tcell.KeyCtrlSpace:
+		case tcell.KeyCtrlSpace, tcell.KeyCtrlK:
 			// The ctrl check works on linux/mac and not windows:
 			extList.PageUp()
 			go loadSelectedReadme()
 		case tcell.KeyCtrlJ:
 			extList.PageDown()
-			go loadSelectedReadme()
-		case tcell.KeyCtrlK:
-			extList.PageUp()
 			go loadSelectedReadme()
 		}
 

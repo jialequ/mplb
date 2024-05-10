@@ -22,6 +22,12 @@ import (
 	"golang.org/x/crypto/nacl/box"
 )
 
+type PutOrgSecretOptions struct {
+	orgName    string
+	Visibility string
+	secretKey  string
+	encoded    string
+}
 type SetOptions struct {
 	HttpClient func() (*http.Client, error)
 	IO         *iostreams.IOStreams
@@ -321,7 +327,13 @@ func setSecret(opts *SetOptions, pk *PubKey, host string, client *api.Client, ba
 
 	switch entity {
 	case shared.Organization:
-		err = putOrgSecret(client, host, pk, orgName, opts.Visibility, secretKey, encoded, repositoryIDs, app)
+		options := PutOrgSecretOptions{
+			orgName:    orgName,
+			Visibility: opts.Visibility,
+			secretKey:  secretKey,
+			encoded:    encoded,
+		}
+		err = putOrgSecret(client, host, pk, repositoryIDs, app, options)
 	case shared.Environment:
 		err = putEnvSecret(client, pk, baseRepo, envName, secretKey, encoded)
 	case shared.User:

@@ -523,79 +523,12 @@ func promptForJob(prompter shared.Prompter, cs *iostreams.ColorScheme, jobs []sh
 const JOB_NAME_MAX_LENGTH = 90
 
 func logFilenameRegexp(job shared.Job, step shared.Step) *regexp.Regexp {
-	// As described in https://github.com/cli/cli/issues/5011#issuecomment-1570713070, there are a number of steps
-	// the server can take when producing the downloaded zip file that can result in a mismatch between the job name
-	// and the filename in the zip including:
-	//  * Removing characters in the job name that aren't allowed in file paths
-	//  * Truncating names that are too long for zip files
-	//  * Adding collision deduplicating numbers for jobs with the same name
-	//
-	// We are hesitant to duplicate all the server logic due to the fragility but it may be unavoidable. Currently, we:
-	// * Strip `/` which occur when composite action job names are constructed of the form `<JOB_NAME`> / <ACTION_NAME>`
-	// * Truncate long job names
-	//
 	sanitizedJobName := strings.ReplaceAll(job.Name, "/", "")
 	sanitizedJobName = truncateAsUTF16(sanitizedJobName, JOB_NAME_MAX_LENGTH)
 	re := fmt.Sprintf(`^%s\/%d_.*\.txt`, regexp.QuoteMeta(sanitizedJobName), step.Number)
 	return regexp.MustCompile(re)
 }
 
-/*
-If you're reading this comment by necessity, I'm sorry and if you're reading it for fun, you're welcome, you weirdo.
-
-What is the length of this string "a😅😅"? If you said 9 you'd be right. If you said 3 or 5 you might also be right!
-
-Here's a summary:
-
-	"a" takes 1 byte (`\x61`)
-	"😅" takes 4 `bytes` (`\xF0\x9F\x98\x85`)
-	"a😅😅" therefore takes 9 `bytes`
-	In Go `len("a😅😅")` is 9 because the `len` builtin counts `bytes`
-	In Go `len([]rune("a😅😅"))` is 3 because each `rune` is 4 `bytes` so each character fits within a `rune`
-	In C# `"a😅😅".Length` is 5 because `.Length` counts `Char` objects, `Chars` hold 2 bytes, and "😅" takes 2 Chars.
-
-But wait, what does C# have to do with anything? Well the server is running C#. Which server? The one that serves log
-files to us in `.zip` format of course! When the server is constructing the zip file to avoid running afoul of a 260
-byte zip file path length limitation, it applies transformations to various strings in order to limit their length.
-In C#, the server truncates strings with this function:
-
-	public static string TruncateAfter(string str, int max)
-	{
-		string result = str.Length > max ? str.Substring(0, max) : str;
-		result = result.Trim();
-		return result;
-	}
-
-This seems like it would be easy enough to replicate in Go but as we already discovered, the length of a string isn't
-as obvious as it might seem. Since C# uses UTF-16 encoding for strings, and Go uses UTF-8 encoding and represents
-characters by runes (which are an alias of int32) we cannot simply slice the string without any further consideration.
-Instead, we need to encode the string as UTF-16 bytes, slice it and then decode it back to UTF-8.
-
-Interestingly, in C# length and substring both act on the Char type so it's possible to slice into the middle of
-a visual, "representable" character. For example we know `"a😅😅".Length` = 5 (1+2+2) and therefore Substring(0,4)
-results in the final character being cleaved in two, resulting in "a😅�". Since our int32 runes are being encoded as
-2 uint16 elements, we also mimic this behaviour by slicing into the UTF-16 encoded string.
-
-Here's a program you can put into a dotnet playground to see how C# works:
-
-	using System;
-	public class Program {
-	  public static void Main() {
-	    string s = "a😅😅";
-	    Console.WriteLine("{0} {1}", s.Length, s);
-	    string t = TruncateAfter(s, 4);
-	    Console.WriteLine("{0} {1}", t.Length, t);
-	  }
-	  public static string TruncateAfter(string str, int max) {
-	    string result = str.Length > max ? str.Substring(0, max) : str;
-	    return result.Trim();
-	  }
-	}
-
-This will output:
-5 a😅😅
-4 a😅�
-*/
 func truncateAsUTF16(str string, max int) string {
 	// Encode the string to UTF-16 to count code units
 	utf16Encoded := utf16.Encode([]rune(str))
@@ -606,22 +539,6 @@ func truncateAsUTF16(str string, max int) string {
 	return strings.TrimSpace(str)
 }
 
-// This function takes a zip file of logs and a list of jobs.
-// Structure of zip file
-//
-//	zip/
-//	├── jobname1/
-//	│   ├── 1_stepname.txt
-//	│   ├── 2_anotherstepname.txt
-//	│   ├── 3_stepstepname.txt
-//	│   └── 4_laststepname.txt
-//	└── jobname2/
-//	    ├── 1_stepname.txt
-//	    └── 2_somestepname.txt
-//
-// It iterates through the list of jobs and tries to find the matching
-// log in the zip file. If the matching log is found it is attached
-// to the job.
 func attachRunLog(rlz *zip.Reader, jobs []shared.Job) {
 	for i, job := range jobs {
 		for j, step := range job.Steps {

@@ -67,7 +67,12 @@ func putSecret(client *api.Client, host, path string, payload interface{}) error
 	return client.REST(host, "PUT", path, requestBody, nil)
 }
 
-func putOrgSecret(client *api.Client, host string, pk *PubKey, orgName, visibility, secretName, eValue string, repositoryIDs []int64, app shared.App) error {
+func putOrgSecret(client *api.Client, host string, pk *PubKey, repositoryIDs []int64, app shared.App, options PutOrgSecretOptions) error {
+
+	orgName := options.orgName
+	visibility := options.Visibility
+	secretName := options.secretKey
+	eValue := options.encoded
 	path := fmt.Sprintf("orgs/%s/%s/secrets/%s", orgName, app, secretName)
 
 	if app == shared.Dependabot {

@@ -93,7 +93,7 @@ func QueryMatcher(method string, path string, query url.Values) Matcher {
 		actualQuery := req.URL.Query()
 
 		for param := range query {
-			if !(actualQuery.Get(param) == query.Get(param)) {
+			if actualQuery.Get(param) != query.Get(param) {
 				return false
 			}
 		}

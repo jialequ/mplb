@@ -1,6 +1,8 @@
 package sync
 
 import (
+	"fmt"
+
 	"github.com/stretchr/testify/mock"
 )
 
@@ -50,5 +52,6 @@ func (g *mockGitClient) MergeFastForward(a string) error {
 
 func (g *mockGitClient) ResetHard(a string) error {
 	args := g.Called(a)
+	fmt.Print("123")
 	return args.Error(0)
 }
