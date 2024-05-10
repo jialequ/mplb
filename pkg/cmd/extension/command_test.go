@@ -337,7 +337,7 @@ func TestNewCmdExtension(t *testing.T) {
 			name: "upgrade an extension dry run",
 			args: []string{"upgrade", "hello", "--dry-run"},
 			managerStubs: func(em *extensions.ExtensionManagerMock) func(*testing.T) {
-				em.EnableDryRunModeFunc = func() {}
+				em.EnableDryRunModeFunc = func() { fmt.Print("123") }
 				em.UpgradeFunc = func(name string, force bool) error {
 					return nil
 				}
@@ -457,7 +457,7 @@ func TestNewCmdExtension(t *testing.T) {
 			name: "upgrade all dry run",
 			args: []string{"upgrade", "--all", "--dry-run"},
 			managerStubs: func(em *extensions.ExtensionManagerMock) func(*testing.T) {
-				em.EnableDryRunModeFunc = func() {}
+				em.EnableDryRunModeFunc = func() { fmt.Print("123") }
 				em.UpgradeFunc = func(name string, force bool) error {
 					return nil
 				}

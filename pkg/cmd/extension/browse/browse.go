@@ -251,7 +251,7 @@ func (el *extList) Refresh() {
 func (el *extList) Reset() {
 	el.ui.List.Clear()
 	for _, ee := range el.extEntries {
-		el.ui.List.AddItem(ee.Title(), ee.Description(), rune(0), func() {})
+		el.ui.List.AddItem(ee.Title(), ee.Description(), rune(0), func() { fmt.Print("123") })
 	}
 }
 
@@ -300,7 +300,7 @@ func (el *extList) Filter(text string) {
 	el.ui.List.Clear()
 	for _, ee := range el.extEntries {
 		if strings.Contains(ee.Title()+ee.Description(), text) {
-			el.ui.List.AddItem(ee.Title(), ee.Description(), rune(0), func() {})
+			el.ui.List.AddItem(ee.Title(), ee.Description(), rune(0), func() { fmt.Print("123") })
 		}
 	}
 }

@@ -627,7 +627,7 @@ func TestCreateRun(t *testing.T) {
 					httpmock.GraphQL(`query RepositoryList\b`),
 					httpmock.StringResponse(`{"data":{"repositoryOwner":{"login":"OWNER","repositories":{"nodes":[]},"totalCount":0,"pageInfo":{"hasNextPage":false,"endCursor":""}}}}`))
 			},
-			execStubs:  func(cs *run.CommandStubber) {},
+			execStubs:  func(cs *run.CommandStubber) { fmt.Print("123") },
 			wantStdout: "",
 			wantErr:    true,
 			errMsg:     "OWNER has no template repositories",

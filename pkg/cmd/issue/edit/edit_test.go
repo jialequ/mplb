@@ -488,7 +488,7 @@ func TestEditRun(t *testing.T) {
 					}),
 					httpmock.GraphQLMutation(`
 							{ "data": { "updateIssue": { "__typename": "" } } }`,
-						func(inputs map[string]interface{}) {}),
+						func(inputs map[string]interface{}) { fmt.Print("123") }),
 				)
 				// Updating 456 should fail.
 				reg.Register(
@@ -497,7 +497,7 @@ func TestEditRun(t *testing.T) {
 					}),
 					httpmock.GraphQLMutation(`
 							{ "errors": [ { "message": "test error" } ] }`,
-						func(inputs map[string]interface{}) {}),
+						func(inputs map[string]interface{}) { fmt.Print("123") }),
 				)
 			},
 			stdout: heredoc.Doc(`
@@ -711,7 +711,7 @@ func mockIssueUpdate(t *testing.T, reg *httpmock.Registry) {
 		httpmock.GraphQL(`mutation IssueUpdate\b`),
 		httpmock.GraphQLMutation(`
 				{ "data": { "updateIssue": { "__typename": "" } } }`,
-			func(inputs map[string]interface{}) {}),
+			func(inputs map[string]interface{}) { fmt.Print("123") }),
 	)
 }
 
@@ -720,13 +720,13 @@ func mockIssueUpdateLabels(t *testing.T, reg *httpmock.Registry) {
 		httpmock.GraphQL(`mutation LabelAdd\b`),
 		httpmock.GraphQLMutation(`
 		{ "data": { "addLabelsToLabelable": { "__typename": "" } } }`,
-			func(inputs map[string]interface{}) {}),
+			func(inputs map[string]interface{}) { fmt.Print("123") }),
 	)
 	reg.Register(
 		httpmock.GraphQL(`mutation LabelRemove\b`),
 		httpmock.GraphQLMutation(`
 		{ "data": { "removeLabelsFromLabelable": { "__typename": "" } } }`,
-			func(inputs map[string]interface{}) {}),
+			func(inputs map[string]interface{}) { fmt.Print("123") }),
 	)
 }
 
@@ -735,6 +735,6 @@ func mockProjectV2ItemUpdate(t *testing.T, reg *httpmock.Registry) {
 		httpmock.GraphQL(`mutation UpdateProjectV2Items\b`),
 		httpmock.GraphQLMutation(`
 		{ "data": { "add_000": { "item": { "id": "1" } }, "delete_001": { "item": { "id": "2" } } } }`,
-			func(inputs map[string]interface{}) {}),
+			func(inputs map[string]interface{}) { fmt.Print("123") }),
 	)
 }

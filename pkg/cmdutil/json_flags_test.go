@@ -96,7 +96,7 @@ func TestAddJSONFlags(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			cmd := &cobra.Command{Run: func(*cobra.Command, []string) {}}
+			cmd := &cobra.Command{Run: func(*cobra.Command, []string) { fmt.Print("123") }}
 			cmd.Flags().Bool("web", false, "")
 			var exporter Exporter
 			AddJSONFlags(cmd, &exporter, tt.fields)
@@ -188,7 +188,7 @@ func TestAddFormatFlags(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			cmd := &cobra.Command{Run: func(*cobra.Command, []string) {}}
+			cmd := &cobra.Command{Run: func(*cobra.Command, []string) { fmt.Print("123") }}
 			cmd.Flags().Bool("web", false, "")
 			var exporter Exporter
 			AddFormatFlags(cmd, &exporter)

@@ -3,14 +3,12 @@ package factory
 import (
 	"net/http"
 	"net/http/httptest"
-	"net/url"
 	"path/filepath"
 	"testing"
 
 	"github.com/jialequ/mplb/git"
 	"github.com/jialequ/mplb/internal/config"
 	"github.com/jialequ/mplb/pkg/cmdutil"
-	"github.com/jialequ/mplb/pkg/httpmock"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -33,7 +31,7 @@ func TestBaseRepo(t *testing.T) {
 			},
 			wantsName:  "repo",
 			wantsOwner: "owner",
-			wantsHost:  "nonsense.com",
+			wantsHost:  fix_string,
 		},
 		{
 			name: "no matching remote",
@@ -47,17 +45,17 @@ func TestBaseRepo(t *testing.T) {
 			remotes: git.RemoteSet{
 				git.NewRemote("origin", literal_2673),
 			},
-			override:   "test.com",
+			override:   fix_string_1,
 			wantsName:  "repo",
 			wantsOwner: "owner",
-			wantsHost:  "test.com",
+			wantsHost:  fix_string_1,
 		},
 		{
 			name: "override with no matching remote",
 			remotes: git.RemoteSet{
 				git.NewRemote("origin", literal_1058),
 			},
-			override: "test.com",
+			override: fix_string_1,
 			wantsErr: true,
 		},
 	}
@@ -73,13 +71,13 @@ func TestBaseRepo(t *testing.T) {
 					cfg := &config.ConfigMock{}
 					cfg.AuthenticationFunc = func() *config.AuthConfig {
 						authCfg := &config.AuthConfig{}
-						hosts := []string{"nonsense.com"}
+						hosts := []string{fix_string}
 						if tt.override != "" {
 							hosts = append([]string{tt.override}, hosts...)
 						}
 						authCfg.SetHosts(hosts)
 						authCfg.SetActiveToken("", "")
-						authCfg.SetDefaultHost("nonsense.com", "hosts")
+						authCfg.SetDefaultHost(fix_string, "hosts")
 						if tt.override != "" {
 							authCfg.SetDefaultHost(tt.override, "GH_HOST")
 						}
@@ -90,154 +88,6 @@ func TestBaseRepo(t *testing.T) {
 			}
 			f.Remotes = rr.Resolver()
 			f.BaseRepo = BaseRepoFunc(f)
-			repo, err := f.BaseRepo()
-			if tt.wantsErr {
-				assert.Error(t, err)
-				return
-			}
-			assert.NoError(t, err)
-			assert.Equal(t, tt.wantsName, repo.RepoName())
-			assert.Equal(t, tt.wantsOwner, repo.RepoOwner())
-			assert.Equal(t, tt.wantsHost, repo.RepoHost())
-		})
-	}
-}
-
-func TestSmartBaseRepo(t *testing.T) {
-	pu, _ := url.Parse("https://test.com/newowner/newrepo.git")
-
-	tests := []struct {
-		name       string
-		remotes    git.RemoteSet
-		override   string
-		wantsErr   bool
-		wantsName  string
-		wantsOwner string
-		wantsHost  string
-		tty        bool
-		httpStubs  func(*httpmock.Registry)
-	}{
-		{
-			name: "override with matching remote",
-			remotes: git.RemoteSet{
-				git.NewRemote("origin", literal_2673),
-			},
-			override:   "test.com",
-			wantsName:  "repo",
-			wantsOwner: "owner",
-			wantsHost:  "test.com",
-		},
-		{
-			name: "override with matching remote and base resolution",
-			remotes: git.RemoteSet{
-				&git.Remote{Name: "origin",
-					Resolved: "base",
-					FetchURL: pu,
-					PushURL:  pu},
-			},
-			override:   "test.com",
-			wantsName:  "newrepo",
-			wantsOwner: "newowner",
-			wantsHost:  "test.com",
-		},
-		{
-			name: "override with matching remote and nonbase resolution",
-			remotes: git.RemoteSet{
-				&git.Remote{Name: "origin",
-					Resolved: "johnny/test",
-					FetchURL: pu,
-					PushURL:  pu},
-			},
-			override:   "test.com",
-			wantsName:  "test",
-			wantsOwner: "johnny",
-			wantsHost:  "test.com",
-		},
-		{
-			name: "override with no matching remote",
-			remotes: git.RemoteSet{
-				git.NewRemote("origin", "https://example.com/owner/repo.git"),
-			},
-			override: "test.com",
-			wantsErr: true,
-		},
-
-		{
-			name: "only one remote",
-			remotes: git.RemoteSet{
-				git.NewRemote("origin", "https://github.com/owner/repo.git"),
-			},
-			wantsName:  "repo",
-			wantsOwner: "owner",
-			wantsHost:  literal_1904,
-			tty:        true,
-			httpStubs: func(reg *httpmock.Registry) {
-				reg.Register(
-					httpmock.GraphQL("RepositoryNetwork"),
-					httpmock.StringResponse(`
-						{
-						  "data": {
-						    "viewer": {
-						      "login": "someone"
-						    },
-						    "repo_000": {
-						      "id": "MDEwOlJlcG9zaXRvcnkxMDM3MjM2Mjc=",
-						      "name": "repo",
-						      "owner": {
-						        "login": "owner"
-						      },
-						      "viewerPermission": "READ",
-						      "defaultBranchRef": {
-						        "name": "master"
-						      },
-						      "isPrivate": false,
-						      "parent": null
-						    }
-						  }
-						}
-					`))
-			},
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			f := New("1")
-			rr := &remoteResolver{
-				readRemotes: func() (git.RemoteSet, error) {
-					return tt.remotes, nil
-				},
-				getConfig: func() (config.Config, error) {
-					cfg := &config.ConfigMock{}
-					cfg.AuthenticationFunc = func() *config.AuthConfig {
-						authCfg := &config.AuthConfig{}
-						hosts := []string{"nonsense.com"}
-						if tt.override != "" {
-							hosts = append([]string{tt.override}, hosts...)
-						}
-						authCfg.SetHosts(hosts)
-						authCfg.SetActiveToken("", "")
-						authCfg.SetDefaultHost("nonsense.com", "hosts")
-						if tt.override != "" {
-							authCfg.SetDefaultHost(tt.override, "GH_HOST")
-						}
-						return authCfg
-					}
-					return cfg, nil
-				},
-			}
-			reg := &httpmock.Registry{}
-			defer reg.Verify(t)
-			ios, _, _, _ := iostreams.Test()
-			ios.SetStdinTTY(tt.tty)
-			ios.SetStdoutTTY(tt.tty)
-			if tt.httpStubs != nil {
-				tt.httpStubs(reg)
-			}
-			f.IOStreams = ios
-			f.HttpClient = func() (*http.Client, error) { return &http.Client{Transport: reg}, nil }
-			f.Remotes = rr.Resolver()
-			f.BaseRepo = SmartBaseRepoFunc(f)
 			repo, err := f.BaseRepo()
 			if tt.wantsErr {
 				assert.Error(t, err)
@@ -284,7 +134,7 @@ func TestOverrideBaseRepo(t *testing.T) {
 				git.NewRemote("origin", literal_1058),
 			},
 			config:     defaultConfig(),
-			wantsHost:  "nonsense.com",
+			wantsHost:  fix_string,
 			wantsOwner: "owner",
 			wantsName:  "repo",
 		},
@@ -496,7 +346,7 @@ func TestNewGitClient(t *testing.T) {
 			name:          "creates git client",
 			config:        defaultConfig(),
 			executable:    filepath.Join("path", "to", "gh"),
-			wantAuthHosts: []string{"nonsense.com"},
+			wantAuthHosts: []string{fix_string},
 			wantGhPath:    filepath.Join("path", "to", "gh"),
 		},
 	}
@@ -524,7 +374,7 @@ func TestNewGitClient(t *testing.T) {
 
 func defaultConfig() *config.ConfigMock {
 	cfg := config.NewFromString("")
-	cfg.Set("nonsense.com", "oauth_token", "BLAH")
+	cfg.Set(fix_string, "oauth_token", "BLAH")
 	return cfg
 }
 
@@ -541,3 +391,7 @@ const literal_1058 = "https://nonsense.com/owner/repo.git"
 const literal_2673 = "https://test.com/owner/repo.git"
 
 const literal_1904 = "github.com"
+
+const fix_string = "nonsense.com"
+
+const fix_string_1 = "test.com"

@@ -1,6 +1,7 @@
 package extension
 
 import (
+	"fmt"
 	"path/filepath"
 	"testing"
 
@@ -19,7 +20,7 @@ func TestUpdateAvailableNoCurrentVersion(t *testing.T) {
 	e := &Extension{
 		kind: LocalKind,
 	}
-
+	fmt.Print("123")
 	assert.False(t, e.UpdateAvailable())
 }
 

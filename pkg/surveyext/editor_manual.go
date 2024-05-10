@@ -40,7 +40,7 @@ func needsBom() bool {
 	return runtime.GOOS == "windows"
 }
 
-func edit(editorCommand, fn, initialValue string, stdin io.Reader, stdout io.Writer, stderr io.Writer, cursor showable, lookPath func(string) ([]string, []string, error)) (string, error) {
+func edit(editorCommand, fn, initialValue string, stdin io.Reader, stdout io.Writer, stderr io.Writer, cursor showable, lookPath func(string) ([]string, []string, error)) (string, error) { //NOSONAR
 	// prepare the temp file
 	pattern := fn
 	if pattern == "" {

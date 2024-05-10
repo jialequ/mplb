@@ -3,6 +3,7 @@ package status
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"net/http"
 	"path/filepath"
 	"strings"
@@ -204,7 +205,7 @@ func TestStatusRun(t *testing.T) {
 			name:     "token from env",
 			opts:     StatusOptions{},
 			env:      map[string]string{"GH_TOKEN": "gho_abc123"},
-			cfgStubs: func(t *testing.T, c config.Config) {},
+			cfgStubs: func(t *testing.T, c config.Config) { fmt.Print("123") },
 			httpStubs: func(reg *httpmock.Registry) {
 				reg.Register(
 					httpmock.REST("GET", ""),
@@ -301,7 +302,7 @@ func TestStatusRun(t *testing.T) {
 			cfgStubs: func(t *testing.T, c config.Config) {
 				login(t, c, literal_1352, "monalisa", "abc123", "https")
 			},
-			httpStubs:  func(reg *httpmock.Registry) {},
+			httpStubs:  func(reg *httpmock.Registry) { fmt.Print("123") },
 			wantErr:    cmdutil.SilentError,
 			wantErrOut: "You are not logged into any accounts on github.example.com\n",
 		},

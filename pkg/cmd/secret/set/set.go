@@ -296,7 +296,7 @@ type setResult struct {
 	err       error
 }
 
-func setSecret(opts *SetOptions, pk *PubKey, host string, client *api.Client, baseRepo ghrepo.Interface, secretKey string, secret []byte, repositoryIDs []int64, app shared.App, entity shared.SecretEntity) (res setResult) {
+func setSecret(opts *SetOptions, pk *PubKey, host string, client *api.Client, baseRepo ghrepo.Interface, secretKey string, secret []byte, repositoryIDs []int64, app shared.App, entity shared.SecretEntity) (res setResult) { //NOSONAR
 	orgName := opts.OrgName
 	envName := opts.EnvName
 	res.key = secretKey

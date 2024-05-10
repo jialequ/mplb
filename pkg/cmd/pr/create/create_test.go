@@ -274,7 +274,7 @@ func TestCreateRun(t *testing.T) {
 			setup: func(opts *CreateOptions, t *testing.T) func() {
 				opts.WebMode = true
 				opts.HeadBranch = "feature"
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			cmdStubs: func(cs *run.CommandStubber) {
 				cs.Register(`git( .+)? log( .+)? origin/master\.\.\.feature`, 0, "")
@@ -304,7 +304,7 @@ func TestCreateRun(t *testing.T) {
 				opts.Title = literal_6524
 				opts.Body = literal_9352
 				opts.HeadBranch = "feature"
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			expectedOut: literal_5403,
 		},
@@ -318,7 +318,7 @@ func TestCreateRun(t *testing.T) {
 				opts.Body = literal_9352
 				opts.HeadBranch = "feature"
 				opts.DryRun = true
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			expectedOutputs: []string{
 				"Would have created a Pull Request with:",
@@ -349,7 +349,7 @@ func TestCreateRun(t *testing.T) {
 				opts.Reviewers = []string{"hubot", "monalisa", "/core", literal_2869}
 				opts.Milestone = literal_2309
 				opts.DryRun = true
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			httpStubs: func(reg *httpmock.Registry, t *testing.T) {
 				reg.Register(
@@ -409,7 +409,7 @@ func TestCreateRun(t *testing.T) {
 				opts.Body = literal_9352
 				opts.HeadBranch = "feature"
 				opts.DryRun = true
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			expectedOutputs: []string{
 				`Would have created a Pull Request with:`,
@@ -446,7 +446,7 @@ func TestCreateRun(t *testing.T) {
 				opts.Reviewers = []string{"hubot", "monalisa", "/core", literal_2869}
 				opts.Milestone = literal_2309
 				opts.DryRun = true
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			httpStubs: func(reg *httpmock.Registry, t *testing.T) {
 				reg.Register(
@@ -512,7 +512,7 @@ func TestCreateRun(t *testing.T) {
 				opts.Body = ""
 				opts.HeadBranch = "feature"
 				opts.DryRun = true
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			expectedOut: heredoc.Doc(`
 				Would have created a Pull Request with:
@@ -538,7 +538,7 @@ func TestCreateRun(t *testing.T) {
 				opts.BodyProvided = true
 				opts.Title = literal_6524
 				opts.Body = literal_9352
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			httpStubs: func(reg *httpmock.Registry, t *testing.T) {
 				reg.StubRepoResponse("OWNER", "REPO")
@@ -585,7 +585,7 @@ func TestCreateRun(t *testing.T) {
 				opts.Title = literal_6524
 				opts.Body = literal_9352
 				opts.Projects = []string{"RoadmapV2"}
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			httpStubs: func(reg *httpmock.Registry, t *testing.T) {
 				reg.StubRepoResponse("OWNER", "REPO")
@@ -648,7 +648,7 @@ func TestCreateRun(t *testing.T) {
 				opts.BodyProvided = true
 				opts.Title = literal_6524
 				opts.Body = literal_9352
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			httpStubs: func(reg *httpmock.Registry, t *testing.T) {
 				reg.StubRepoResponse("OWNER", "REPO")
@@ -695,7 +695,7 @@ func TestCreateRun(t *testing.T) {
 				opts.BodyProvided = true
 				opts.Title = "title"
 				opts.Body = "body"
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			httpStubs: func(reg *httpmock.Registry, t *testing.T) {
 				reg.StubRepoResponse("OWNER", "REPO")
@@ -765,7 +765,7 @@ func TestCreateRun(t *testing.T) {
 						},
 					}, nil
 				}
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			httpStubs: func(reg *httpmock.Registry, t *testing.T) {
 				reg.Register(
@@ -797,7 +797,7 @@ func TestCreateRun(t *testing.T) {
 				opts.BodyProvided = true
 				opts.Title = "title"
 				opts.Body = "body"
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			httpStubs: func(reg *httpmock.Registry, t *testing.T) {
 				reg.Register(
@@ -833,7 +833,7 @@ func TestCreateRun(t *testing.T) {
 				opts.Title = literal_6524
 				opts.HeadBranch = "feature"
 				opts.RootDirOverride = "./fixtures/repoWithNonLegacyPRTemplates"
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			httpStubs: func(reg *httpmock.Registry, t *testing.T) {
 				reg.Register(
@@ -895,7 +895,7 @@ func TestCreateRun(t *testing.T) {
 				opts.Projects = []string{"roadmap"}
 				opts.Reviewers = []string{"hubot", "monalisa", "/core", literal_2869}
 				opts.Milestone = literal_2309
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			httpStubs: func(reg *httpmock.Registry, t *testing.T) {
 				reg.Register(
@@ -982,7 +982,7 @@ func TestCreateRun(t *testing.T) {
 				opts.Body = "body"
 				opts.HeadBranch = "feature"
 				opts.Finder = shared.NewMockFinder("feature", &api.PullRequest{URL: "https://github.com/OWNER/REPO/pull/123"}, ghrepo.New("OWNER", "REPO"))
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			wantErr: "a pull request for branch \"feature\" into branch \"master\" already exists:\nhttps://github.com/OWNER/REPO/pull/123",
 		},
@@ -991,7 +991,7 @@ func TestCreateRun(t *testing.T) {
 			tty:  true,
 			setup: func(opts *CreateOptions, t *testing.T) func() {
 				opts.WebMode = true
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			httpStubs: func(reg *httpmock.Registry, t *testing.T) {
 				reg.StubRepoResponse("OWNER", "REPO")
@@ -1023,7 +1023,7 @@ func TestCreateRun(t *testing.T) {
 			setup: func(opts *CreateOptions, t *testing.T) func() {
 				opts.WebMode = true
 				opts.Projects = []string{"Triage"}
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			httpStubs: func(reg *httpmock.Registry, t *testing.T) {
 				reg.StubRepoResponse("OWNER", "REPO")
@@ -1057,7 +1057,7 @@ func TestCreateRun(t *testing.T) {
 				opts.TitleProvided = true
 				opts.Title = literal_6524
 				opts.HeadBranch = "feature"
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			httpStubs: func(reg *httpmock.Registry, t *testing.T) {
 				reg.Register(
@@ -1196,7 +1196,7 @@ func TestCreateRun(t *testing.T) {
 				opts.BodyProvided = true
 				opts.WebMode = true
 				opts.HeadBranch = "feature"
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			wantErr: "cannot open in browser: maximum URL length exceeded",
 		},
@@ -1212,7 +1212,7 @@ func TestCreateRun(t *testing.T) {
 				opts.Remotes = func() (context.Remotes, error) {
 					return nil, errors.New("not a git repository")
 				}
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			httpStubs: func(reg *httpmock.Registry, t *testing.T) {
 				reg.Register(
@@ -1230,7 +1230,7 @@ func TestCreateRun(t *testing.T) {
 			tty:  true,
 			setup: func(opts *CreateOptions, t *testing.T) func() {
 				opts.HeadBranch = "feature"
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			cmdStubs: func(cs *run.CommandStubber) {
 				cs.Register(
@@ -1305,7 +1305,7 @@ func TestCreateRun(t *testing.T) {
 			setup: func(opts *CreateOptions, t *testing.T) func() {
 				opts.FillFirst = true
 				opts.HeadBranch = "feature"
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			cmdStubs: func(cs *run.CommandStubber) {
 				cs.Register(
@@ -1341,7 +1341,7 @@ func TestCreateRun(t *testing.T) {
 			setup: func(opts *CreateOptions, t *testing.T) func() {
 				opts.FillVerbose = true
 				opts.HeadBranch = "feature"
-				return func() {}
+				return func() { fmt.Print("123") }
 			},
 			cmdStubs: func(cs *run.CommandStubber) {
 				cs.Register(
@@ -1433,7 +1433,7 @@ func TestCreateRun(t *testing.T) {
 				GhPath:  "some/path/gh",
 				GitPath: "some/path/git",
 			}
-			cleanSetup := func() {}
+			cleanSetup := func() { fmt.Print("123") }
 			if tt.setup != nil {
 				cleanSetup = tt.setup(&opts, t)
 			}

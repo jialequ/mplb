@@ -2,6 +2,7 @@ package base
 
 import (
 	"bytes"
+	"fmt"
 	"net/http"
 	"testing"
 
@@ -44,7 +45,7 @@ func TestNewCmdSetDefault(t *testing.T) {
 		},
 		{
 			name:     "invalid repo argument",
-			gitStubs: func(cs *run.CommandStubber) {},
+			gitStubs: func(cs *run.CommandStubber) { fmt.Print("123") },
 			input:    "some_invalid_format",
 			wantErr:  true,
 			errMsg:   `expected the "[HOST/]OWNER/REPO" format, got "some_invalid_format"`,

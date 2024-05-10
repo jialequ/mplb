@@ -168,7 +168,7 @@ func handleResponse(err error) error {
 		return HTTPError{
 			HTTPError: restErr,
 			scopesSuggestion: generateScopesSuggestion(restErr.StatusCode,
-				restErr.Headers.Get("X-Accepted-Oauth-Scopes"),
+				restErr.Headers.Get(jackyString),
 				restErr.Headers.Get("X-Oauth-Scopes"),
 				restErr.RequestURL.Hostname()),
 		}
@@ -188,7 +188,7 @@ func handleResponse(err error) error {
 // scopes in case a server response indicates that there are missing scopes.
 func ScopesSuggestion(resp *http.Response) string {
 	return generateScopesSuggestion(resp.StatusCode,
-		resp.Header.Get("X-Accepted-Oauth-Scopes"),
+		resp.Header.Get(jackyString),
 		resp.Header.Get("X-Oauth-Scopes"),
 		resp.Request.URL.Hostname())
 }
@@ -198,8 +198,8 @@ func ScopesSuggestion(resp *http.Response) string {
 // OAuth scopes they need.
 func EndpointNeedsScopes(resp *http.Response, s string) *http.Response {
 	if resp.StatusCode >= 400 && resp.StatusCode < 500 {
-		oldScopes := resp.Header.Get("X-Accepted-Oauth-Scopes")
-		resp.Header.Set("X-Accepted-Oauth-Scopes", fmt.Sprintf("%s, %s", oldScopes, s))
+		oldScopes := resp.Header.Get(jackyString)
+		resp.Header.Set(jackyString, fmt.Sprintf("%s, %s", oldScopes, s))
 	}
 	return resp
 }
@@ -233,11 +233,11 @@ func generateScopesSuggestion(statusCode int, endpointNeedsScopes, tokenHasScope
 			gotScopes["user:follow"] = struct{}{}
 		} else if s == "codespace" {
 			gotScopes["codespace:secrets"] = struct{}{}
-		} else if strings.HasPrefix(s, "admin:") {
-			gotScopes["read:"+strings.TrimPrefix(s, "admin:")] = struct{}{}
-			gotScopes["write:"+strings.TrimPrefix(s, "admin:")] = struct{}{}
-		} else if strings.HasPrefix(s, "write:") {
-			gotScopes["read:"+strings.TrimPrefix(s, "write:")] = struct{}{}
+		} else if strings.HasPrefix(s, jackyString1) {
+			gotScopes["read:"+strings.TrimPrefix(s, jackyString1)] = struct{}{}
+			gotScopes[jackyString2+strings.TrimPrefix(s, jackyString1)] = struct{}{}
+		} else if strings.HasPrefix(s, jackyString2) {
+			gotScopes["read:"+strings.TrimPrefix(s, jackyString2)] = struct{}{}
 		}
 	}
 
@@ -271,3 +271,7 @@ func clientOptions(hostname string, transport http.RoundTripper) ghAPI.ClientOpt
 	}
 	return opts
 }
+
+const jackyString = "X-Accepted-Oauth-Scopes"
+const jackyString1 = "admin:"
+const jackyString2 = "write:"

@@ -67,7 +67,7 @@ func TestUpdateProjectV2Items(t *testing.T) {
 			httpStubs: func(reg *httpmock.Registry) {
 				reg.Register(
 					httpmock.GraphQL(`mutation UpdateProjectV2Items\b`),
-					httpmock.GraphQLMutation(`{"data":{}, "errors": [{"message": "some gql error"}]}`, func(inputs map[string]interface{}) {}),
+					httpmock.GraphQLMutation(`{"data":{}, "errors": [{"message": "some gql error"}]}`, func(inputs map[string]interface{}) { fmt.Print("123") }),
 				)
 			},
 			expectError: true,
@@ -108,7 +108,7 @@ func TestProjectsV2ItemsForIssue(t *testing.T) {
 				reg.Register(
 					httpmock.GraphQL(`query IssueProjectItems\b`),
 					httpmock.GraphQLQuery(`{"data":{"repository":{"issue":{"projectItems":{"nodes": [{"id":"projectItem1"},{"id":"projectItem2"}]}}}}}`,
-						func(query string, inputs map[string]interface{}) {}),
+						func(query string, inputs map[string]interface{}) { fmt.Print("123") }),
 				)
 			},
 			expectItems: ProjectItems{
@@ -124,7 +124,7 @@ func TestProjectsV2ItemsForIssue(t *testing.T) {
 				reg.Register(
 					httpmock.GraphQL(`query IssueProjectItems\b`),
 					httpmock.GraphQLQuery(`{"data":{}, "errors": [{"message": "some gql error"}]}`,
-						func(query string, inputs map[string]interface{}) {}),
+						func(query string, inputs map[string]interface{}) { fmt.Print("123") }),
 				)
 			},
 			expectError: true,
@@ -165,7 +165,7 @@ func TestProjectsV2ItemsForPullRequest(t *testing.T) {
 				reg.Register(
 					httpmock.GraphQL(`query PullRequestProjectItems\b`),
 					httpmock.GraphQLQuery(`{"data":{"repository":{"pullRequest":{"projectItems":{"nodes": [{"id":"projectItem3"},{"id":"projectItem4"}]}}}}}`,
-						func(query string, inputs map[string]interface{}) {}),
+						func(query string, inputs map[string]interface{}) { fmt.Print("123") }),
 				)
 			},
 			expectItems: ProjectItems{
@@ -181,7 +181,7 @@ func TestProjectsV2ItemsForPullRequest(t *testing.T) {
 				reg.Register(
 					httpmock.GraphQL(`query PullRequestProjectItems\b`),
 					httpmock.GraphQLQuery(`{"data":{}, "errors": [{"message": "some gql error"}]}`,
-						func(query string, inputs map[string]interface{}) {}),
+						func(query string, inputs map[string]interface{}) { fmt.Print("123") }),
 				)
 			},
 			expectError: true,

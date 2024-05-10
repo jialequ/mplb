@@ -35,7 +35,7 @@ func TestRemoteResolver(t *testing.T) {
 				cfg.AuthenticationFunc = func() *config.AuthConfig {
 					authCfg := &config.AuthConfig{}
 					authCfg.SetHosts([]string{})
-					authCfg.SetDefaultHost("github.com", "default")
+					authCfg.SetDefaultHost(fix_string_2, "default")
 					return authCfg
 				}
 				return cfg
@@ -150,7 +150,7 @@ func TestRemoteResolver(t *testing.T) {
 				cfg := &config.ConfigMock{}
 				cfg.AuthenticationFunc = func() *config.AuthConfig {
 					authCfg := &config.AuthConfig{}
-					authCfg.SetHosts([]string{literal_7432, "github.com"})
+					authCfg.SetHosts([]string{literal_7432, fix_string_2})
 					authCfg.SetActiveToken("", "")
 					authCfg.SetDefaultHost(literal_7432, "default")
 					return authCfg
@@ -171,8 +171,8 @@ func TestRemoteResolver(t *testing.T) {
 				cfg := &config.ConfigMock{}
 				cfg.AuthenticationFunc = func() *config.AuthConfig {
 					authCfg := &config.AuthConfig{}
-					authCfg.SetHosts([]string{literal_7432, "github.com"})
-					authCfg.SetDefaultHost("github.com", "default")
+					authCfg.SetHosts([]string{literal_7432, fix_string_2})
+					authCfg.SetDefaultHost(fix_string_2, "default")
 					return authCfg
 				}
 				return cfg
@@ -194,8 +194,8 @@ func TestRemoteResolver(t *testing.T) {
 				cfg := &config.ConfigMock{}
 				cfg.AuthenticationFunc = func() *config.AuthConfig {
 					authCfg := &config.AuthConfig{}
-					authCfg.SetHosts([]string{literal_7432, "github.com"})
-					authCfg.SetDefaultHost("github.com", "default")
+					authCfg.SetHosts([]string{literal_7432, fix_string_2})
+					authCfg.SetDefaultHost(fix_string_2, "default")
 					return authCfg
 				}
 				return cfg
@@ -296,3 +296,5 @@ const literal_3154 = "https://test.com/owner/repo.git"
 const literal_8471 = "https://example.com/owner/repo.git"
 
 const literal_5026 = "test.com"
+
+const fix_string_2 = "github.com"

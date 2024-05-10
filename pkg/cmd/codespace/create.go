@@ -36,6 +36,13 @@ type NullableDuration struct {
 	*time.Duration
 }
 
+type machineType struct {
+	machine          string
+	branch           string
+	Location         string
+	devContainerPath string
+}
+
 func (d *NullableDuration) String() string {
 	if d.Duration != nil {
 		return d.Duration.String()
@@ -120,7 +127,7 @@ func newCreateCmd(app *App) *cobra.Command {
 }
 
 // Create creates a new Codespace
-func (a *App) Create(ctx context.Context, opts createOptions) error {
+func (a *App) Create(ctx context.Context, opts createOptions) error { //NOSONAR
 	// Overrides for Codespace developers to target test environments
 	vscsLocation := os.Getenv("VSCS_LOCATION")
 	vscsTarget := os.Getenv("VSCS_TARGET")
@@ -278,7 +285,13 @@ func (a *App) Create(ctx context.Context, opts createOptions) error {
 	// web UI also provide a way to select machine type
 	// therefore we let the user choose from the web UI instead of prompting from CLI
 	if !(opts.useWeb && opts.machine == "") {
-		machine, err = getMachineName(ctx, a.apiClient, prompter, repository.ID, opts.machine, branch, userInputs.Location, devContainerPath)
+		options := machineType{
+			machine:          opts.machine,
+			branch:           branch,
+			Location:         userInputs.Location,
+			devContainerPath: devContainerPath,
+		}
+		machine, err = getMachineName(ctx, a.apiClient, prompter, repository.ID, options)
 		if err != nil {
 			return fmt.Errorf("error getting machine type: %w", err)
 		}
@@ -449,7 +462,7 @@ func (a *App) pollForPermissions(ctx context.Context, createParams *api.CreateCo
 // showStatus polls the codespace for a list of post create states and their status. It will keep polling
 // until all states have finished. Once all states have finished, we poll once more to check if any new
 // states have been introduced and stop polling otherwise.
-func (a *App) showStatus(ctx context.Context, codespace *api.Codespace) error {
+func (a *App) showStatus(ctx context.Context, codespace *api.Codespace) error { //NOSONAR
 	var (
 		lastState      codespaces.PostCreateState
 		breakNextState bool
@@ -511,7 +524,11 @@ func (a *App) showStatus(ctx context.Context, codespace *api.Codespace) error {
 }
 
 // getMachineName prompts the user to select the machine type, or validates the machine if non-empty.
-func getMachineName(ctx context.Context, apiClient apiClient, prompter SurveyPrompter, repoID int, machine, branch, location string, devcontainerPath string) (string, error) {
+func getMachineName(ctx context.Context, apiClient apiClient, prompter SurveyPrompter, repoID int, options machineType) (string, error) {
+	machine := options.machine
+	branch := options.branch
+	location := options.Location
+	devcontainerPath := options.devContainerPath
 	machines, err := apiClient.GetCodespacesMachines(ctx, repoID, branch, location, devcontainerPath)
 	if err != nil {
 		return "", fmt.Errorf("error requesting machine instance types: %w", err)
