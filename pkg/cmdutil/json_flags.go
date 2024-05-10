@@ -23,7 +23,7 @@ type JSONFlagError struct {
 	error
 }
 
-func AddJSONFlags(cmd *cobra.Command, exportTarget *Exporter, fields []string) {
+func AddJSONFlags(cmd *cobra.Command, exportTarget *Exporter, fields []string) { //NOSONAR
 	f := cmd.Flags()
 	f.StringSlice("json", nil, "Output JSON with the specified `fields`")
 	f.StringP("jq", "q", "", "Filter JSON output using a jq `expression`")

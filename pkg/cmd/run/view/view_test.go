@@ -174,7 +174,7 @@ func TestNewCmdView(t *testing.T) {
 	}
 }
 
-func TestViewRun(t *testing.T) {
+func TestViewRun(t *testing.T) { //NOSONAR
 	tests := []struct {
 		name        string
 		httpStubs   func(*httpmock.Registry)

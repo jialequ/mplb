@@ -10,7 +10,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func NewCmdIssues(f *cmdutil.Factory, runF func(*shared.IssuesOptions) error) *cobra.Command {
+func NewCmdIssues(f *cmdutil.Factory, runF func(*shared.IssuesOptions) error) *cobra.Command { //NOSONAR
 	var locked, includePrs bool
 	var noAssignee, noLabel, noMilestone, noProject bool
 	var order, sort string

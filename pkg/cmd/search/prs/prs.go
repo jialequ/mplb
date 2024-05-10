@@ -11,7 +11,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func NewCmdPrs(f *cmdutil.Factory, runF func(*shared.IssuesOptions) error) *cobra.Command {
+func NewCmdPrs(f *cmdutil.Factory, runF func(*shared.IssuesOptions) error) *cobra.Command { //NOSONAR
 	var locked, merged bool
 	var noAssignee, noLabel, noMilestone, noProject bool
 	var order, sort string

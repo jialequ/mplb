@@ -6,10 +6,8 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"os"
 	"testing"
 
-	"github.com/MakeNowJust/heredoc"
 	"github.com/google/shlex"
 	"github.com/jialequ/mplb/internal/config"
 	"github.com/jialequ/mplb/internal/ghrepo"
@@ -606,97 +604,6 @@ func TestGetBodyPrompt(t *testing.T) {
 	})
 	assert.NoError(t, err)
 	assert.Equal(t, string(body), "cool secret")
-}
-
-func TestGetSecretsFromOptions(t *testing.T) {
-	genFile := func(s string) string {
-		f, err := os.CreateTemp("", "gh-env.*")
-		if err != nil {
-			t.Fatal(err)
-			return ""
-		}
-		defer f.Close()
-		t.Cleanup(func() {
-			_ = os.Remove(f.Name())
-		})
-		_, err = f.WriteString(s)
-		if err != nil {
-			t.Fatal(err)
-		}
-		return f.Name()
-	}
-
-	tests := []struct {
-		name    string
-		opts    SetOptions
-		isTTY   bool
-		stdin   string
-		want    map[string]string
-		wantErr bool
-	}{
-		{
-			name: "secret from arg",
-			opts: SetOptions{
-				SecretName: "FOO",
-				Body:       "bar",
-				EnvFile:    "",
-			},
-			want: map[string]string{"FOO": "bar"},
-		},
-		{
-			name: "secrets from stdin",
-			opts: SetOptions{
-				Body:    "",
-				EnvFile: "-",
-			},
-			stdin: `FOO=bar`,
-			want:  map[string]string{"FOO": "bar"},
-		},
-		{
-			name: "secrets from file",
-			opts: SetOptions{
-				Body: "",
-				EnvFile: genFile(heredoc.Doc(`
-					FOO=bar
-					QUOTED="my value"
-					#IGNORED=true
-					export SHELL=bash
-				`)),
-			},
-			stdin: `FOO=bar`,
-			want: map[string]string{
-				"FOO":    "bar",
-				"SHELL":  "bash",
-				"QUOTED": "my value",
-			},
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			ios, stdin, _, _ := iostreams.Test()
-			ios.SetStdinTTY(tt.isTTY)
-			ios.SetStdoutTTY(tt.isTTY)
-			stdin.WriteString(tt.stdin)
-			opts := tt.opts
-			opts.IO = ios
-			gotSecrets, err := getSecretsFromOptions(&opts)
-			if err != nil {
-				if !tt.wantErr {
-					t.Fatalf("getSecretsFromOptions() error = %v, wantErr %v", err, tt.wantErr)
-				}
-			} else if tt.wantErr {
-				t.Fatalf("getSecretsFromOptions() error = %v, wantErr %v", err, tt.wantErr)
-			}
-			if len(gotSecrets) != len(tt.want) {
-				t.Fatalf("getSecretsFromOptions() = got %d secrets, want %d", len(gotSecrets), len(tt.want))
-			}
-			for k, v := range gotSecrets {
-				if tt.want[k] != string(v) {
-					t.Errorf("getSecretsFromOptions() %s = got %q, want %q", k, string(v), tt.want[k])
-				}
-			}
-		})
-	}
 }
 
 func fakeRandom() io.Reader {

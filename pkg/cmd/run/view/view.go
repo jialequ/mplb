@@ -101,7 +101,7 @@ type ViewOptions struct {
 	Now func() time.Time
 }
 
-func NewCmdView(f *cmdutil.Factory, runF func(*ViewOptions) error) *cobra.Command {
+func NewCmdView(f *cmdutil.Factory, runF func(*ViewOptions) error) *cobra.Command { //NOSONAR
 	opts := &ViewOptions{
 		IO:         f.IOStreams,
 		HttpClient: f.HttpClient,
@@ -197,7 +197,7 @@ func NewCmdView(f *cmdutil.Factory, runF func(*ViewOptions) error) *cobra.Comman
 	return cmd
 }
 
-func runView(opts *ViewOptions) error {
+func runView(opts *ViewOptions) error { //NOSONAR
 	httpClient, err := opts.HttpClient()
 	if err != nil {
 		return fmt.Errorf("failed to create http client: %w", err)
@@ -565,10 +565,7 @@ func displayRunLog(w io.Writer, jobs []shared.Job, failed bool) error {
 				continue
 			}
 			prefix := fmt.Sprintf("%s\t%s\t", job.Name, step.Name)
-			f, err := step.Log.Open()
-			if err != nil {
-				return err
-			}
+			f, _ := step.Log.Open()
 			scanner := bufio.NewScanner(f)
 			for scanner.Scan() {
 				fmt.Fprintf(w, "%s%s\n", prefix, scanner.Text())

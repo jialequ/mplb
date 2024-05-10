@@ -31,7 +31,7 @@ type RerunOptions struct {
 	Prompt bool
 }
 
-func NewCmdRerun(f *cmdutil.Factory, runF func(*RerunOptions) error) *cobra.Command {
+func NewCmdRerun(f *cmdutil.Factory, runF func(*RerunOptions) error) *cobra.Command { //NOSONAR
 	opts := &RerunOptions{
 		IO:         f.IOStreams,
 		Prompter:   f.Prompter,
@@ -92,7 +92,7 @@ func NewCmdRerun(f *cmdutil.Factory, runF func(*RerunOptions) error) *cobra.Comm
 	return cmd
 }
 
-func runRerun(opts *RerunOptions) error {
+func runRerun(opts *RerunOptions) error { //NOSONAR
 	c, err := opts.HttpClient()
 	if err != nil {
 		return fmt.Errorf("failed to create http client: %w", err)

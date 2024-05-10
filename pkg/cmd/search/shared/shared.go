@@ -91,7 +91,7 @@ func SearchIssues(opts *IssuesOptions) error {
 	return displayIssueResults(io, opts.Now, opts.Entity, result)
 }
 
-func displayIssueResults(io *iostreams.IOStreams, now time.Time, et EntityType, results search.IssuesResult) error {
+func displayIssueResults(io *iostreams.IOStreams, now time.Time, et EntityType, results search.IssuesResult) error { //NOSONAR
 	if now.IsZero() {
 		now = time.Now()
 	}

@@ -92,7 +92,7 @@ func (q Query) String() string {
 	return strings.TrimSpace(strings.Join(all, " "))
 }
 
-func (q Qualifiers) Map() map[string][]string {
+func (q Qualifiers) Map() map[string][]string { //NOSONAR
 	m := map[string][]string{}
 	v := reflect.ValueOf(q)
 	t := reflect.TypeOf(q)

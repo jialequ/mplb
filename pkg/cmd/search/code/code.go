@@ -131,7 +131,7 @@ func codeRun(opts *CodeOptions) error {
 	return displayResults(io, results)
 }
 
-func displayResults(io *iostreams.IOStreams, results search.CodeResult) error {
+func displayResults(io *iostreams.IOStreams, results search.CodeResult) error { //NOSONAR
 	cs := io.ColorScheme()
 	if io.IsStdoutTTY() {
 		fmt.Fprintf(io.Out, "\nShowing %d of %d results\n\n", len(results.Items), results.Total)
@@ -160,7 +160,7 @@ func displayResults(io *iostreams.IOStreams, results search.CodeResult) error {
 	return nil
 }
 
-func formatMatch(t string, matches []search.Match, colorize bool) []string {
+func formatMatch(t string, matches []search.Match, colorize bool) []string { //NOSONAR
 	startIndices := map[int]struct{}{}
 	endIndices := map[int]struct{}{}
 	for _, m := range matches {

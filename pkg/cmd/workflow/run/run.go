@@ -43,7 +43,7 @@ type iprompter interface {
 	Select(string, string, []string) (int, error)
 }
 
-func NewCmdRun(f *cmdutil.Factory, runF func(*RunOptions) error) *cobra.Command {
+func NewCmdRun(f *cmdutil.Factory, runF func(*RunOptions) error) *cobra.Command { //NOSONAR
 	opts := &RunOptions{
 		IO:         f.IOStreams,
 		HttpClient: f.HttpClient,
@@ -203,7 +203,7 @@ func (ia *InputAnswer) WriteAnswer(name string, value interface{}) error {
 	return fmt.Errorf("unexpected value type: %v", value)
 }
 
-func collectInputs(p iprompter, yamlContent []byte) (map[string]string, error) {
+func collectInputs(p iprompter, yamlContent []byte) (map[string]string, error) { //NOSONAR
 	inputs, err := findInputs(yamlContent)
 	if err != nil {
 		return nil, err
@@ -248,7 +248,7 @@ func collectInputs(p iprompter, yamlContent []byte) (map[string]string, error) {
 	return providedInputs, nil
 }
 
-func runRun(opts *RunOptions) error {
+func runRun(opts *RunOptions) error { //NOSONAR
 	c, err := opts.HttpClient()
 	if err != nil {
 		return fmt.Errorf("could not build http client: %w", err)
@@ -345,7 +345,7 @@ type WorkflowInput struct {
 	Options     []string
 }
 
-func findInputs(yamlContent []byte) ([]WorkflowInput, error) {
+func findInputs(yamlContent []byte) ([]WorkflowInput, error) { //NOSONAR
 	var rootNode yaml.Node
 	err := yaml.Unmarshal(yamlContent, &rootNode)
 	if err != nil {

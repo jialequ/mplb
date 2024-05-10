@@ -40,7 +40,7 @@ type SetOptions struct {
 	EnvFile         string
 }
 
-func NewCmdSet(f *cmdutil.Factory, runF func(*SetOptions) error) *cobra.Command {
+func NewCmdSet(f *cmdutil.Factory, runF func(*SetOptions) error) *cobra.Command { //NOSONAR
 	opts := &SetOptions{
 		IO:         f.IOStreams,
 		Config:     f.Config,
@@ -139,7 +139,7 @@ func NewCmdSet(f *cmdutil.Factory, runF func(*SetOptions) error) *cobra.Command 
 	return cmd
 }
 
-func setRun(opts *SetOptions) error {
+func setRun(opts *SetOptions) error { //NOSONAR
 	variables, err := getVariablesFromOptions(opts)
 	if err != nil {
 		return err

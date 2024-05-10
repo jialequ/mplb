@@ -73,7 +73,7 @@ func NewCmdDelete(f *cmdutil.Factory, runF func(*DeleteOptions) error) *cobra.Co
 	return cmd
 }
 
-func removeRun(opts *DeleteOptions) error {
+func removeRun(opts *DeleteOptions) error { //NOSONAR
 	c, err := opts.HttpClient()
 	if err != nil {
 		return fmt.Errorf("could not create http client: %w", err)

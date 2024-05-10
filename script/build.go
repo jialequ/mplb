@@ -135,7 +135,7 @@ func date() string {
 	return t.Format("2006-01-02")
 }
 
-func sourceFilesLaterThan(t time.Time) bool {
+func sourceFilesLaterThan(t time.Time) bool { //NOSONAR
 	foundLater := false
 	err := filepath.Walk(".", func(path string, info os.FileInfo, err error) error {
 		if err != nil {

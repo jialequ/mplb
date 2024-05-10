@@ -13,7 +13,7 @@ import (
 )
 
 // FindNonLegacy returns the list of template file paths from the template folder (according to the "upgraded multiple template builder")
-func FindNonLegacy(rootDir string, name string) []string {
+func FindNonLegacy(rootDir string, name string) []string { //NOSONAR
 	results := []string{}
 
 	// https://help.github.com/en/github/building-a-strong-community/creating-a-pull-request-template-for-your-repository

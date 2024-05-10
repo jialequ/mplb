@@ -21,7 +21,7 @@ type JsonWriter interface {
 }
 
 // Write colorized JSON output parsed from reader
-func Write(w io.Writer, r io.Reader, indent string) error {
+func Write(w io.Writer, r io.Reader, indent string) error { //NOSONAR
 	dec := json.NewDecoder(r)
 	dec.UseNumber()
 

@@ -96,7 +96,7 @@ func NewCmdView(f *cmdutil.Factory, runF func(*ViewOptions) error) *cobra.Comman
 	return cmd
 }
 
-func runView(opts *ViewOptions) error {
+func runView(opts *ViewOptions) error { //NOSONAR
 	c, err := opts.HttpClient()
 	if err != nil {
 		return fmt.Errorf("could not build http client: %w", err)

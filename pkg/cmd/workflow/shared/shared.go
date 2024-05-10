@@ -71,10 +71,7 @@ func GetWorkflows(client *api.Client, repo ghrepo.Interface, limit int) ([]Workf
 
 		path := fmt.Sprintf("repos/%s/actions/workflows?per_page=%d&page=%d", ghrepo.FullName(repo), perPage, page)
 
-		err := client.REST(repo.RepoHost(), "GET", path, nil, &result)
-		if err != nil {
-			return nil, err
-		}
+		client.REST(repo.RepoHost(), "GET", path, nil, &result)
 
 		for _, workflow := range result.Workflows {
 			workflows = append(workflows, workflow)

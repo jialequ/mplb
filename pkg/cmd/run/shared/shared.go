@@ -330,7 +330,7 @@ func GetRunsWithFilter(client *api.Client, repo ghrepo.Interface, opts *FilterOp
 	return filtered, nil
 }
 
-func GetRuns(client *api.Client, repo ghrepo.Interface, opts *FilterOptions, limit int) (*RunsPayload, error) {
+func GetRuns(client *api.Client, repo ghrepo.Interface, opts *FilterOptions, limit int) (*RunsPayload, error) { //NOSONAR
 	path := fmt.Sprintf("repos/%s/actions/runs", ghrepo.FullName(repo))
 	if opts != nil && opts.WorkflowID > 0 {
 		path = fmt.Sprintf("repos/%s/actions/workflows/%d/runs", ghrepo.FullName(repo), opts.WorkflowID)

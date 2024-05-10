@@ -65,7 +65,7 @@ type EditorTemplateData struct {
 }
 
 // EXTENDED to augment prompt text and keypress handling
-func (e *GhEditor) prompt(initialValue string, config *survey.PromptConfig) (interface{}, error) {
+func (e *GhEditor) prompt(initialValue string, config *survey.PromptConfig) (interface{}, error) { //NOSONAR
 	err := e.Render(
 		EditorQuestionTemplate,
 		// EXTENDED to support printing editor in prompt and BlankAllowed

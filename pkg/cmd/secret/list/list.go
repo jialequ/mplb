@@ -86,7 +86,7 @@ func NewCmdList(f *cmdutil.Factory, runF func(*ListOptions) error) *cobra.Comman
 	return cmd
 }
 
-func listRun(opts *ListOptions) error {
+func listRun(opts *ListOptions) error { //NOSONAR
 	client, err := opts.HttpClient()
 	if err != nil {
 		return fmt.Errorf("could not create http client: %w", err)

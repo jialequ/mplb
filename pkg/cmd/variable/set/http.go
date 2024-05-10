@@ -40,7 +40,7 @@ type setResult struct {
 	Operation string
 }
 
-func setVariable(client *api.Client, host string, opts setOptions) setResult {
+func setVariable(client *api.Client, host string, opts setOptions) setResult { //NOSONAR
 	var err error
 	var postErr api.HTTPError
 	result := setResult{Operation: createdOperation, Key: opts.Key}

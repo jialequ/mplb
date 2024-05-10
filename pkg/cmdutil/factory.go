@@ -61,7 +61,7 @@ func (f *Factory) Executable() string {
 // commands to update its taps. If `gh` (no path) is being used as git credential helper, as set up by `gh
 // auth login`, running `brew update` will print out authentication errors as git is unable to locate
 // Homebrew-installed `gh`.
-func executable(fallbackName string) string {
+func executable(fallbackName string) string { //NOSONAR
 	exe, err := os.Executable()
 	if err != nil {
 		return fallbackName

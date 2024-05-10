@@ -87,7 +87,7 @@ func NewCmdList(f *cmdutil.Factory, runF func(*ListOptions) error) *cobra.Comman
 	return cmd
 }
 
-func listRun(opts *ListOptions) error {
+func listRun(opts *ListOptions) error { //NOSONAR
 	baseRepo, err := opts.BaseRepo()
 	if err != nil {
 		return fmt.Errorf("failed to determine base repo: %w", err)

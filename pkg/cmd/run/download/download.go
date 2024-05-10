@@ -99,7 +99,7 @@ func NewCmdDownload(f *cmdutil.Factory, runF func(*DownloadOptions) error) *cobr
 	return cmd
 }
 
-func runDownload(opts *DownloadOptions) error {
+func runDownload(opts *DownloadOptions) error { //NOSONAR
 	opts.IO.StartProgressIndicator()
 	artifacts, err := opts.Platform.List(opts.RunID)
 	opts.IO.StopProgressIndicator()

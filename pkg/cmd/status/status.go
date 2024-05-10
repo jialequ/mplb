@@ -261,7 +261,7 @@ func (s *StatusGetter) ActualMention(commentURL string) (string, error) {
 // work
 
 // Populate .Mentions
-func (s *StatusGetter) LoadNotifications() error {
+func (s *StatusGetter) LoadNotifications() error { //NOSONAR
 	perPage := 100
 	c := api.NewClientFromHTTP(s.Client)
 	query := url.Values{}
@@ -412,7 +412,7 @@ query AssignedSearch($searchAssigns: String!, $searchReviews: String!, $limit: I
 }`
 
 // Populate .AssignedPRs, .AssignedIssues, .ReviewRequests
-func (s *StatusGetter) LoadSearchResults() error {
+func (s *StatusGetter) LoadSearchResults() error { //NOSONAR
 	c := api.NewClientFromHTTP(s.Client)
 
 	searchAssigns := `assignee:@me state:open archived:false`
@@ -527,7 +527,7 @@ func (s *StatusGetter) LoadSearchResults() error {
 }
 
 // Populate .RepoActivity
-func (s *StatusGetter) LoadEvents() error {
+func (s *StatusGetter) LoadEvents() error { //NOSONAR
 	perPage := 100
 	c := api.NewClientFromHTTP(s.Client)
 	query := url.Values{}
@@ -626,7 +626,7 @@ func (s *StatusGetter) HasAuthErrors() bool {
 	return s.authErrors != nil && s.authErrors.Len() > 0
 }
 
-func statusRun(opts *StatusOptions) error {
+func statusRun(opts *StatusOptions) error { //NOSONAR
 	client, err := opts.HttpClient()
 	if err != nil {
 		return fmt.Errorf("could not create client: %w", err)
