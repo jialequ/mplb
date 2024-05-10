@@ -238,7 +238,7 @@ func TestEditRun(t *testing.T) {
 			httpStubs: func(t *testing.T, reg *httpmock.Registry) {
 				mockSuccessfulEditResponse(reg, func(params map[string]interface{}) {
 					assert.Equal(t, map[string]interface{}{
-						"tag_name":         "v1.2.3",
+						"tag_name":         fix_string,
 						"target_commitish": "c0ff33",
 					}, params)
 				})
@@ -255,7 +255,7 @@ func TestEditRun(t *testing.T) {
 			httpStubs: func(t *testing.T, reg *httpmock.Registry) {
 				mockSuccessfulEditResponse(reg, func(params map[string]interface{}) {
 					assert.Equal(t, map[string]interface{}{
-						"tag_name": "v1.2.3",
+						"tag_name": fix_string,
 						"name":     "Hot Release #1",
 					}, params)
 				})
@@ -272,7 +272,7 @@ func TestEditRun(t *testing.T) {
 			httpStubs: func(t *testing.T, reg *httpmock.Registry) {
 				mockSuccessfulEditResponse(reg, func(params map[string]interface{}) {
 					assert.Equal(t, map[string]interface{}{
-						"tag_name":                 "v1.2.3",
+						"tag_name":                 fix_string,
 						"discussion_category_name": literal_8921,
 					}, params)
 				})
@@ -289,7 +289,7 @@ func TestEditRun(t *testing.T) {
 			httpStubs: func(t *testing.T, reg *httpmock.Registry) {
 				mockSuccessfulEditResponse(reg, func(params map[string]interface{}) {
 					assert.Equal(t, map[string]interface{}{
-						"tag_name":    "v1.2.3",
+						"tag_name":    fix_string,
 						"make_latest": "true",
 					}, params)
 				})
@@ -306,7 +306,7 @@ func TestEditRun(t *testing.T) {
 			httpStubs: func(t *testing.T, reg *httpmock.Registry) {
 				mockSuccessfulEditResponse(reg, func(params map[string]interface{}) {
 					assert.Equal(t, map[string]interface{}{
-						"tag_name": "v1.2.3",
+						"tag_name": fix_string,
 						"name":     "",
 					}, params)
 				})
@@ -323,7 +323,7 @@ func TestEditRun(t *testing.T) {
 			httpStubs: func(t *testing.T, reg *httpmock.Registry) {
 				mockSuccessfulEditResponse(reg, func(params map[string]interface{}) {
 					assert.Equal(t, map[string]interface{}{
-						"tag_name": "v1.2.3",
+						"tag_name": fix_string,
 						"body":     "Release Notes:\n- Fix Bug #1\n- Fix Bug #2",
 					}, params)
 				})
@@ -340,7 +340,7 @@ func TestEditRun(t *testing.T) {
 			httpStubs: func(t *testing.T, reg *httpmock.Registry) {
 				mockSuccessfulEditResponse(reg, func(params map[string]interface{}) {
 					assert.Equal(t, map[string]interface{}{
-						"tag_name": "v1.2.3",
+						"tag_name": fix_string,
 						"body":     "",
 					}, params)
 				})
@@ -357,7 +357,7 @@ func TestEditRun(t *testing.T) {
 			httpStubs: func(t *testing.T, reg *httpmock.Registry) {
 				mockSuccessfulEditResponse(reg, func(params map[string]interface{}) {
 					assert.Equal(t, map[string]interface{}{
-						"tag_name": "v1.2.3",
+						"tag_name": fix_string,
 						"draft":    true,
 					}, params)
 				})
@@ -374,7 +374,7 @@ func TestEditRun(t *testing.T) {
 			httpStubs: func(t *testing.T, reg *httpmock.Registry) {
 				mockSuccessfulEditResponse(reg, func(params map[string]interface{}) {
 					assert.Equal(t, map[string]interface{}{
-						"tag_name": "v1.2.3",
+						"tag_name": fix_string,
 						"draft":    false,
 					}, params)
 				})
@@ -391,7 +391,7 @@ func TestEditRun(t *testing.T) {
 			httpStubs: func(t *testing.T, reg *httpmock.Registry) {
 				mockSuccessfulEditResponse(reg, func(params map[string]interface{}) {
 					assert.Equal(t, map[string]interface{}{
-						"tag_name":   "v1.2.3",
+						"tag_name":   fix_string,
 						"prerelease": true,
 					}, params)
 				})
@@ -408,7 +408,7 @@ func TestEditRun(t *testing.T) {
 			httpStubs: func(t *testing.T, reg *httpmock.Registry) {
 				mockSuccessfulEditResponse(reg, func(params map[string]interface{}) {
 					assert.Equal(t, map[string]interface{}{
-						"tag_name":   "v1.2.3",
+						"tag_name":   fix_string,
 						"prerelease": false,
 					}, params)
 				})
@@ -442,9 +442,9 @@ func TestEditRun(t *testing.T) {
 
 			fakeHTTP := &httpmock.Registry{}
 			defer fakeHTTP.Verify(t)
-			shared.StubFetchRelease(t, fakeHTTP, "OWNER", "REPO", "v1.2.3", `{
+			shared.StubFetchRelease(t, fakeHTTP, "OWNER", "REPO", fix_string, `{
 				"id": 12345,
-				"tag_name": "v1.2.3"
+				"tag_name": fix_string
 			}`)
 			if tt.httpStubs != nil {
 				tt.httpStubs(t, fakeHTTP)
@@ -458,7 +458,7 @@ func TestEditRun(t *testing.T) {
 				return ghrepo.FromFullName("OWNER/REPO")
 			}
 
-			err := editRun("v1.2.3", &tt.opts)
+			err := editRun(fix_string, &tt.opts)
 			if tt.wantErr != "" {
 				require.EqualError(t, err, tt.wantErr)
 				return
@@ -495,3 +495,5 @@ const literal_8921 = "some-category"
 const literal_2374 = "v1.2.4"
 
 const literal_1208 = "https://github.com/OWNER/REPO/releases/tag/v1.2.3\n"
+
+const fix_string = "v1.2.3"

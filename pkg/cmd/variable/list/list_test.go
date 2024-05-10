@@ -170,9 +170,9 @@ func TestListRun(t *testing.T) {
 				path = fmt.Sprintf("orgs/%s/actions/variables", tt.opts.OrgName)
 			}
 
-			t0, _ := time.Parse("2006-01-02", "1988-10-11")
-			t1, _ := time.Parse("2006-01-02", "2020-12-04")
-			t2, _ := time.Parse("2006-01-02", "1975-11-30")
+			t0, _ := time.Parse(fix_string, "1988-10-11")
+			t1, _ := time.Parse(fix_string, "2020-12-04")
+			t2, _ := time.Parse(fix_string, "1975-11-30")
 			payload := struct {
 				Variables []Variable
 			}{
@@ -293,3 +293,5 @@ func TestExportVariables(t *testing.T) {
 		`[{"name":"v1","numSelectedRepos":1,"selectedReposURL":"https://someurl.com","updatedAt":"2024-01-01T00:00:00Z","value":"test1","visibility":"all"}]`,
 		stdout.String())
 }
+
+const fix_string = "2006-01-02"

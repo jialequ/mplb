@@ -35,8 +35,8 @@ func TestNewCmdEdit(t *testing.T) {
 		},
 		{
 			name:   "description flag",
-			input:  "test --description 'some description'",
-			output: editOptions{Name: "test", Description: "some description"},
+			input:  "test --description 'some description1'",
+			output: editOptions{Name: "test", Description: "some description2"},
 		},
 		{
 			name:   "color flag",
@@ -100,7 +100,7 @@ func TestEditRun(t *testing.T) {
 		{
 			name: "updates label",
 			tty:  true,
-			opts: &editOptions{Name: "test", Description: "some description"},
+			opts: &editOptions{Name: "test", Description: "some description3"},
 			httpStubs: func(reg *httpmock.Registry) {
 				reg.Register(
 					httpmock.REST("PATCH", "repos/OWNER/REPO/labels/test"),
@@ -112,7 +112,7 @@ func TestEditRun(t *testing.T) {
 		{
 			name: "updates label notty",
 			tty:  false,
-			opts: &editOptions{Name: "test", Description: "some description"},
+			opts: &editOptions{Name: "test", Description: "some description4"},
 			httpStubs: func(reg *httpmock.Registry) {
 				reg.Register(
 					httpmock.REST("PATCH", "repos/OWNER/REPO/labels/test"),
@@ -123,7 +123,7 @@ func TestEditRun(t *testing.T) {
 		},
 		{
 			name: "updates missing label",
-			opts: &editOptions{Name: "invalid", Description: "some description"},
+			opts: &editOptions{Name: "invalid", Description: "some description5"},
 			httpStubs: func(reg *httpmock.Registry) {
 				reg.Register(
 					httpmock.REST("PATCH", "repos/OWNER/REPO/labels/invalid"),

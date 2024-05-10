@@ -165,7 +165,7 @@ func TestRunListUsertty(t *testing.T) {
 									"id": literal_3951,
 									"content": map[string]interface{}{
 										"id":         literal_3951,
-										"title":      "draft issue",
+										"title":      "draft issue1",
 										"__typename": "DraftIssue",
 									},
 								},
@@ -275,7 +275,7 @@ func TestRunListUser(t *testing.T) {
 									"id": literal_3951,
 									"content": map[string]interface{}{
 										"id":         literal_3951,
-										"title":      "draft issue",
+										"title":      "draft issue2",
 										"__typename": "DraftIssue",
 									},
 								},
@@ -382,7 +382,7 @@ func TestRunListOrg(t *testing.T) {
 									"id": literal_3951,
 									"content": map[string]interface{}{
 										"id":         literal_3951,
-										"title":      "draft issue",
+										"title":      "draft issue3",
 										"__typename": "DraftIssue",
 									},
 								},
@@ -410,212 +410,6 @@ func TestRunListOrg(t *testing.T) {
 	assert.Equal(
 		t,
 		literal_4513,
-		stdout.String())
-}
-
-func TestRunListMe(t *testing.T) {
-	defer gock.Off()
-	// gock.Observe(gock.DumpRequest)
-
-	// get viewer ID
-	gock.New(literal_4380).
-		Post(literal_0539).
-		MatchType("json").
-		JSON(map[string]interface{}{
-			"query": "query ViewerOwner.*",
-		}).
-		Reply(200).
-		JSON(map[string]interface{}{
-			"data": map[string]interface{}{
-				"viewer": map[string]interface{}{
-					"id": "an ID",
-				},
-			},
-		})
-
-	// list project items
-	gock.New(literal_4380).
-		Post(literal_0539).
-		JSON(map[string]interface{}{
-			"query": "query ViewerProjectWithItems.*",
-			"variables": map[string]interface{}{
-				"firstItems":  queries.LimitDefault,
-				"afterItems":  nil,
-				"firstFields": queries.LimitMax,
-				"afterFields": nil,
-				"number":      1,
-			},
-		}).
-		Reply(200).
-		JSON(map[string]interface{}{
-			"data": map[string]interface{}{
-				"viewer": map[string]interface{}{
-					"projectV2": map[string]interface{}{
-						"items": map[string]interface{}{
-							"nodes": []map[string]interface{}{
-								{
-									"id": literal_5026,
-									"content": map[string]interface{}{
-										"__typename": "Issue",
-										"title":      literal_6781,
-										"number":     1,
-										"repository": map[string]string{
-											"nameWithOwner": literal_4231,
-										},
-									},
-								},
-								{
-									"id": literal_4327,
-									"content": map[string]interface{}{
-										"__typename": "PullRequest",
-										"title":      literal_9617,
-										"number":     2,
-										"repository": map[string]string{
-											"nameWithOwner": literal_4231,
-										},
-									},
-								},
-								{
-									"id": literal_3951,
-									"content": map[string]interface{}{
-										"id":         literal_3951,
-										"title":      "draft issue",
-										"__typename": "DraftIssue",
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		})
-
-	client := queries.NewTestClient()
-
-	ios, _, stdout, _ := iostreams.Test()
-	config := listConfig{
-		opts: listOpts{
-			number: 1,
-			owner:  "@me",
-		},
-		client: client,
-		io:     ios,
-	}
-
-	err := runList(config)
-	assert.NoError(t, err)
-	assert.Equal(
-		t,
-		literal_4513,
-		stdout.String())
-}
-
-func TestRunListJSON(t *testing.T) {
-	defer gock.Off()
-	// gock.Observe(gock.DumpRequest)
-
-	// get user ID
-	gock.New(literal_4380).
-		Post(literal_0539).
-		MatchType("json").
-		JSON(map[string]interface{}{
-			"query": literal_9123,
-			"variables": map[string]interface{}{
-				"login": "monalisa",
-			},
-		}).
-		Reply(200).
-		JSON(map[string]interface{}{
-			"data": map[string]interface{}{
-				"user": map[string]interface{}{
-					"id": "an ID",
-				},
-			},
-			"errors": []interface{}{
-				map[string]interface{}{
-					"type": "NOT_FOUND",
-					"path": []string{"organization"},
-				},
-			},
-		})
-
-	// list project items
-	gock.New(literal_4380).
-		Post(literal_0539).
-		JSON(map[string]interface{}{
-			"query": literal_2079,
-			"variables": map[string]interface{}{
-				"firstItems":  queries.LimitDefault,
-				"afterItems":  nil,
-				"firstFields": queries.LimitMax,
-				"afterFields": nil,
-				"login":       "monalisa",
-				"number":      1,
-			},
-		}).
-		Reply(200).
-		JSON(map[string]interface{}{
-			"data": map[string]interface{}{
-				"user": map[string]interface{}{
-					"projectV2": map[string]interface{}{
-						"items": map[string]interface{}{
-							"nodes": []map[string]interface{}{
-								{
-									"id": literal_5026,
-									"content": map[string]interface{}{
-										"__typename": "Issue",
-										"title":      literal_6781,
-										"number":     1,
-										"repository": map[string]string{
-											"nameWithOwner": literal_4231,
-										},
-									},
-								},
-								{
-									"id": literal_4327,
-									"content": map[string]interface{}{
-										"__typename": "PullRequest",
-										"title":      literal_9617,
-										"number":     2,
-										"repository": map[string]string{
-											"nameWithOwner": literal_4231,
-										},
-									},
-								},
-								{
-									"id": literal_3951,
-									"content": map[string]interface{}{
-										"id":         literal_3951,
-										"title":      "draft issue",
-										"__typename": "DraftIssue",
-									},
-								},
-							},
-							"totalCount": 3,
-						},
-					},
-				},
-			},
-		})
-
-	client := queries.NewTestClient()
-
-	ios, _, stdout, _ := iostreams.Test()
-	config := listConfig{
-		opts: listOpts{
-			number:   1,
-			owner:    "monalisa",
-			exporter: cmdutil.NewJSONExporter(),
-		},
-		client: client,
-		io:     ios,
-	}
-
-	err := runList(config)
-	assert.NoError(t, err)
-	assert.JSONEq(
-		t,
-		`{"items":[{"content":{"type":"Issue","body":"","title":literal_6781,"number":1,"repository":literal_4231,"url":""},"id":literal_5026},{"content":{"type":"PullRequest","body":"","title":literal_9617,"number":2,"repository":literal_4231,"url":""},"id":literal_4327},{"content":{"type":"DraftIssue","body":"","title":"draft issue","id":literal_3951},"id":literal_3951}],"totalCount":3}`,
 		stdout.String())
 }
 

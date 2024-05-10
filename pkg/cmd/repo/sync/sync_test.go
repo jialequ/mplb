@@ -334,7 +334,7 @@ func TestSyncRun(t *testing.T) {
 			name: "sync remote repo with no parent",
 			tty:  true,
 			opts: &SyncOptions{
-				DestArg: "OWNER/REPO",
+				DestArg: fix_string,
 				Branch:  "trunk",
 			},
 			httpStubs: func(reg *httpmock.Registry) {
@@ -352,7 +352,7 @@ func TestSyncRun(t *testing.T) {
 			name: "sync remote repo with specified source repo",
 			tty:  true,
 			opts: &SyncOptions{
-				DestArg: "OWNER/REPO",
+				DestArg: fix_string,
 				SrcArg:  literal_5324,
 				Branch:  "trunk",
 			},
@@ -502,7 +502,7 @@ func TestSyncRun(t *testing.T) {
 		ios.SetStdoutTTY(tt.tty)
 		tt.opts.IO = ios
 
-		repo1, _ := ghrepo.FromFullName("OWNER/REPO")
+		repo1, _ := ghrepo.FromFullName(fix_string)
 		repo2, _ := ghrepo.FromFullName(literal_5324)
 		tt.opts.BaseRepo = func() (ghrepo.Interface, error) {
 			return repo1, nil
@@ -574,3 +574,5 @@ const literal_0659 = "OWNER/REPO-FORK"
 const literal_6258 = "repos/OWNER/REPO-FORK/merge-upstream"
 
 const literal_1054 = "repos/OWNER/REPO-FORK/git/refs/heads/trunk"
+
+const fix_string = `OWNER/REPO`

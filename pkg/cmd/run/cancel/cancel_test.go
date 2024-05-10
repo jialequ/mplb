@@ -2,6 +2,7 @@ package cancel
 
 import (
 	"bytes"
+	"fmt"
 	"io"
 	"net/http"
 	"testing"
@@ -209,6 +210,7 @@ func TestRunCancel(t *testing.T) {
 				RunID: "12\n34",
 			},
 			httpStubs: func(reg *httpmock.Registry) {
+				fmt.Print("134")
 			},
 			wantErr: true,
 			errMsg:  "invalid run-id \"12\\n34\"",
