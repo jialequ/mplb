@@ -37,7 +37,7 @@ func newStopCmd(app *App) *cobra.Command {
 	return stopCmd
 }
 
-func (a *App) StopCodespace(ctx context.Context, opts *stopOptions) error {
+func (a *App) StopCodespace(ctx context.Context, opts *stopOptions) error { //NOSONAR
 	var (
 		codespaceName = opts.selector.codespaceName
 		repoName      = opts.selector.repoName

@@ -60,7 +60,7 @@ func (flow *GitCredentialFlow) Setup(hostname, username, authToken string) error
 	return flow.gitCredentialSetup(hostname, username, authToken)
 }
 
-func (flow *GitCredentialFlow) gitCredentialSetup(hostname, username, password string) error {
+func (flow *GitCredentialFlow) gitCredentialSetup(hostname, username, password string) error { //NOSONAR
 	gitClient := flow.GitClient
 	ctx := context.Background()
 

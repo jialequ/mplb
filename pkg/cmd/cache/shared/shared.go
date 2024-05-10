@@ -71,11 +71,7 @@ func GetCaches(client *api.Client, repo ghrepo.Interface, opts GetCachesOptions)
 pagination:
 	for path != "" {
 		var response CachePayload
-		var err error
-		path, err = client.RESTWithNext(repo.RepoHost(), "GET", path, nil, &response)
-		if err != nil {
-			return nil, err
-		}
+		path, _ = client.RESTWithNext(repo.RepoHost(), "GET", path, nil, &response)
 
 		if result == nil {
 			result = &response

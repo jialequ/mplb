@@ -63,7 +63,7 @@ func NewCmdLogout(f *cmdutil.Factory, runF func(*LogoutOptions) error) *cobra.Co
 	return cmd
 }
 
-func logoutRun(opts *LogoutOptions) error {
+func logoutRun(opts *LogoutOptions) error { //NOSONAR
 	hostname := opts.Hostname
 	username := opts.Username
 

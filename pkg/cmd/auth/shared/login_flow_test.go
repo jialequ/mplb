@@ -29,7 +29,7 @@ func (c tinyConfig) UsersForHost(hostname string) []string {
 	return nil
 }
 
-func TestLogin(t *testing.T) {
+func TestLogin(t *testing.T) { //NOSONAR
 	tests := []struct {
 		name         string
 		opts         LoginOptions

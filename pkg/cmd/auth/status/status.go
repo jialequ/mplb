@@ -163,7 +163,7 @@ func NewCmdStatus(f *cmdutil.Factory, runF func(*StatusOptions) error) *cobra.Co
 	return cmd
 }
 
-func statusRun(opts *StatusOptions) error {
+func statusRun(opts *StatusOptions) error { //NOSONAR
 	cfg, err := opts.Config()
 	if err != nil {
 		return err

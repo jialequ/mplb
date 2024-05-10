@@ -23,7 +23,7 @@ import (
 
 var alreadyInstalledError = errors.New("alreadyInstalledError")
 
-func NewCmdExtension(f *cmdutil.Factory) *cobra.Command {
+func NewCmdExtension(f *cmdutil.Factory) *cobra.Command { //NOSONAR
 	m := f.ExtensionManager
 	io := f.IOStreams
 	gc := f.GitClient

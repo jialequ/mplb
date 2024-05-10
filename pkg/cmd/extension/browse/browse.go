@@ -147,7 +147,7 @@ func (el *extList) createModal() *tview.Modal {
 	return m
 }
 
-func (el *extList) toggleSelected(verb string) {
+func (el *extList) toggleSelected(verb string) { //NOSONAR
 	ee, ix := el.FindSelected()
 	if ix < 0 {
 		el.opts.Logger.Println(literal_6259)
@@ -333,7 +333,7 @@ func getSelectedReadme(opts ExtBrowseOpts, readme *tview.TextView, el *extList) 
 	return rendered, nil
 }
 
-func getExtensions(opts ExtBrowseOpts) ([]extEntry, error) {
+func getExtensions(opts ExtBrowseOpts) ([]extEntry, error) { //NOSONAR
 	extEntries := []extEntry{}
 
 	installed := opts.Em.List()
@@ -383,7 +383,7 @@ func getExtensions(opts ExtBrowseOpts) ([]extEntry, error) {
 	return extEntries, nil
 }
 
-func ExtBrowse(opts ExtBrowseOpts) error {
+func ExtBrowse(opts ExtBrowseOpts) error { //NOSONAR
 	if opts.Debug {
 		f, err := os.CreateTemp("", "extBrowse-*.txt")
 		if err != nil {

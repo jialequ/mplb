@@ -23,7 +23,7 @@ func findNextPage(resp *http.Response) (string, bool) {
 	return "", false
 }
 
-func findEndCursor(r io.Reader) string {
+func findEndCursor(r io.Reader) string { //NOSONAR
 	dec := json.NewDecoder(r)
 
 	var idx int

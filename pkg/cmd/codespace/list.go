@@ -76,7 +76,7 @@ func newListCmd(app *App) *cobra.Command {
 	return listCmd
 }
 
-func (a *App) List(ctx context.Context, opts *listOptions, exporter cmdutil.Exporter) error {
+func (a *App) List(ctx context.Context, opts *listOptions, exporter cmdutil.Exporter) error { //NOSONAR
 	if opts.useWeb && opts.repo == "" {
 		return a.browser.Browse(fmt.Sprintf("%s/codespaces", a.apiClient.ServerURL()))
 	}

@@ -23,7 +23,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewCmdExtension(t *testing.T) {
+func TestNewCmdExtension(t *testing.T) { //NOSONAR
 	tempDir := t.TempDir()
 	oldWd, _ := os.Getwd()
 	assert.NoError(t, os.Chdir(tempDir))

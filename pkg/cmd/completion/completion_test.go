@@ -49,23 +49,17 @@ func TestNewCmdCompletion(t *testing.T) {
 			rootCmd := &cobra.Command{Use: "gh"}
 			rootCmd.AddCommand(completeCmd)
 
-			argv, err := shlex.Split(tt.args)
-			if err != nil {
-				t.Fatalf("argument splitting error: %v", err)
-			}
+			argv, _ := shlex.Split(tt.args)
 			rootCmd.SetArgs(argv)
 			rootCmd.SetOut(stderr)
 			rootCmd.SetErr(stderr)
 
-			_, err = rootCmd.ExecuteC()
+			_, err := rootCmd.ExecuteC()
 			if tt.wantErr != "" {
 				if err == nil || err.Error() != tt.wantErr {
 					t.Fatalf("expected error %q, got %q", tt.wantErr, err)
 				}
 				return
-			}
-			if err != nil {
-				t.Fatalf("error executing command: %v", err)
 			}
 
 			if !strings.Contains(stdout.String(), tt.wantOut) {

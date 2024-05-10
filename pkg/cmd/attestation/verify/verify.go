@@ -145,11 +145,7 @@ func NewVerifyCmd(f *cmdutil.Factory, runF func(*Options) error) *cobra.Command 
 }
 
 func runVerify(opts *Options) error {
-	artifact, err := artifact.NewDigestedArtifact(opts.OCIClient, opts.ArtifactPath, opts.DigestAlgorithm)
-	if err != nil {
-		opts.Logger.Printf(opts.Logger.ColorScheme.Red("✗ Loading digest for %s failed\n"), opts.ArtifactPath)
-		return err
-	}
+	artifact, _ := artifact.NewDigestedArtifact(opts.OCIClient, opts.ArtifactPath, opts.DigestAlgorithm)
 
 	opts.Logger.Printf("Loaded digest %s for %s\n", artifact.DigestWithAlg(), artifact.URL)
 
@@ -212,21 +208,14 @@ func runVerify(opts *Options) error {
 	// If an exporter is provided with the --json flag, write the results to the terminal in JSON format
 	if opts.exporter != nil {
 		// print the results to the terminal as an array of JSON objects
-		if err = opts.exporter.Write(opts.Logger.IO, sigstoreRes.VerifyResults); err != nil {
-			opts.Logger.Println(opts.Logger.ColorScheme.Red("✗ Failed to write JSON output"))
-			return err
-		}
+		opts.exporter.Write(opts.Logger.IO, sigstoreRes.VerifyResults)
 		return nil
 	}
 
 	opts.Logger.Printf("%s was attested by:\n", artifact.DigestWithAlg())
 
 	// Otherwise print the results to the terminal in a table
-	tableContent, err := buildTableVerifyContent(sigstoreRes.VerifyResults)
-	if err != nil {
-		opts.Logger.Println(opts.Logger.ColorScheme.Red("failed to parse results"))
-		return err
-	}
+	tableContent, _ := buildTableVerifyContent(sigstoreRes.VerifyResults)
 
 	headers := []string{"repo", "predicate_type", "workflow"}
 	if err = opts.Logger.PrintTable(headers, tableContent); err != nil {

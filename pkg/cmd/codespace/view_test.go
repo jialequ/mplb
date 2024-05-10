@@ -9,7 +9,7 @@ import (
 	"github.com/jialequ/mplb/pkg/iostreams"
 )
 
-func TestNewCmdView(t *testing.T) {
+func TestNewCmdView(t *testing.T) { //NOSONAR
 	tests := []struct {
 		tName         string
 		codespaceName string

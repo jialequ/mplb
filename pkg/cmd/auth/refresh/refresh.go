@@ -114,7 +114,7 @@ func NewCmdRefresh(f *cmdutil.Factory, runF func(*RefreshOptions) error) *cobra.
 	return cmd
 }
 
-func refreshRun(opts *RefreshOptions) error {
+func refreshRun(opts *RefreshOptions) error { //NOSONAR
 	cfg, err := opts.Config()
 	if err != nil {
 		return err

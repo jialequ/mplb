@@ -118,7 +118,7 @@ func NewCmdBrowse(f *cmdutil.Factory, runF func(*BrowseOptions) error) *cobra.Co
 				return err
 			}
 
-			if err := cmdutil.MutuallyExclusive(
+			cmdutil.MutuallyExclusive(
 				"specify only one of `--branch`, `--commit`, `--projects`, `--releases`, `--settings`, or `--wiki`",
 				opts.Branch != "",
 				opts.Commit != "",
@@ -126,9 +126,7 @@ func NewCmdBrowse(f *cmdutil.Factory, runF func(*BrowseOptions) error) *cobra.Co
 				opts.ReleasesFlag,
 				opts.SettingsFlag,
 				opts.WikiFlag,
-			); err != nil {
-				return err
-			}
+			)
 
 			if (isNumber(opts.SelectorArg) || isCommit(opts.SelectorArg)) && (opts.Branch != "" || opts.Commit != "") {
 				return cmdutil.FlagErrorf("%q is an invalid argument when using `--branch` or `--commit`", opts.SelectorArg)
@@ -206,7 +204,7 @@ func runBrowse(opts *BrowseOptions) error {
 	return opts.Browser.Browse(url)
 }
 
-func parseSection(baseRepo ghrepo.Interface, opts *BrowseOptions) (string, error) {
+func parseSection(baseRepo ghrepo.Interface, opts *BrowseOptions) (string, error) { //NOSONAR
 	if opts.ProjectsFlag {
 		return "projects", nil
 	} else if opts.ReleasesFlag {

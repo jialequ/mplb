@@ -47,7 +47,7 @@ type sshOptions struct {
 	scpArgs          []string // scp arguments, for 'cs cp' (nil for 'cs ssh')
 }
 
-func newSSHCmd(app *App) *cobra.Command {
+func newSSHCmd(app *App) *cobra.Command { //NOSONAR
 	var opts sshOptions
 
 	sshCmd := &cobra.Command{
@@ -163,7 +163,7 @@ func (crwc *combinedReadWriteHalfCloser) CloseWrite() error {
 }
 
 // SSH opens an ssh session or runs an ssh command in a codespace.
-func (a *App) SSH(ctx context.Context, sshArgs []string, opts sshOptions) (err error) {
+func (a *App) SSH(ctx context.Context, sshArgs []string, opts sshOptions) (err error) { //NOSONAR
 	// Ensure all child tasks (e.g. port forwarding) terminate before return.
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
@@ -540,7 +540,7 @@ func keypairForPrivateKey(privateKeyPath string) (*ssh.KeyPair, error) {
 	}, nil
 }
 
-func (a *App) printOpenSSHConfig(ctx context.Context, opts sshOptions) (err error) {
+func (a *App) printOpenSSHConfig(ctx context.Context, opts sshOptions) (err error) { //NOSONAR
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 

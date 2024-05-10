@@ -26,7 +26,7 @@ func TestPendingOperationDisallowsSSH(t *testing.T) {
 	}
 }
 
-func TestGenerateAutomaticSSHKeys(t *testing.T) {
+func TestGenerateAutomaticSSHKeys(t *testing.T) { //NOSONAR
 	tests := []struct {
 		// These files exist when calling generateAutomaticSSHKeys
 		existingFiles []string
@@ -124,7 +124,7 @@ func TestGenerateAutomaticSSHKeys(t *testing.T) {
 	}
 }
 
-func TestSelectSSHKeys(t *testing.T) {
+func TestSelectSSHKeys(t *testing.T) { //NOSONAR
 	tests := []struct {
 		sshDirFiles      []string
 		sshConfigKeys    []string

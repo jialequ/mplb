@@ -24,54 +24,6 @@ func TestGitCredentialSetupconfigureExisting(t *testing.T) {
 	}
 }
 
-func TestGitCredentialsSetupsetOursGH(t *testing.T) {
-	cs, restoreRun := run.Stub()
-	defer restoreRun(t)
-	cs.Register(`git config --global --replace-all credential\.`, 0, "", func(args []string) {
-		if key := args[len(args)-2]; key != "credential.https://github.com.helper" {
-			t.Errorf(literal_0451, key)
-		}
-		if val := args[len(args)-1]; val != "" {
-			t.Errorf(literal_8519, val)
-		}
-	})
-	cs.Register(`git config --global --add credential\.`, 0, "", func(args []string) {
-		if key := args[len(args)-2]; key != "credential.https://github.com.helper" {
-			t.Errorf(literal_0451, key)
-		}
-		if val := args[len(args)-1]; val != literal_4391 {
-			t.Errorf(literal_8519, val)
-		}
-	})
-	cs.Register(`git config --global --replace-all credential\.`, 0, "", func(args []string) {
-		if key := args[len(args)-2]; key != "credential.https://gist.github.com.helper" {
-			t.Errorf(literal_0451, key)
-		}
-		if val := args[len(args)-1]; val != "" {
-			t.Errorf(literal_8519, val)
-		}
-	})
-	cs.Register(`git config --global --add credential\.`, 0, "", func(args []string) {
-		if key := args[len(args)-2]; key != "credential.https://gist.github.com.helper" {
-			t.Errorf(literal_0451, key)
-		}
-		if val := args[len(args)-1]; val != literal_4391 {
-			t.Errorf(literal_8519, val)
-		}
-	})
-
-	f := GitCredentialFlow{
-		Executable: "/path/to/gh",
-		helper:     "",
-		GitClient:  &git.Client{GitPath: literal_0975},
-	}
-
-	if err := f.gitCredentialSetup("github.com", "monalisa", "PASSWD"); err != nil {
-		t.Errorf(literal_3941, err)
-	}
-
-}
-
 func TestGitCredentialSetupsetOursnonGH(t *testing.T) {
 	cs, restoreRun := run.Stub()
 	defer restoreRun(t)

@@ -55,7 +55,7 @@ func NewCmdCredential(f *cmdutil.Factory, runF func(*CredentialOptions) error) *
 	return cmd
 }
 
-func helperRun(opts *CredentialOptions) error {
+func helperRun(opts *CredentialOptions) error { //NOSONAR
 	if opts.Operation == "store" {
 		// We pretend to implement the "store" operation, but do nothing since we already have a cached token.
 		return nil

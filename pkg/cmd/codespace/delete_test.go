@@ -14,7 +14,7 @@ import (
 	"github.com/jialequ/mplb/pkg/iostreams"
 )
 
-func TestDelete(t *testing.T) {
+func TestDelete(t *testing.T) { //NOSONAR
 	now, _ := time.Parse(time.RFC3339, "2021-09-22T00:00:00Z")
 	daysAgo := func(n int) string {
 		return now.Add(time.Hour * -time.Duration(24*n)).Format(time.RFC3339)

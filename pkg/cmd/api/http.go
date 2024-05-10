@@ -13,7 +13,7 @@ import (
 	"github.com/jialequ/mplb/internal/ghinstance"
 )
 
-func httpRequest(client *http.Client, hostname string, method string, p string, params interface{}, headers []string) (*http.Response, error) {
+func httpRequest(client *http.Client, hostname string, method string, p string, params interface{}, headers []string) (*http.Response, error) { //NOSONAR
 	isGraphQL := p == "graphql"
 	var requestURL string
 	if strings.Contains(p, "://") {

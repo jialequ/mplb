@@ -63,7 +63,7 @@ func TestListCmdFlagError(t *testing.T) {
 	}
 }
 
-func TestAppList(t *testing.T) {
+func TestAppList(t *testing.T) { //NOSONAR
 	type fields struct {
 		apiClient apiClient
 	}

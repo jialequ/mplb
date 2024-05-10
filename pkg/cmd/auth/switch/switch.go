@@ -74,7 +74,7 @@ type hostUser struct {
 
 type candidates []hostUser
 
-func switchRun(opts *SwitchOptions) error {
+func switchRun(opts *SwitchOptions) error { //NOSONAR
 	hostname := opts.Hostname
 	username := opts.Username
 

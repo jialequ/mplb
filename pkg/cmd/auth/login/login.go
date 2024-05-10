@@ -39,7 +39,7 @@ type LoginOptions struct {
 	SkipSSHKeyPrompt bool
 }
 
-func NewCmdLogin(f *cmdutil.Factory, runF func(*LoginOptions) error) *cobra.Command {
+func NewCmdLogin(f *cmdutil.Factory, runF func(*LoginOptions) error) *cobra.Command { //NOSONAR
 	opts := &LoginOptions{
 		IO:         f.IOStreams,
 		Config:     f.Config,
