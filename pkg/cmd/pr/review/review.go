@@ -31,7 +31,7 @@ type ReviewOptions struct {
 	Body            string
 }
 
-func NewCmdReview(f *cmdutil.Factory, runF func(*ReviewOptions) error) *cobra.Command {
+func NewCmdReview(f *cmdutil.Factory, runF func(*ReviewOptions) error) *cobra.Command { //NOSONAR
 	opts := &ReviewOptions{
 		IO:         f.IOStreams,
 		HttpClient: f.HttpClient,

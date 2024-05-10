@@ -68,7 +68,7 @@ To authorize, run "gh auth refresh -s delete_repo"`,
 	return cmd
 }
 
-func deleteRun(opts *DeleteOptions) error {
+func deleteRun(opts *DeleteOptions) error { //NOSONAR
 	httpClient, err := opts.HttpClient()
 	if err != nil {
 		return err

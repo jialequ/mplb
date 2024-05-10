@@ -101,7 +101,7 @@ func NewCmdClone(f *cmdutil.Factory, runF func(*CloneOptions) error) *cobra.Comm
 	return cmd
 }
 
-func cloneRun(opts *CloneOptions) error {
+func cloneRun(opts *CloneOptions) error { //NOSONAR
 	httpClient, err := opts.HttpClient()
 	if err != nil {
 		return err

@@ -85,7 +85,7 @@ type FindOptions struct {
 	States []string
 }
 
-func (f *finder) Find(opts FindOptions) (*api.PullRequest, ghrepo.Interface, error) {
+func (f *finder) Find(opts FindOptions) (*api.PullRequest, ghrepo.Interface, error) { //NOSONAR
 	if len(opts.Fields) == 0 {
 		return nil, nil, errors.New("Find error: no fields specified")
 	}

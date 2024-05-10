@@ -37,7 +37,7 @@ type linkConfig struct {
 	io         *iostreams.IOStreams
 }
 
-func NewCmdLink(f *cmdutil.Factory, runF func(config linkConfig) error) *cobra.Command {
+func NewCmdLink(f *cmdutil.Factory, runF func(config linkConfig) error) *cobra.Command { //NOSONAR
 	opts := linkOpts{}
 	linkCmd := &cobra.Command{
 		Short: "Link a project to a repository or a team",
@@ -109,7 +109,7 @@ func NewCmdLink(f *cmdutil.Factory, runF func(config linkConfig) error) *cobra.C
 	return linkCmd
 }
 
-func validateRepoOrTeamFlag(opts *linkOpts) error {
+func validateRepoOrTeamFlag(opts *linkOpts) error { //NOSONAR
 
 	linkedTarget := ""
 	if opts.repo != "" {

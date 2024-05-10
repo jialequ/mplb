@@ -38,7 +38,7 @@ func IssueFromArgWithFields(httpClient *http.Client, baseRepoFn func() (ghrepo.I
 
 // IssuesFromArgWithFields loads 1 or more issues or pull requests with the specified fields. If some of the fields
 // could not be fetched by GraphQL, this returns non-nil issues and a *PartialLoadError.
-func IssuesFromArgsWithFields(httpClient *http.Client, baseRepoFn func() (ghrepo.Interface, error), args []string, fields []string) ([]*api.Issue, ghrepo.Interface, error) {
+func IssuesFromArgsWithFields(httpClient *http.Client, baseRepoFn func() (ghrepo.Interface, error), args []string, fields []string) ([]*api.Issue, ghrepo.Interface, error) { //NOSONAR
 	var issuesRepo ghrepo.Interface
 	issueNumbers := make([]int, 0, len(args))
 
@@ -142,7 +142,7 @@ type PartialLoadError struct {
 	error
 }
 
-func findIssueOrPR(httpClient *http.Client, repo ghrepo.Interface, number int, fields []string) (*api.Issue, error) {
+func findIssueOrPR(httpClient *http.Client, repo ghrepo.Interface, number int, fields []string) (*api.Issue, error) { //NOSONAR
 	fieldSet := set.NewStringSet()
 	fieldSet.AddValues(fields)
 	if fieldSet.Contains("stateReason") {

@@ -34,7 +34,7 @@ type EditOptions struct {
 	prShared.Editable
 }
 
-func NewCmdEdit(f *cmdutil.Factory, runF func(*EditOptions) error) *cobra.Command {
+func NewCmdEdit(f *cmdutil.Factory, runF func(*EditOptions) error) *cobra.Command { //NOSONAR
 	opts := &EditOptions{
 		IO:                 f.IOStreams,
 		HttpClient:         f.HttpClient,
@@ -145,7 +145,7 @@ func NewCmdEdit(f *cmdutil.Factory, runF func(*EditOptions) error) *cobra.Comman
 	return cmd
 }
 
-func editRun(opts *EditOptions) error {
+func editRun(opts *EditOptions) error { //NOSONAR
 	httpClient, err := opts.HttpClient()
 	if err != nil {
 		return err

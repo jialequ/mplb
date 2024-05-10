@@ -111,7 +111,7 @@ func NewCmdRepoCredits(f *cmdutil.Factory, runF func(*CreditsOptions) error) *co
 	return cmd
 }
 
-func creditsRun(opts *CreditsOptions) error {
+func creditsRun(opts *CreditsOptions) error { //NOSONAR
 	isWindows := runtime.GOOS == "windows"
 	httpClient, err := opts.HttpClient()
 	if err != nil {

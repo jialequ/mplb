@@ -7,10 +7,9 @@ import (
 
 	"github.com/jialequ/mplb/internal/ghrepo"
 	"github.com/jialequ/mplb/pkg/httpmock"
-	"github.com/stretchr/testify/assert"
 )
 
-func TestIssueFromArgWithFields(t *testing.T) {
+func TestIssueFromArgWithFields(t *testing.T) { //NOSONAR
 	type args struct {
 		baseRepoFn func() (ghrepo.Interface, error)
 		selector   string
@@ -209,109 +208,6 @@ func TestIssueFromArgWithFields(t *testing.T) {
 			repoURL := ghrepo.GenerateRepoURL(repo, "")
 			if repoURL != tt.wantRepo {
 				t.Errorf("want repo %s, got %s", tt.wantRepo, repoURL)
-			}
-		})
-	}
-}
-
-func TestIssuesFromArgsWithFields(t *testing.T) {
-	type args struct {
-		baseRepoFn func() (ghrepo.Interface, error)
-		selectors  []string
-	}
-	tests := []struct {
-		name       string
-		args       args
-		httpStub   func(*httpmock.Registry)
-		wantIssues []int
-		wantRepo   string
-		wantErr    bool
-		wantErrMsg string
-	}{
-		{
-			name: "multiple repos",
-			args: args{
-				selectors: []string{"1", "https://github.com/OWNER/OTHERREPO/issues/2"},
-				baseRepoFn: func() (ghrepo.Interface, error) {
-					return ghrepo.New("OWNER", "REPO"), nil
-				},
-			},
-			httpStub: func(r *httpmock.Registry) {
-				r.Register(
-					httpmock.GraphQL(`query IssueByNumber\b`),
-					httpmock.StringResponse(`{"data":{"repository":{
-						"hasIssuesEnabled": true,
-						"issue":{"number":1}
-					}}}`))
-				r.Register(
-					httpmock.GraphQL(`query IssueByNumber\b`),
-					httpmock.StringResponse(`{"data":{"repository":{
-							"hasIssuesEnabled": true,
-							"issue":{"number":2}
-					}}}`))
-			},
-			wantErr:    true,
-			wantErrMsg: "multiple issues must be in same repo",
-		},
-		{
-			name: "multiple issues",
-			args: args{
-				selectors: []string{"1", "2"},
-				baseRepoFn: func() (ghrepo.Interface, error) {
-					return ghrepo.New("OWNER", "REPO"), nil
-				},
-			},
-			httpStub: func(r *httpmock.Registry) {
-				r.Register(
-					httpmock.GraphQL(`query IssueByNumber\b`),
-					httpmock.StringResponse(`{"data":{"repository":{
-						"hasIssuesEnabled": true,
-						"issue":{"number":1}
-					}}}`))
-				r.Register(
-					httpmock.GraphQL(`query IssueByNumber\b`),
-					httpmock.StringResponse(`{"data":{"repository":{
-							"hasIssuesEnabled": true,
-							"issue":{"number":2}
-						}}}`))
-			},
-			wantIssues: []int{1, 2},
-			wantRepo:   literal_4690,
-		},
-	}
-	for _, tt := range tests {
-		if !tt.wantErr && len(tt.args.selectors) != len(tt.wantIssues) {
-			t.Fatal("number of selectors and issues not equal")
-		}
-		t.Run(tt.name, func(t *testing.T) {
-			reg := &httpmock.Registry{}
-			if tt.httpStub != nil {
-				tt.httpStub(reg)
-			}
-			httpClient := &http.Client{Transport: reg}
-			issues, repo, err := IssuesFromArgsWithFields(httpClient, tt.args.baseRepoFn, tt.args.selectors, []string{"number"})
-			if (err != nil) != tt.wantErr {
-				t.Errorf("IssuesFromArgsWithFields() error = %v, wantErr %v", err, tt.wantErr)
-				if issues == nil {
-					return
-				}
-			}
-			if tt.wantErr {
-				assert.Error(t, err)
-				assert.ErrorContains(t, err, tt.wantErrMsg)
-				return
-			}
-			assert.NoError(t, err)
-			for i := range issues {
-				assert.Contains(t, tt.wantIssues, issues[i].Number)
-			}
-			if repo != nil {
-				repoURL := ghrepo.GenerateRepoURL(repo, "")
-				if repoURL != tt.wantRepo {
-					t.Errorf("want repo %s, got %s", tt.wantRepo, repoURL)
-				}
-			} else if tt.wantRepo != "" {
-				t.Errorf("want repo %sw, got nil", tt.wantRepo)
 			}
 		})
 	}

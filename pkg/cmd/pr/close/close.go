@@ -62,7 +62,7 @@ func NewCmdClose(f *cmdutil.Factory, runF func(*CloseOptions) error) *cobra.Comm
 	return cmd
 }
 
-func closeRun(opts *CloseOptions) error {
+func closeRun(opts *CloseOptions) error { //NOSONAR
 	cs := opts.IO.ColorScheme()
 
 	findOptions := shared.FindOptions{

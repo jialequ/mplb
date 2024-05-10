@@ -73,7 +73,7 @@ type updateRepositoryInput struct {
 }
 
 // repoCreate creates a new GitHub repository
-func repoCreate(client *http.Client, hostname string, input repoCreateInput) (*api.Repository, error) {
+func repoCreate(client *http.Client, hostname string, input repoCreateInput) (*api.Repository, error) { //NOSONAR
 	isOrg := false
 	var ownerID string
 	var teamID string

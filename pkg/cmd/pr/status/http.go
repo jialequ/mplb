@@ -28,7 +28,7 @@ type pullRequestsPayload struct {
 	DefaultBranch   string
 }
 
-func pullRequestStatus(httpClient *http.Client, repo ghrepo.Interface, options requestOptions) (*pullRequestsPayload, error) {
+func pullRequestStatus(httpClient *http.Client, repo ghrepo.Interface, options requestOptions) (*pullRequestsPayload, error) { //NOSONAR
 	apiClient := api.NewClientFromHTTP(httpClient)
 	type edges struct {
 		TotalCount int

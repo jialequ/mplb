@@ -51,7 +51,7 @@ func ValidURL(urlStr string) bool {
 
 // Ensure that tb.MetadataResult object exists and contains enough pre-fetched API data to be able
 // to resolve all object listed in tb to GraphQL IDs.
-func fillMetadata(client *api.Client, baseRepo ghrepo.Interface, tb *IssueMetadataState) error {
+func fillMetadata(client *api.Client, baseRepo ghrepo.Interface, tb *IssueMetadataState) error { //NOSONAR
 	resolveInput := api.RepoResolveInput{}
 
 	if len(tb.Assignees) > 0 && (tb.MetadataResult == nil || len(tb.MetadataResult.AssignableUsers) == 0) {

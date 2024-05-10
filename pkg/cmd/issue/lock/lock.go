@@ -103,7 +103,7 @@ type LockOptions struct {
 	Interactive bool
 }
 
-func (opts *LockOptions) setCommonOptions(f *cmdutil.Factory, cmd *cobra.Command, args []string) {
+func (opts *LockOptions) setCommonOptions(f *cmdutil.Factory, args []string) {
 	opts.IO = f.IOStreams
 	opts.HttpClient = f.HttpClient
 	opts.Config = f.Config
@@ -129,7 +129,7 @@ func NewCmdLock(f *cmdutil.Factory, parentName string, runF func(string, *LockOp
 		Short: short,
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			opts.setCommonOptions(f, cmd, args)
+			opts.setCommonOptions(f, args)
 
 			reasonProvided := cmd.Flags().Changed("reason")
 			if reasonProvided {
@@ -172,7 +172,7 @@ func NewCmdUnlock(f *cmdutil.Factory, parentName string, runF func(string, *Lock
 		Short: short,
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			opts.setCommonOptions(f, cmd, args)
+			opts.setCommonOptions(f, args)
 
 			if runF != nil {
 				return runF(Unlock, opts)
@@ -206,7 +206,7 @@ func status(state string, lockable *api.Issue, baseRepo ghrepo.Interface, opts *
 }
 
 // lockRun will lock or unlock a conversation.
-func lockRun(state string, opts *LockOptions) error {
+func lockRun(state string, opts *LockOptions) error { //NOSONAR
 	cs := opts.IO.ColorScheme()
 
 	httpClient, err := opts.HttpClient()

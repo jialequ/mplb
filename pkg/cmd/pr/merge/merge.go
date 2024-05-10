@@ -57,7 +57,7 @@ type MergeOptions struct {
 // ErrAlreadyInMergeQueue indicates that the pull request is already in a merge queue
 var ErrAlreadyInMergeQueue = errors.New("already in merge queue")
 
-func NewCmdMerge(f *cmdutil.Factory, runF func(*MergeOptions) error) *cobra.Command {
+func NewCmdMerge(f *cmdutil.Factory, runF func(*MergeOptions) error) *cobra.Command { //NOSONAR
 	opts := &MergeOptions{
 		IO:         f.IOStreams,
 		HttpClient: f.HttpClient,
@@ -271,7 +271,7 @@ func (m *mergeContext) canMerge() error {
 }
 
 // Merge the pull request. May prompt the user for input parameters for the merge.
-func (m *mergeContext) merge() error {
+func (m *mergeContext) merge() error { //NOSONAR
 	if m.merged {
 		return nil
 	}
@@ -370,7 +370,7 @@ func (m *mergeContext) merge() error {
 }
 
 // Delete local branch if requested and if allowed.
-func (m *mergeContext) deleteLocalBranch() error {
+func (m *mergeContext) deleteLocalBranch() error { //NOSONAR
 	if m.autoMerge {
 		return nil
 	}

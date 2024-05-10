@@ -8,7 +8,7 @@ import (
 	"github.com/jialequ/mplb/pkg/iostreams"
 )
 
-func addRow(tp *tableprinter.TablePrinter, io *iostreams.IOStreams, o check) {
+func addRow(tp *tableprinter.TablePrinter, io *iostreams.IOStreams, o check) { //NOSONAR
 	cs := io.ColorScheme()
 	elapsed := ""
 

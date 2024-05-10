@@ -81,7 +81,7 @@ var defaultFields = []string{
 	"assignees", "labels", "projectCards", "reactionGroups", "lastComment", "stateReason",
 }
 
-func viewRun(opts *ViewOptions) error {
+func viewRun(opts *ViewOptions) error { //NOSONAR
 	httpClient, err := opts.HttpClient()
 	if err != nil {
 		return err

@@ -255,7 +255,7 @@ func TestNewCmdCreate(t *testing.T) {
 	}
 }
 
-func TestCreateRun(t *testing.T) {
+func TestCreateRun(t *testing.T) { //NOSONAR
 	tests := []struct {
 		name            string
 		setup           func(*CreateOptions, *testing.T) func()

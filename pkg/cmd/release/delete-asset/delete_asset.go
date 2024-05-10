@@ -56,7 +56,7 @@ func NewCmdDeleteAsset(f *cmdutil.Factory, runF func(*DeleteAssetOptions) error)
 	return cmd
 }
 
-func deleteAssetRun(opts *DeleteAssetOptions) error {
+func deleteAssetRun(opts *DeleteAssetOptions) error { //NOSONAR
 	httpClient, err := opts.HttpClient()
 	if err != nil {
 		return err

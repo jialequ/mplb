@@ -36,7 +36,7 @@ type ChecksOptions struct {
 	Required    bool
 }
 
-func NewCmdChecks(f *cmdutil.Factory, runF func(*ChecksOptions) error) *cobra.Command {
+func NewCmdChecks(f *cmdutil.Factory, runF func(*ChecksOptions) error) *cobra.Command { //NOSONAR
 	var interval int
 	opts := &ChecksOptions{
 		HttpClient: f.HttpClient,
@@ -120,7 +120,7 @@ func checksRunWebMode(opts *ChecksOptions) error {
 	return opts.Browser.Browse(openURL)
 }
 
-func checksRun(opts *ChecksOptions) error {
+func checksRun(opts *ChecksOptions) error { //NOSONAR
 	if opts.WebMode {
 		return checksRunWebMode(opts)
 	}

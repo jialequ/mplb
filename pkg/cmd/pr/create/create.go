@@ -86,7 +86,7 @@ type CreateContext struct {
 	GitClient          *git.Client
 }
 
-func NewCmdCreate(f *cmdutil.Factory, runF func(*CreateOptions) error) *cobra.Command {
+func NewCmdCreate(f *cmdutil.Factory, runF func(*CreateOptions) error) *cobra.Command { //NOSONAR
 	opts := &CreateOptions{
 		IO:         f.IOStreams,
 		HttpClient: f.HttpClient,
@@ -239,7 +239,7 @@ func NewCmdCreate(f *cmdutil.Factory, runF func(*CreateOptions) error) *cobra.Co
 	return cmd
 }
 
-func createRun(opts *CreateOptions) (err error) {
+func createRun(opts *CreateOptions) (err error) { //NOSONAR
 	ctx, err := NewCreateContext(opts)
 	if err != nil {
 		return
@@ -534,7 +534,7 @@ func NewIssueState(ctx CreateContext, opts CreateOptions) (*shared.IssueMetadata
 	return state, nil
 }
 
-func NewCreateContext(opts *CreateOptions) (*CreateContext, error) {
+func NewCreateContext(opts *CreateOptions) (*CreateContext, error) { //NOSONAR
 	httpClient, err := opts.HttpClient()
 	if err != nil {
 		return nil, err
@@ -828,7 +828,7 @@ func previewPR(opts CreateOptions, openURL string) error {
 	return opts.Browser.Browse(openURL)
 }
 
-func handlePush(opts CreateOptions, ctx CreateContext) error {
+func handlePush(opts CreateOptions, ctx CreateContext) error { //NOSONAR
 	didForkRepo := false
 	headRepo := ctx.HeadRepo
 	headRemote := ctx.HeadRemote

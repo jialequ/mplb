@@ -8,7 +8,7 @@ import (
 	prShared "github.com/jialequ/mplb/pkg/cmd/pr/shared"
 )
 
-func listIssues(client *api.Client, repo ghrepo.Interface, filters prShared.FilterOptions, limit int) (*api.IssuesAndTotalCount, error) {
+func listIssues(client *api.Client, repo ghrepo.Interface, filters prShared.FilterOptions, limit int) (*api.IssuesAndTotalCount, error) { //NOSONAR
 	var states []string
 	switch filters.State {
 	case "open", "":

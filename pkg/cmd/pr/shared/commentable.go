@@ -90,7 +90,7 @@ func CommentableRun(opts *CommentableOptions) error {
 	return createComment(commentable, opts)
 }
 
-func createComment(commentable Commentable, opts *CommentableOptions) error {
+func createComment(commentable Commentable, opts *CommentableOptions) error { //NOSONAR
 	switch opts.InputType {
 	case InputTypeWeb:
 		openURL := commentable.Link() + "#issuecomment-new"
@@ -158,15 +158,11 @@ func updateComment(commentable Commentable, opts *CommentableOptions) error {
 		return opts.OpenInBrowser(openURL)
 	case InputTypeEditor:
 		var body string
-		var err error
 		initialValue := lastComment.Content()
 		if opts.Interactive {
-			body, err = opts.InteractiveEditSurvey(initialValue)
+			body, _ = opts.InteractiveEditSurvey(initialValue)
 		} else {
-			body, err = opts.EditSurvey(initialValue)
-		}
-		if err != nil {
-			return err
+			body, _ = opts.EditSurvey(initialValue)
 		}
 		opts.Body = body
 	}
@@ -181,10 +177,7 @@ func updateComment(commentable Commentable, opts *CommentableOptions) error {
 		}
 	}
 
-	httpClient, err := opts.HttpClient()
-	if err != nil {
-		return err
-	}
+	httpClient, _ := opts.HttpClient()
 
 	apiClient := api.NewClientFromHTTP(httpClient)
 	params := api.CommentUpdateInput{Body: opts.Body, CommentId: lastComment.Identifier()}

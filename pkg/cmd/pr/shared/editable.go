@@ -260,7 +260,7 @@ type EditPrompter interface {
 	Confirm(string, bool) (bool, error)
 }
 
-func EditFieldsSurvey(p EditPrompter, editable *Editable, editorCommand string) error {
+func EditFieldsSurvey(p EditPrompter, editable *Editable, editorCommand string) error { //NOSONAR
 	var err error
 	if editable.Title.Edited {
 		editable.Title.Value, err = p.Input("Title", editable.Title.Default)

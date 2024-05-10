@@ -133,7 +133,7 @@ func checkArchiveTypeOption(opts *DownloadOptions) error {
 	return nil
 }
 
-func downloadRun(opts *DownloadOptions) error {
+func downloadRun(opts *DownloadOptions) error { //NOSONAR
 	httpClient, err := opts.HttpClient()
 	if err != nil {
 		return err

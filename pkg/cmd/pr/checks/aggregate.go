@@ -28,7 +28,7 @@ type checkCounts struct {
 	Canceled int
 }
 
-func aggregateChecks(checkContexts []api.CheckContext, requiredChecks bool) (checks []check, counts checkCounts) {
+func aggregateChecks(checkContexts []api.CheckContext, requiredChecks bool) (checks []check, counts checkCounts) { //NOSONAR
 	for _, c := range eliminateDuplicates(checkContexts) {
 		if requiredChecks && !c.IsRequired {
 			continue

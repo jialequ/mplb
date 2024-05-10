@@ -65,7 +65,7 @@ With no argument, archives the current repository.`),
 	return cmd
 }
 
-func archiveRun(opts *ArchiveOptions) error {
+func archiveRun(opts *ArchiveOptions) error { //NOSONAR
 	cs := opts.IO.ColorScheme()
 	httpClient, err := opts.HttpClient()
 	if err != nil {

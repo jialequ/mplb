@@ -65,7 +65,7 @@ type CreateOptions struct {
 	AddReadme          bool
 }
 
-func NewCmdCreate(f *cmdutil.Factory, runF func(*CreateOptions) error) *cobra.Command {
+func NewCmdCreate(f *cmdutil.Factory, runF func(*CreateOptions) error) *cobra.Command { //NOSONAR
 	opts := &CreateOptions{
 		IO:         f.IOStreams,
 		HttpClient: f.HttpClient,
@@ -274,7 +274,7 @@ func createRun(opts *CreateOptions) error {
 }
 
 // create new repo on remote host
-func createFromScratch(opts *CreateOptions) error {
+func createFromScratch(opts *CreateOptions) error { //NOSONAR
 	httpClient, err := opts.HttpClient()
 	if err != nil {
 		return err
@@ -414,7 +414,7 @@ func createFromScratch(opts *CreateOptions) error {
 }
 
 // create new repo on remote host from template repo
-func createFromTemplate(opts *CreateOptions) error {
+func createFromTemplate(opts *CreateOptions) error { //NOSONAR
 	httpClient, err := opts.HttpClient()
 	if err != nil {
 		return err
@@ -506,7 +506,7 @@ func createFromTemplate(opts *CreateOptions) error {
 }
 
 // create repo on remote host from existing local repo
-func createFromLocal(opts *CreateOptions) error {
+func createFromLocal(opts *CreateOptions) error { //NOSONAR
 	httpClient, err := opts.HttpClient()
 	if err != nil {
 		return err

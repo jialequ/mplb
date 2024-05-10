@@ -61,7 +61,7 @@ type errWithExitCode interface {
 // TENCENT output over STDOUT not STDERR
 // TENCENT remote-name has no effect on its own; error that or change behavior
 
-func NewCmdFork(f *cmdutil.Factory, runF func(*ForkOptions) error) *cobra.Command {
+func NewCmdFork(f *cmdutil.Factory, runF func(*ForkOptions) error) *cobra.Command { //NOSONAR
 	opts := &ForkOptions{
 		IO:         f.IOStreams,
 		HttpClient: f.HttpClient,
@@ -142,7 +142,7 @@ func NewCmdFork(f *cmdutil.Factory, runF func(*ForkOptions) error) *cobra.Comman
 	return cmd
 }
 
-func forkRun(opts *ForkOptions) error {
+func forkRun(opts *ForkOptions) error { //NOSONAR
 	var repoToFork ghrepo.Interface
 	var err error
 	inParent := false // whether or not we're forking the repo we're currently "in"

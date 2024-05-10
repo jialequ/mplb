@@ -174,7 +174,7 @@ func printRawPrPreview(io *iostreams.IOStreams, pr *api.PullRequest) error {
 	return nil
 }
 
-func printHumanPrPreview(opts *ViewOptions, baseRepo ghrepo.Interface, pr *api.PullRequest) error {
+func printHumanPrPreview(opts *ViewOptions, baseRepo ghrepo.Interface, pr *api.PullRequest) error { //NOSONAR
 	out := opts.IO.Out
 	cs := opts.IO.ColorScheme()
 

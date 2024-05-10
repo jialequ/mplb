@@ -690,7 +690,7 @@ type projectAttribute interface {
 // nodes is the list of attributes that have already been fetched.
 //
 // the return value is a slice of the newly fetched attributes appended to nodes.
-func paginateAttributes[N projectAttribute](c *Client, p pager[N], variables map[string]any, queryName string, firstKey string, afterKey string, limit int, nodes []N) ([]N, error) {
+func paginateAttributes[N projectAttribute](c *Client, p pager[N], variables map[string]any, queryName string, firstKey string, afterKey string, limit int, nodes []N) ([]N, error) { //NOSONAR
 	hasNextPage := p.HasNextPage()
 	cursor := p.EndCursor()
 	for {
@@ -1290,7 +1290,7 @@ func (c *Client) NewProject(canPrompt bool, o *Owner, number int32, fields bool)
 
 // Projects returns all the projects for an Owner. If the OwnerType is VIEWER, no login is required.
 // If limit is 0, the default limit is used.
-func (c *Client) Projects(login string, t OwnerType, limit int, fields bool) (Projects, error) {
+func (c *Client) Projects(login string, t OwnerType, limit int, fields bool) (Projects, error) { //NOSONAR
 	projects := Projects{
 		Nodes: make([]Project, 0),
 	}

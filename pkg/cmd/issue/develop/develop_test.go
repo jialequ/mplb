@@ -159,7 +159,7 @@ func TestNewCmdDevelop(t *testing.T) {
 	}
 }
 
-func TestDevelopRun(t *testing.T) {
+func TestDevelopRun(t *testing.T) { //NOSONAR
 	featureEnabledPayload := `{"data":{"LinkedBranch":{"fields":[{"name":"id"},{"name":"ref"}]}}}`
 	featureDisabledPayload := `{"data":{"LinkedBranch":null}}`
 

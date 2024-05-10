@@ -62,7 +62,7 @@ type CreateOptions struct {
 	NotesFromTag       bool
 }
 
-func NewCmdCreate(f *cmdutil.Factory, runF func(*CreateOptions) error) *cobra.Command {
+func NewCmdCreate(f *cmdutil.Factory, runF func(*CreateOptions) error) *cobra.Command { //NOSONAR
 	opts := &CreateOptions{
 		IO:         f.IOStreams,
 		HttpClient: f.HttpClient,
@@ -194,7 +194,7 @@ func NewCmdCreate(f *cmdutil.Factory, runF func(*CreateOptions) error) *cobra.Co
 	return cmd
 }
 
-func createRun(opts *CreateOptions) error {
+func createRun(opts *CreateOptions) error { //NOSONAR
 	httpClient, err := opts.HttpClient()
 	if err != nil {
 		return err

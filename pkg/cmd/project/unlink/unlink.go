@@ -37,7 +37,7 @@ type unlinkConfig struct {
 	io         *iostreams.IOStreams
 }
 
-func NewCmdUnlink(f *cmdutil.Factory, runF func(config unlinkConfig) error) *cobra.Command {
+func NewCmdUnlink(f *cmdutil.Factory, runF func(config unlinkConfig) error) *cobra.Command { //NOSONAR
 	opts := unlinkOpts{}
 	linkCmd := &cobra.Command{
 		Short: "Unlink a project from a repository or a team",
@@ -109,7 +109,7 @@ func NewCmdUnlink(f *cmdutil.Factory, runF func(config unlinkConfig) error) *cob
 	return linkCmd
 }
 
-func validateRepoOrTeamFlag(opts *unlinkOpts) error {
+func validateRepoOrTeamFlag(opts *unlinkOpts) error { //NOSONAR
 
 	unlinkedTarget := ""
 	if opts.repo != "" {

@@ -64,7 +64,7 @@ func NewCmdDelete(f *cmdutil.Factory, runF func(*DeleteOptions) error) *cobra.Co
 	return cmd
 }
 
-func deleteRun(opts *DeleteOptions) error {
+func deleteRun(opts *DeleteOptions) error { //NOSONAR
 	httpClient, err := opts.HttpClient()
 	if err != nil {
 		return err

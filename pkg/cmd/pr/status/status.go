@@ -71,7 +71,7 @@ func NewCmdStatus(f *cmdutil.Factory, runF func(*StatusOptions) error) *cobra.Co
 	return cmd
 }
 
-func statusRun(opts *StatusOptions) error {
+func statusRun(opts *StatusOptions) error { //NOSONAR
 	httpClient, err := opts.HttpClient()
 	if err != nil {
 		return err
@@ -231,7 +231,7 @@ func totalApprovals(pr *api.PullRequest) int {
 	return approvals
 }
 
-func printPrs(io *iostreams.IOStreams, totalCount int, prs ...api.PullRequest) {
+func printPrs(io *iostreams.IOStreams, totalCount int, prs ...api.PullRequest) { //NOSONAR
 	w := io.Out
 	cs := io.ColorScheme()
 

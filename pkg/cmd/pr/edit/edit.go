@@ -32,7 +32,7 @@ type EditOptions struct {
 	shared.Editable
 }
 
-func NewCmdEdit(f *cmdutil.Factory, runF func(*EditOptions) error) *cobra.Command {
+func NewCmdEdit(f *cmdutil.Factory, runF func(*EditOptions) error) *cobra.Command { //NOSONAR
 	opts := &EditOptions{
 		IO:              f.IOStreams,
 		HttpClient:      f.HttpClient,

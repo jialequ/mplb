@@ -82,7 +82,7 @@ type EditRepositoryInput struct {
 	Visibility          *string `json:"visibility,omitempty"`
 }
 
-func NewCmdEdit(f *cmdutil.Factory, runF func(options *EditOptions) error) *cobra.Command {
+func NewCmdEdit(f *cmdutil.Factory, runF func(options *EditOptions) error) *cobra.Command { //NOSONAR
 	opts := &EditOptions{
 		IO:       f.IOStreams,
 		Prompter: f.Prompter,
@@ -171,7 +171,7 @@ func NewCmdEdit(f *cmdutil.Factory, runF func(options *EditOptions) error) *cobr
 	return cmd
 }
 
-func editRun(ctx context.Context, opts *EditOptions) error {
+func editRun(ctx context.Context, opts *EditOptions) error { //NOSONAR
 	repo := opts.Repository
 
 	if opts.InteractiveMode {
@@ -313,7 +313,7 @@ func interactiveChoice(p iprompter, r *api.Repository) ([]string, error) {
 	return answers, err
 }
 
-func interactiveRepoEdit(opts *EditOptions, r *api.Repository) error {
+func interactiveRepoEdit(opts *EditOptions, r *api.Repository) error { //NOSONAR
 	for _, v := range r.RepositoryTopics.Nodes {
 		opts.topicsCache = append(opts.topicsCache, v.Topic.Name)
 	}

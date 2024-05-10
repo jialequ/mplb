@@ -196,7 +196,7 @@ var (
 	colorReset    = []byte("\x1b[m")
 )
 
-func colorDiffLines(w io.Writer, r io.Reader) error {
+func colorDiffLines(w io.Writer, r io.Reader) error { //NOSONAR
 	diffLines := bufio.NewReaderSize(r, lineBufferSize)
 	wasPrefix := false
 	needsReset := false
@@ -295,7 +295,7 @@ func sanitizedReader(r io.Reader) io.Reader {
 type sanitizer struct{ transform.NopResetter }
 
 // Transform implements transform.Transformer.
-func (t sanitizer) Transform(dst, src []byte, atEOF bool) (nDst, nSrc int, err error) {
+func (t sanitizer) Transform(dst, src []byte, atEOF bool) (nDst, nSrc int, err error) { //NOSONAR
 	for r, size := rune(0), 0; nSrc < len(src); {
 		if r = rune(src[nSrc]); r < utf8.RuneSelf {
 			size = 1

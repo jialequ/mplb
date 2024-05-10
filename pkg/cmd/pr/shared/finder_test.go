@@ -13,7 +13,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestFind(t *testing.T) {
+func TestFind(t *testing.T) { //NOSONAR
 	type args struct {
 		baseRepoFn   func() (ghrepo.Interface, error)
 		branchFn     func() (string, error)
