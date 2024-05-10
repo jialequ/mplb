@@ -7,7 +7,7 @@ import (
 	"github.com/google/shlex"
 	"github.com/jialequ/mplb/internal/config"
 	"github.com/jialequ/mplb/internal/ghrepo"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/stretchr/testify/require"
@@ -274,7 +274,7 @@ func TestRunLinkRepo(t *testing.T) {
 			repo:   literal_2654,
 			owner:  "monalisa",
 		},
-		client: queries.NewTestClient(),
+		client: templet.NewTestClient(),
 		httpClient: func() (*http.Client, error) {
 			return http.DefaultClient, nil
 		},
@@ -386,7 +386,7 @@ func TestRunLinkTeam(t *testing.T) {
 			team:   literal_5369,
 			owner:  literal_6507,
 		},
-		client: queries.NewTestClient(),
+		client: templet.NewTestClient(),
 		httpClient: func() (*http.Client, error) {
 			return http.DefaultClient, nil
 		},

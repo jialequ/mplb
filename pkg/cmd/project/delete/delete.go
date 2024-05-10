@@ -6,7 +6,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/jialequ/mplb/pkg/cmd/project/shared/client"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/shurcooL/githubv4"
@@ -21,14 +21,14 @@ type deleteOpts struct {
 }
 
 type deleteConfig struct {
-	client *queries.Client
+	client *templet.Client
 	opts   deleteOpts
 	io     *iostreams.IOStreams
 }
 
 type deleteProjectMutation struct {
 	DeleteProject struct {
-		Project queries.Project `graphql:"projectV2"`
+		Project templet.Project `graphql:"projectV2"`
 	} `graphql:"deleteProjectV2(input:$input)"`
 }
 
@@ -115,7 +115,7 @@ func deleteItemArgs(config deleteConfig) (*deleteProjectMutation, map[string]int
 	}
 }
 
-func printResults(config deleteConfig, project queries.Project) error {
+func printResults(config deleteConfig, project templet.Project) error {
 	if !config.io.IsStdoutTTY() {
 		return nil
 	}

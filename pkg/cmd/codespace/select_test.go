@@ -5,6 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"sort"
+	"strings"
 	"testing"
 
 	"github.com/jialequ/mplb/internal/codespaces/api"
@@ -12,6 +14,17 @@ import (
 )
 
 const CODESPACE_NAME = "monalisa-cli-cli-abcdef"
+
+func sortLines(s string) string {
+	trailing := ""
+	if strings.HasSuffix(s, "\n") {
+		s = strings.TrimSuffix(s, "\n")
+		trailing = "\n"
+	}
+	lines := strings.Split(s, "\n")
+	sort.Strings(lines)
+	return strings.Join(lines, "\n") + trailing
+}
 
 func TestAppSelect(t *testing.T) { //NOSONAR
 	tests := []struct {

@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/google/shlex"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/stretchr/testify/assert"
@@ -145,7 +145,7 @@ func TestRunViewUser(t *testing.T) {
 			}
 		`)
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, _, _ := iostreams.Test()
 	config := viewConfig{
@@ -209,7 +209,7 @@ func TestRunViewViewer(t *testing.T) {
 			}
 		`)
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, _, _ := iostreams.Test()
 	config := viewConfig{
@@ -281,7 +281,7 @@ func TestRunViewOrg(t *testing.T) {
 			}
 		`)
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, _, _ := iostreams.Test()
 	config := viewConfig{
@@ -353,7 +353,7 @@ func TestRunViewWebUser(t *testing.T) {
 		}
 	`)
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 	buf := bytes.Buffer{}
 	ios, _, _, _ := iostreams.Test()
 	config := viewConfig{
@@ -431,7 +431,7 @@ func TestRunViewWebOrg(t *testing.T) {
 		}
 	`)
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 	buf := bytes.Buffer{}
 	ios, _, _, _ := iostreams.Test()
 	config := viewConfig{
@@ -506,7 +506,7 @@ func TestRunViewWebMe(t *testing.T) {
 		}
 	`)
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 	buf := bytes.Buffer{}
 	ios, _, _, _ := iostreams.Test()
 	config := viewConfig{

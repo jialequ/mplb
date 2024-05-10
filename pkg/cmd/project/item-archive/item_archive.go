@@ -6,7 +6,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/jialequ/mplb/pkg/cmd/project/shared/client"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/shurcooL/githubv4"
@@ -23,20 +23,20 @@ type archiveItemOpts struct {
 }
 
 type archiveItemConfig struct {
-	client *queries.Client
+	client *templet.Client
 	opts   archiveItemOpts
 	io     *iostreams.IOStreams
 }
 
 type archiveProjectItemMutation struct {
 	ArchiveProjectItem struct {
-		ProjectV2Item queries.ProjectItem `graphql:"item"`
+		ProjectV2Item templet.ProjectItem `graphql:"item"`
 	} `graphql:"archiveProjectV2Item(input:$input)"`
 }
 
 type unarchiveProjectItemMutation struct {
 	UnarchiveProjectItem struct {
-		ProjectV2Item queries.ProjectItem `graphql:"item"`
+		ProjectV2Item templet.ProjectItem `graphql:"item"`
 	} `graphql:"unarchiveProjectV2Item(input:$input)"`
 }
 
@@ -145,7 +145,7 @@ func unarchiveItemArgs(config archiveItemConfig, itemID string) (*unarchiveProje
 	}
 }
 
-func printResults(config archiveItemConfig, item queries.ProjectItem) error {
+func printResults(config archiveItemConfig, item templet.ProjectItem) error {
 	if !config.io.IsStdoutTTY() {
 		return nil
 	}

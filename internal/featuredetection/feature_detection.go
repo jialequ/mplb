@@ -114,7 +114,7 @@ func (d *detector) PullRequestFeatures() (PullRequestFeatures, error) {
 		} `graphql:"StatusCheckRollupContextConnection: __type(name: \"StatusCheckRollupContextConnection\")"`
 	}
 
-	// Break feature detection down into two separate queries because the platform
+	// Break feature detection down into two separate templet because the platform
 	// only supports two `__type` expressions in one query.
 	var pullRequestFeatureDetection2 struct {
 		WorkflowRun struct {

@@ -399,9 +399,9 @@ func RepoNetwork(client *Client, repos []ghrepo.Interface) (RepoNetworkResult, e
 		hostname = repos[0].RepoHost()
 	}
 
-	queries := make([]string, 0, len(repos))
+	templet := make([]string, 0, len(repos))
 	for i, repo := range repos {
-		queries = append(queries, fmt.Sprintf(`
+		templet = append(templet, fmt.Sprintf(`
 		repo_%03d: repository(owner: %q, name: %q) {
 			...repo
 			parent {
@@ -432,7 +432,7 @@ func RepoNetwork(client *Client, repos []ghrepo.Interface) (RepoNetworkResult, e
 		viewer { login }
 		%s
 	}
-	`, strings.Join(queries, "")), nil, &graphqlResult)
+	`, strings.Join(templet, "")), nil, &graphqlResult)
 	var graphqlError GraphQLError
 	if errors.As(err, &graphqlError) {
 		// If the only errors are that certain repositories are not found,
@@ -1298,7 +1298,7 @@ func relevantProjects(client *Client, repo ghrepo.Interface) ([]RepoProject, []P
 	projects = append(projects, repoProjects...)
 	projects = append(projects, orgProjects...)
 
-	// ProjectV2 might appear across multiple queries so use a map to keep them deduplicated.
+	// ProjectV2 might appear across multiple templet so use a map to keep them deduplicated.
 	m := make(map[string]ProjectV2, len(userProjectsV2)+len(repoProjectsV2)+len(orgProjectsV2))
 	for _, p := range userProjectsV2 {
 		m[p.ID] = p
@@ -1342,16 +1342,16 @@ func CreateRepoTransformToV4(apiClient *Client, hostname string, method string, 
 // This is similar logic to RepoNetwork, but only fetches databaseId and does not
 // discover parent repositories.
 func GetRepoIDs(client *Client, host string, repositories []ghrepo.Interface) ([]int64, error) {
-	queries := make([]string, 0, len(repositories))
+	templet := make([]string, 0, len(repositories))
 	for i, repo := range repositories {
-		queries = append(queries, fmt.Sprintf(`
+		templet = append(templet, fmt.Sprintf(`
 			repo_%03d: repository(owner: %q, name: %q) {
 				databaseId
 			}
 		`, i, repo.RepoOwner(), repo.RepoName()))
 	}
 
-	query := fmt.Sprintf(`query MapRepositoryNames { %s }`, strings.Join(queries, ""))
+	query := fmt.Sprintf(`query MapRepositoryNames { %s }`, strings.Join(templet, ""))
 
 	graphqlResult := make(map[string]*struct {
 		DatabaseID int64 `json:"databaseId"`

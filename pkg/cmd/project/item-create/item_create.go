@@ -6,7 +6,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/jialequ/mplb/pkg/cmd/project/shared/client"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/shurcooL/githubv4"
@@ -23,14 +23,14 @@ type createItemOpts struct {
 }
 
 type createItemConfig struct {
-	client *queries.Client
+	client *templet.Client
 	opts   createItemOpts
 	io     *iostreams.IOStreams
 }
 
 type createProjectDraftItemMutation struct {
 	CreateProjectDraftItem struct {
-		ProjectV2Item queries.ProjectItem `graphql:"projectItem"`
+		ProjectV2Item templet.ProjectItem `graphql:"projectItem"`
 	} `graphql:"addProjectV2DraftIssue(input:$input)"`
 }
 
@@ -119,7 +119,7 @@ func createDraftIssueArgs(config createItemConfig) (*createProjectDraftItemMutat
 	}
 }
 
-func printResults(config createItemConfig, item queries.ProjectItem) error {
+func printResults(config createItemConfig, item templet.ProjectItem) error {
 	if !config.io.IsStdoutTTY() {
 		return nil
 	}

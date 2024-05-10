@@ -31,7 +31,7 @@ func NewCmdPrs(f *cmdutil.Factory, runF func(*shared.IssuesOptions) error) *cobr
 		Long: heredoc.Doc(`
 			Search for pull requests on GitHub.
 
-			The command supports constructing queries using the GitHub search syntax,
+			The command supports constructing templet using the GitHub search syntax,
 			using the parameter and qualifier flags, or a combination of the two.
 
 			GitHub search syntax is documented at:

@@ -6,7 +6,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/jialequ/mplb/pkg/cmd/project/shared/client"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/shurcooL/githubv4"
@@ -22,19 +22,19 @@ type markTemplateOpts struct {
 }
 
 type markTemplateConfig struct {
-	client *queries.Client
+	client *templet.Client
 	opts   markTemplateOpts
 	io     *iostreams.IOStreams
 }
 
 type markProjectTemplateMutation struct {
 	TemplateProject struct {
-		Project queries.Project `graphql:"projectV2"`
+		Project templet.Project `graphql:"projectV2"`
 	} `graphql:"markProjectV2AsTemplate(input:$input)"`
 }
 type unmarkProjectTemplateMutation struct {
 	TemplateProject struct {
-		Project queries.Project `graphql:"projectV2"`
+		Project templet.Project `graphql:"projectV2"`
 	} `graphql:"unmarkProjectV2AsTemplate(input:$input)"`
 }
 
@@ -150,7 +150,7 @@ func unmarkTemplateArgs(config markTemplateConfig) (*unmarkProjectTemplateMutati
 	}
 }
 
-func printResults(config markTemplateConfig, project queries.Project) error {
+func printResults(config markTemplateConfig, project templet.Project) error {
 	if !config.io.IsStdoutTTY() {
 		return nil
 	}

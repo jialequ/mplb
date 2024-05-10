@@ -7,7 +7,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/jialequ/mplb/pkg/cmd/project/shared/client"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/shurcooL/githubv4"
@@ -34,25 +34,25 @@ type editItemOpts struct {
 
 type editItemConfig struct {
 	io     *iostreams.IOStreams
-	client *queries.Client
+	client *templet.Client
 	opts   editItemOpts
 }
 
 type EditProjectDraftIssue struct {
 	UpdateProjectV2DraftIssue struct {
-		DraftIssue queries.DraftIssue `graphql:"draftIssue"`
+		DraftIssue templet.DraftIssue `graphql:"draftIssue"`
 	} `graphql:"updateProjectV2DraftIssue(input:$input)"`
 }
 
 type UpdateProjectV2FieldValue struct {
 	Update struct {
-		Item queries.ProjectItem `graphql:"projectV2Item"`
+		Item templet.ProjectItem `graphql:"projectV2Item"`
 	} `graphql:"updateProjectV2ItemFieldValue(input:$input)"`
 }
 
 type ClearProjectV2FieldValue struct {
 	Clear struct {
-		Item queries.ProjectItem `graphql:"projectV2Item"`
+		Item templet.ProjectItem `graphql:"projectV2Item"`
 	} `graphql:"clearProjectV2ItemFieldValue(input:$input)"`
 }
 
@@ -210,7 +210,7 @@ func buildClearItem(config editItemConfig) (*ClearProjectV2FieldValue, map[strin
 	}
 }
 
-func printDraftIssueResults(config editItemConfig, item queries.DraftIssue) error {
+func printDraftIssueResults(config editItemConfig, item templet.DraftIssue) error {
 	if !config.io.IsStdoutTTY() {
 		return nil
 	}
@@ -218,7 +218,7 @@ func printDraftIssueResults(config editItemConfig, item queries.DraftIssue) erro
 	return err
 }
 
-func printItemResults(config editItemConfig, item *queries.ProjectItem) error {
+func printItemResults(config editItemConfig, item *templet.ProjectItem) error {
 	if !config.io.IsStdoutTTY() {
 		return nil
 	}

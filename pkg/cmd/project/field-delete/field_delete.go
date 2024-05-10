@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/jialequ/mplb/pkg/cmd/project/shared/client"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/shurcooL/githubv4"
@@ -17,14 +17,14 @@ type deleteFieldOpts struct {
 }
 
 type deleteFieldConfig struct {
-	client *queries.Client
+	client *templet.Client
 	opts   deleteFieldOpts
 	io     *iostreams.IOStreams
 }
 
 type deleteProjectV2FieldMutation struct {
 	DeleteProjectV2Field struct {
-		Field queries.ProjectField `graphql:"projectV2Field"`
+		Field templet.ProjectField `graphql:"projectV2Field"`
 	} `graphql:"deleteProjectV2Field(input:$input)"`
 }
 
@@ -84,7 +84,7 @@ func deleteFieldArgs(config deleteFieldConfig) (*deleteProjectV2FieldMutation, m
 	}
 }
 
-func printResults(config deleteFieldConfig, field queries.ProjectField) error {
+func printResults(config deleteFieldConfig, field templet.ProjectField) error {
 	if !config.io.IsStdoutTTY() {
 		return nil
 	}

@@ -1,4 +1,4 @@
-package queries
+package templet
 
 import (
 	"errors"
@@ -124,21 +124,10 @@ type Project struct {
 	ShortDescription string
 	Public           bool
 	Closed           bool
-	// The Template field is commented out due to https://github.com/cli/cli/issues/8103.
-	// We released gh v2.34.0 without realizing the Template field does not exist
-	// on GHES 3.8 and older. This broke all project commands for users targeting GHES 3.8
-	// and older. In order to fix this we will no longer query the Template field until
-	// GHES 3.8 gets deprecated on 2024-03-07. This solution was simpler and quicker
-	// than adding a feature detection measure to every place this query is used.
-	// It does have the negative consequence that we have had to remove the
-	// Template field when outputting projects to JSON using the --format flag supported
-	// by a number of project commands. See `pkg/cmd/project/shared/format/json.go` for
-	// implementation.
-	// Template         bool
-	Title  string
-	ID     string
-	Readme string
-	Items  struct {
+	Title            string
+	ID               string
+	Readme           string
+	Items            struct {
 		PageInfo   PageInfo
 		TotalCount int
 		Nodes      []ProjectItem
@@ -541,14 +530,14 @@ func (c *Client) ProjectItems(o *Owner, number int32, limit int) (*Project, erro
 	switch o.Type {
 	case UserOwner:
 		variables["login"] = githubv4.String(o.Login)
-		query = &userOwnerWithItems{} // must be a pointer to work with graphql queries
+		query = &userOwnerWithItems{} // must be a pointer to work with graphql templet
 		queryName = "UserProjectWithItems"
 	case OrgOwner:
 		variables["login"] = githubv4.String(o.Login)
-		query = &orgOwnerWithItems{} // must be a pointer to work with graphql queries
+		query = &orgOwnerWithItems{} // must be a pointer to work with graphql templet
 		queryName = "OrgProjectWithItems"
 	case ViewerOwner:
-		query = &viewerOwnerWithItems{} // must be a pointer to work with graphql queries
+		query = &viewerOwnerWithItems{} // must be a pointer to work with graphql templet
 		queryName = "ViewerProjectWithItems"
 	}
 	err := c.doQuery(queryName, query, variables)
@@ -852,14 +841,14 @@ func (c *Client) ProjectFields(o *Owner, number int32, limit int) (*Project, err
 	switch o.Type {
 	case UserOwner:
 		variables["login"] = githubv4.String(o.Login)
-		query = &userOwnerWithFields{} // must be a pointer to work with graphql queries
+		query = &userOwnerWithFields{} // must be a pointer to work with graphql templet
 		queryName = "UserProjectWithFields"
 	case OrgOwner:
 		variables["login"] = githubv4.String(o.Login)
-		query = &orgOwnerWithFields{} // must be a pointer to work with graphql queries
+		query = &orgOwnerWithFields{} // must be a pointer to work with graphql templet
 		queryName = "OrgProjectWithFields"
 	case ViewerOwner:
-		query = &viewerOwnerWithFields{} // must be a pointer to work with graphql queries
+		query = &viewerOwnerWithFields{} // must be a pointer to work with graphql templet
 		queryName = "ViewerProjectWithFields"
 	}
 	err := c.doQuery(queryName, query, variables)
@@ -983,7 +972,7 @@ func (c *Client) ViewerLoginName() (string, error) {
 	return query.Viewer.Login, nil
 }
 
-// OwnerIDAndType returns the ID and OwnerType. The special login "@me" or an empty string queries the current user.
+// OwnerIDAndType returns the ID and OwnerType. The special login "@me" or an empty string templet the current user.
 func (c *Client) OwnerIDAndType(login string) (string, OwnerType, error) {
 	if login == "@me" || login == "" {
 		var query viewerLogin
@@ -1010,7 +999,7 @@ func (c *Client) OwnerIDAndType(login string) (string, OwnerType, error) {
 
 	err := c.doQuery("UserOrgOwner", &query, variables)
 	if err != nil {
-		// Due to the way the queries are structured, we don't know if a login belongs to a user
+		// Due to the way the templet are structured, we don't know if a login belongs to a user
 		// or to an org, even though they are unique. To deal with this, we try both - if neither
 		// is found, we return the error.
 		var graphErr api.GraphQLError
@@ -1063,7 +1052,7 @@ func (c *Client) IssueOrPullRequestID(rawURL string) (string, error) {
 	return "", errors.New("resource not found, please check the URL")
 }
 
-// userProjects queries the $first projects of a user.
+// userProjects templet the $first projects of a user.
 type userProjects struct {
 	Owner struct {
 		Projects struct {
@@ -1075,7 +1064,7 @@ type userProjects struct {
 	} `graphql:"user(login: $login)"`
 }
 
-// orgProjects queries the $first projects of an organization.
+// orgProjects templet the $first projects of an organization.
 type orgProjects struct {
 	Owner struct {
 		Projects struct {
@@ -1087,7 +1076,7 @@ type orgProjects struct {
 	} `graphql:"organization(login: $login)"`
 }
 
-// viewerProjects queries the $first projects of the viewer.
+// viewerProjects templet the $first projects of the viewer.
 type viewerProjects struct {
 	Owner struct {
 		Projects struct {

@@ -5,7 +5,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/jialequ/mplb/pkg/cmd/project/shared/client"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/shurcooL/githubv4"
@@ -20,14 +20,14 @@ type createOpts struct {
 }
 
 type createConfig struct {
-	client *queries.Client
+	client *templet.Client
 	opts   createOpts
 	io     *iostreams.IOStreams
 }
 
 type createProjectMutation struct {
 	CreateProjectV2 struct {
-		ProjectV2 queries.Project `graphql:"projectV2"`
+		ProjectV2 templet.Project `graphql:"projectV2"`
 	} `graphql:"createProjectV2(input:$input)"`
 }
 
@@ -104,7 +104,7 @@ func createArgs(config createConfig) (*createProjectMutation, map[string]interfa
 	}
 }
 
-func printResults(config createConfig, project queries.Project) error {
+func printResults(config createConfig, project templet.Project) error {
 	if !config.io.IsStdoutTTY() {
 		return nil
 	}

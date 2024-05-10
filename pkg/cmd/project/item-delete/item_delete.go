@@ -6,7 +6,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/jialequ/mplb/pkg/cmd/project/shared/client"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/shurcooL/githubv4"
@@ -22,7 +22,7 @@ type deleteItemOpts struct {
 }
 
 type deleteItemConfig struct {
-	client *queries.Client
+	client *templet.Client
 	opts   deleteItemOpts
 	io     *iostreams.IOStreams
 }

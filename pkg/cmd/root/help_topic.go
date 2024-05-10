@@ -121,7 +121,7 @@ var HelpTopics = []helpTopic{
 			Note that you must pass the %[1]s--json%[1]s flag and field names to use the %[1]s--jq%[1]s or %[1]s--template%[1]s flags.
 
 			The %[1]s--jq%[1]s flag requires a string argument in jq query syntax, and will only print
-			those JSON values which match the query. jq queries can be used to select elements from an
+			those JSON values which match the query. jq templet can be used to select elements from an
 			array, fields from an object, create a new array, and more. The %[1]sjq%[1]s utility does not need
 			to be installed on the system to use this formatting directive. When connected to a terminal,
 			the output is automatically pretty-printed. To learn about jq query syntax, see:

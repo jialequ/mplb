@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/google/shlex"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/stretchr/testify/assert"
@@ -95,7 +95,7 @@ func TestRunDeleteField(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	ios.SetStdoutTTY(true)
@@ -136,7 +136,7 @@ func TestRunDeleteFieldJSON(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	config := deleteFieldConfig{

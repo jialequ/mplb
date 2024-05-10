@@ -1,17 +1,17 @@
 package format
 
 import (
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 )
 
-func ProjectState(project queries.Project) string {
+func ProjectState(project templet.Project) string {
 	if project.Closed {
 		return "closed"
 	}
 	return "open"
 }
 
-func ColorForProjectState(project queries.Project) string {
+func ColorForProjectState(project templet.Project) string {
 	if project.Closed {
 		return "gray"
 	}

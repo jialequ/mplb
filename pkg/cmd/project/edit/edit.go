@@ -6,7 +6,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/jialequ/mplb/pkg/cmd/project/shared/client"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/shurcooL/githubv4"
@@ -25,14 +25,14 @@ type editOpts struct {
 }
 
 type editConfig struct {
-	client *queries.Client
+	client *templet.Client
 	opts   editOpts
 	io     *iostreams.IOStreams
 }
 
 type updateProjectMutation struct {
 	UpdateProjectV2 struct {
-		ProjectV2 queries.Project `graphql:"projectV2"`
+		ProjectV2 templet.Project `graphql:"projectV2"`
 	} `graphql:"updateProjectV2(input:$input)"`
 }
 
@@ -144,7 +144,7 @@ func editArgs(config editConfig) (*updateProjectMutation, map[string]interface{}
 	}
 }
 
-func printResults(config editConfig, project queries.Project) error {
+func printResults(config editConfig, project templet.Project) error {
 	if !config.io.IsStdoutTTY() {
 		return nil
 	}

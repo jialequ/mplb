@@ -40,7 +40,7 @@ func NewCmdCommits(f *cmdutil.Factory, runF func(*CommitsOptions) error) *cobra.
 		Long: heredoc.Doc(`
 			Search for commits on GitHub.
 
-			The command supports constructing queries using the GitHub search syntax,
+			The command supports constructing templet using the GitHub search syntax,
 			using the parameter and qualifier flags, or a combination of the two.
 
 			GitHub search syntax is documented at:

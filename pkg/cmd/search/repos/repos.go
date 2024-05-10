@@ -41,7 +41,7 @@ func NewCmdRepos(f *cmdutil.Factory, runF func(*ReposOptions) error) *cobra.Comm
 		Long: heredoc.Doc(`
 			Search for repositories on GitHub.
 
-			The command supports constructing queries using the GitHub search syntax,
+			The command supports constructing templet using the GitHub search syntax,
 			using the parameter and qualifier flags, or a combination of the two.
 
 			GitHub search syntax is documented at:

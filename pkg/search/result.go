@@ -254,7 +254,7 @@ type Label struct {
 }
 
 func (u User) IsBot() bool {
-	// copied from api/queries_issue.go
+	// copied from api/templet_issue.go
 	// would ideally be shared, but it would require coordinating a "user"
 	// abstraction in a bunch of places.
 	return u.ID == ""

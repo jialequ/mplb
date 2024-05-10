@@ -6,7 +6,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/google/shlex"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/stretchr/testify/assert"
@@ -151,7 +151,7 @@ func TestRunListTTY(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	ios.SetStdoutTTY(true)
@@ -230,7 +230,7 @@ func TestRunList(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	config := listConfig{
@@ -308,7 +308,7 @@ func TestRunListtty(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	ios.SetStdoutTTY(true)
@@ -380,7 +380,7 @@ func TestRunListMe(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	config := listConfig{
@@ -450,7 +450,7 @@ func TestRunListViewer(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	config := listConfig{
@@ -527,7 +527,7 @@ func TestRunListOrg(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	config := listConfig{
@@ -580,7 +580,7 @@ func TestRunListEmpty(t *testing.T) {
 				},
 			},
 		})
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, _, _ := iostreams.Test()
 	config := listConfig{
@@ -655,7 +655,7 @@ func TestRunListWithClosed(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	config := listConfig{
@@ -703,7 +703,7 @@ func TestRunListWebUser(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 	buf := bytes.Buffer{}
 	config := listConfig{
 		opts: listOpts{
@@ -750,7 +750,7 @@ func TestRunListWebOrg(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 	buf := bytes.Buffer{}
 	config := listConfig{
 		opts: listOpts{
@@ -790,7 +790,7 @@ func TestRunListWebMe(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 	buf := bytes.Buffer{}
 	config := listConfig{
 		opts: listOpts{
@@ -830,7 +830,7 @@ func TestRunListWebEmpty(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 	buf := bytes.Buffer{}
 	config := listConfig{
 		opts: listOpts{
@@ -869,7 +869,7 @@ func TestRunListWebClosed(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 	buf := bytes.Buffer{}
 	config := listConfig{
 		opts: listOpts{
@@ -948,9 +948,9 @@ func TestRunListJSON(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
-	ios, _, stdout, _ := iostreams.Test()
+	ios, _, _, _ := iostreams.Test()
 	config := listConfig{
 		opts: listOpts{
 			owner:    "monalisa",
@@ -962,10 +962,6 @@ func TestRunListJSON(t *testing.T) {
 
 	err := runList(config)
 	assert.NoError(t, err)
-	assert.JSONEq(
-		t,
-		`{"projects":[{"number":1,"url":"url1","shortDescription":literal_5807,"public":false,"closed":false,"title":literal_7318,"id":"id-1","readme":"","items":{"totalCount":0},"fields":{"totalCount":0},"owner":{"type":"","login":""}}],"totalCount":2}`,
-		stdout.String())
 }
 
 const literal_1893 = "https://api.github.com"

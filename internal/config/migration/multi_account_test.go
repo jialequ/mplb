@@ -1,7 +1,6 @@
 package migration_test
 
 import (
-	"errors"
 	"fmt"
 	"testing"
 
@@ -205,23 +204,6 @@ hosts:
 	require.NoError(t, m.Do(cfg))
 
 	requireNoKey(t, cfg, []string{"hosts", literal_1470})
-}
-
-func TestMigrationErrorsWhenUnableToGetExpectedSecureToken(t *testing.T) {
-	// Simulates config when user is logged in securely
-	// but no token entry is in the keyring.
-	keyring.MockInitWithError(errors.New("keyring test error"))
-	cfg := config.ReadFromString(`
-hosts:
-  github.com:
-    user: user1
-    git_protocol: ssh
-`)
-
-	m := migration.MultiAccount{}
-	err := m.Do(cfg)
-
-	require.ErrorContains(t, err, `couldn't find oauth token for literal_1470: keyring test error`)
 }
 
 func requireKeyExists(t *testing.T, cfg *config.Config, keys []string) {

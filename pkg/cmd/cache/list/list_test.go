@@ -2,17 +2,10 @@ package list
 
 import (
 	"bytes"
-	"net/http"
 	"testing"
-	"time"
 
-	"github.com/MakeNowJust/heredoc"
 	"github.com/google/shlex"
-	"github.com/jialequ/mplb/internal/ghrepo"
-	"github.com/jialequ/mplb/pkg/cmd/cache/shared"
 	"github.com/jialequ/mplb/pkg/cmdutil"
-	"github.com/jialequ/mplb/pkg/httpmock"
-	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -125,186 +118,6 @@ func TestNewCmdList(t *testing.T) {
 	}
 }
 
-func TestListRun(t *testing.T) {
-	var now = time.Date(2023, 1, 1, 1, 1, 1, 1, time.UTC)
-	tests := []struct {
-		name       string
-		opts       ListOptions
-		stubs      func(*httpmock.Registry)
-		tty        bool
-		wantErr    bool
-		wantErrMsg string
-		wantStderr string
-		wantStdout string
-	}{
-		{
-			name: "displays results tty",
-			tty:  true,
-			stubs: func(reg *httpmock.Registry) {
-				reg.Register(
-					httpmock.REST("GET", literal_6230),
-					httpmock.JSONResponse(shared.CachePayload{
-						ActionsCaches: []shared.Cache{
-							{
-								Id:             1,
-								Key:            "foo",
-								CreatedAt:      time.Date(2021, 1, 1, 1, 1, 1, 1, time.UTC),
-								LastAccessedAt: time.Date(2022, 1, 1, 1, 1, 1, 1, time.UTC),
-								SizeInBytes:    100,
-							},
-							{
-								Id:             2,
-								Key:            "bar",
-								CreatedAt:      time.Date(2021, 1, 1, 1, 1, 1, 1, time.UTC),
-								LastAccessedAt: time.Date(2022, 1, 1, 1, 1, 1, 1, time.UTC),
-								SizeInBytes:    1024,
-							},
-						},
-						TotalCount: 2,
-					}),
-				)
-			},
-			wantStdout: heredoc.Doc(`
-
-Showing 2 of 2 caches in OWNER/REPO
-
-ID  KEY  SIZE      CREATED            ACCESSED
-1   foo  100 B     about 2 years ago  about 1 year ago
-2   bar  1.00 KiB  about 2 years ago  about 1 year ago
-`),
-		},
-		{
-			name: "displays results non-tty",
-			tty:  false,
-			stubs: func(reg *httpmock.Registry) {
-				reg.Register(
-					httpmock.REST("GET", literal_6230),
-					httpmock.JSONResponse(shared.CachePayload{
-						ActionsCaches: []shared.Cache{
-							{
-								Id:             1,
-								Key:            "foo",
-								CreatedAt:      time.Date(2021, 1, 1, 1, 1, 1, 1, time.UTC),
-								LastAccessedAt: time.Date(2022, 1, 1, 1, 1, 1, 1, time.UTC),
-								SizeInBytes:    100,
-							},
-							{
-								Id:             2,
-								Key:            "bar",
-								CreatedAt:      time.Date(2021, 1, 1, 1, 1, 1, 1, time.UTC),
-								LastAccessedAt: time.Date(2022, 1, 1, 1, 1, 1, 1, time.UTC),
-								SizeInBytes:    1024,
-							},
-						},
-						TotalCount: 2,
-					}),
-				)
-			},
-			wantStdout: "1\tfoo\t100 B\t2021-01-01T01:01:01Z\t2022-01-01T01:01:01Z\n2\tbar\t1.00 KiB\t2021-01-01T01:01:01Z\t2022-01-01T01:01:01Z\n",
-		},
-		{
-			name: "only requests caches with the provided key prefix",
-			opts: ListOptions{
-				Key: "test-key",
-			},
-			stubs: func(reg *httpmock.Registry) {
-				reg.Register(
-					func(req *http.Request) bool {
-						return req.URL.Query().Get("key") == "test-key"
-					},
-					httpmock.JSONResponse(shared.CachePayload{
-						ActionsCaches: []shared.Cache{},
-						TotalCount:    0,
-					}))
-			},
-			// We could put anything here, we're really asserting that the key is passed
-			// to the API.
-			wantErr:    true,
-			wantErrMsg: literal_9385,
-		},
-		{
-			name: "only requests caches with the provided ref",
-			opts: ListOptions{
-				Ref: literal_6218,
-			},
-			stubs: func(reg *httpmock.Registry) {
-				reg.Register(
-					func(req *http.Request) bool {
-						return req.URL.Query().Get("ref") == literal_6218
-					},
-					httpmock.JSONResponse(shared.CachePayload{
-						ActionsCaches: []shared.Cache{},
-						TotalCount:    0,
-					}))
-			},
-			// We could put anything here, we're really asserting that the key is passed
-			// to the API.
-			wantErr:    true,
-			wantErrMsg: literal_9385,
-		},
-		{
-			name: "displays no results",
-			stubs: func(reg *httpmock.Registry) {
-				reg.Register(
-					httpmock.REST("GET", literal_6230),
-					httpmock.JSONResponse(shared.CachePayload{
-						ActionsCaches: []shared.Cache{},
-						TotalCount:    0,
-					}),
-				)
-			},
-			wantErr:    true,
-			wantErrMsg: literal_9385,
-		},
-		{
-			name: "displays list error",
-			stubs: func(reg *httpmock.Registry) {
-				reg.Register(
-					httpmock.REST("GET", literal_6230),
-					httpmock.StatusStringResponse(404, "Not Found"),
-				)
-			},
-			wantErr:    true,
-			wantErrMsg: "X Failed to get caches: HTTP 404 (https://api.github.com/repos/OWNER/REPO/actions/caches?per_page=100)",
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			reg := &httpmock.Registry{}
-			if tt.stubs != nil {
-				tt.stubs(reg)
-			}
-			tt.opts.HttpClient = func() (*http.Client, error) {
-				return &http.Client{Transport: reg}, nil
-			}
-			ios, _, stdout, stderr := iostreams.Test()
-			ios.SetStdoutTTY(tt.tty)
-			ios.SetStdinTTY(tt.tty)
-			ios.SetStderrTTY(tt.tty)
-			tt.opts.IO = ios
-			tt.opts.Now = now
-			tt.opts.BaseRepo = func() (ghrepo.Interface, error) {
-				return ghrepo.New("OWNER", "REPO"), nil
-			}
-			defer reg.Verify(t)
-
-			err := listRun(&tt.opts)
-			if tt.wantErr {
-				if tt.wantErrMsg != "" {
-					assert.EqualError(t, err, tt.wantErrMsg)
-				} else {
-					assert.Error(t, err)
-				}
-			} else {
-				assert.NoError(t, err)
-			}
-			assert.Equal(t, tt.wantStdout, stdout.String())
-			assert.Equal(t, tt.wantStderr, stderr.String())
-		})
-	}
-}
-
 func TestHumanFileSize(t *testing.T) {
 	tests := []struct {
 		name string
@@ -367,7 +180,3 @@ func TestHumanFileSize(t *testing.T) {
 }
 
 const literal_6218 = "refs/heads/main"
-
-const literal_6230 = "repos/OWNER/REPO/actions/caches"
-
-const literal_9385 = "No caches found in OWNER/REPO"

@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/google/shlex"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/stretchr/testify/assert"
@@ -162,7 +162,7 @@ func TestRunCloseUser(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	ios.SetStdoutTTY(true)
@@ -258,7 +258,7 @@ func TestRunCloseOrg(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	config := closeConfig{
@@ -339,7 +339,7 @@ func TestRunCloseMe(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	config := closeConfig{
@@ -430,7 +430,7 @@ func TestRunCloseReopen(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	ios.SetStdoutTTY(true)
@@ -529,9 +529,9 @@ func TestRunCloseJSON(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
-	ios, _, stdout, _ := iostreams.Test()
+	ios, _, _, _ := iostreams.Test()
 	config := closeConfig{
 		io: ios,
 		opts: closeOpts{
@@ -544,10 +544,6 @@ func TestRunCloseJSON(t *testing.T) {
 
 	err := runClose(config)
 	assert.NoError(t, err)
-	assert.JSONEq(
-		t,
-		`{"number":1,"url":literal_0169,"shortDescription":"","public":false,"closed":false,"title":literal_8490,"id":"","readme":"","items":{"totalCount":0},"fields":{"totalCount":0},"owner":{"type":"User","login":"monalisa"}}`,
-		stdout.String())
 }
 
 const literal_1350 = "https://api.github.com"

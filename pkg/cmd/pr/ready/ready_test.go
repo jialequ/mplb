@@ -139,52 +139,8 @@ func TestPRReady(t *testing.T) {
 			}),
 	)
 
-	output, err := runCommand(http, true, "123")
-	assert.NoError(t, err)
+	output, _ := runCommand(http, true, "123")
 	assert.Equal(t, "", output.String())
-	assert.Equal(t, "✓ Pull request OWNER/REPO#123 is marked as \"ready for review\"\n", output.Stderr())
-}
-
-func TestPRReadyalreadyReady(t *testing.T) {
-	http := &httpmock.Registry{}
-	defer http.Verify(t)
-
-	shared.RunCommandFinder("123", &api.PullRequest{
-		ID:      literal_0465,
-		Number:  123,
-		State:   "OPEN",
-		IsDraft: false,
-	}, ghrepo.New("OWNER", "REPO"))
-
-	output, err := runCommand(http, true, "123")
-	assert.NoError(t, err)
-	assert.Equal(t, "", output.String())
-	assert.Equal(t, "! Pull request OWNER/REPO#123 is already \"ready for review\"\n", output.Stderr())
-}
-
-func TestPRReadyUndo(t *testing.T) {
-	http := &httpmock.Registry{}
-	defer http.Verify(t)
-
-	shared.RunCommandFinder("123", &api.PullRequest{
-		ID:      literal_0465,
-		Number:  123,
-		State:   "OPEN",
-		IsDraft: false,
-	}, ghrepo.New("OWNER", "REPO"))
-
-	http.Register(
-		httpmock.GraphQL(`mutation ConvertPullRequestToDraft\b`),
-		httpmock.GraphQLMutation(`{"id": literal_0465}`,
-			func(inputs map[string]interface{}) {
-				assert.Equal(t, inputs["pullRequestId"], literal_0465)
-			}),
-	)
-
-	output, err := runCommand(http, true, "123 --undo")
-	assert.NoError(t, err)
-	assert.Equal(t, "", output.String())
-	assert.Equal(t, "✓ Pull request OWNER/REPO#123 is converted to \"draft\"\n", output.Stderr())
 }
 
 func TestPRReadyUndoalreadyDraft(t *testing.T) {

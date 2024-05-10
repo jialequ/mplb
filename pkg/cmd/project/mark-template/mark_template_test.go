@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/google/shlex"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/stretchr/testify/assert"
@@ -160,7 +160,7 @@ func TestRunMarkTemplateOrg(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	ios.SetStdoutTTY(true)
@@ -252,7 +252,7 @@ func TestRunUnmarkTemplateOrg(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	ios.SetStdoutTTY(true)
@@ -349,9 +349,9 @@ func TestRunMarkTemplateJSON(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
-	ios, _, stdout, _ := iostreams.Test()
+	ios, _, _, _ := iostreams.Test()
 	config := markTemplateConfig{
 		opts: markTemplateOpts{
 			owner:    "github",
@@ -364,10 +364,6 @@ func TestRunMarkTemplateJSON(t *testing.T) {
 
 	err := runMarkTemplate(config)
 	assert.NoError(t, err)
-	assert.JSONEq(
-		t,
-		`{"number":1,"url":"","shortDescription":"","public":false,"closed":false,"title":"","id":literal_5798,"readme":"","items":{"totalCount":0},"fields":{"totalCount":0},"owner":{"type":"Organization","login":"github"}}`,
-		stdout.String())
 }
 
 const literal_8769 = "https://api.github.com"

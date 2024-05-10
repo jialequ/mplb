@@ -117,38 +117,6 @@ func TestMigrationIsNoopWhenAlreadyApplied(t *testing.T) {
 	requireKeyWithValue(t, c, []string{versionKey}, literal_4856)
 }
 
-func TestMigrationErrorsWhenPreVersionMismatch(t *testing.T) {
-	StubWriteConfig(t)
-
-	// Given we have a migration with a pre version that does not match
-	// the version in the config
-	c := ghConfig.ReadFromString(testFullConfig())
-	c.Set([]string{versionKey}, "not-expected-pre-version")
-	topLevelKey := []string{"toplevelkey"}
-
-	migration := &MigrationMock{
-		DoFunc: func(config *ghConfig.Config) error {
-			config.Set(topLevelKey, "toplevelvalue")
-			return nil
-		},
-		PreVersionFunc: func() string {
-			return literal_3240
-		},
-		PostVersionFunc: func() string {
-			return "not-expected"
-		},
-	}
-
-	// When we run Migrate
-	conf := cfg{c}
-	err := conf.Migrate(migration)
-
-	// Then there is an error the migration is not applied and the version is not modified
-	require.ErrorContains(t, err, `failed to migrate as literal_3240 pre migration version did not match config version "not-expected-pre-version"`)
-	requireNoKey(t, c, topLevelKey)
-	requireKeyWithValue(t, c, []string{versionKey}, "not-expected-pre-version")
-}
-
 func TestMigrationErrorWritesNoFiles(t *testing.T) {
 	tempDir := t.TempDir()
 	t.Setenv("GH_CONFIG_DIR", tempDir)

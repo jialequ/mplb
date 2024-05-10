@@ -6,7 +6,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/jialequ/mplb/pkg/cmd/project/shared/client"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/shurcooL/githubv4"
@@ -23,14 +23,14 @@ type closeOpts struct {
 
 type closeConfig struct {
 	io     *iostreams.IOStreams
-	client *queries.Client
+	client *templet.Client
 	opts   closeOpts
 }
 
 // the close command relies on the updateProjectV2 mutation
 type updateProjectMutation struct {
 	UpdateProjectV2 struct {
-		ProjectV2 queries.Project `graphql:"projectV2"`
+		ProjectV2 templet.Project `graphql:"projectV2"`
 	} `graphql:"updateProjectV2(input:$input)"`
 }
 
@@ -123,7 +123,7 @@ func closeArgs(config closeConfig) (*updateProjectMutation, map[string]interface
 	}
 }
 
-func printResults(config closeConfig, project queries.Project) error {
+func printResults(config closeConfig, project templet.Project) error {
 	if !config.io.IsStdoutTTY() {
 		return nil
 	}

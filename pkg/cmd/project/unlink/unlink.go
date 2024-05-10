@@ -11,7 +11,7 @@ import (
 	"github.com/jialequ/mplb/internal/config"
 	"github.com/jialequ/mplb/internal/ghrepo"
 	"github.com/jialequ/mplb/pkg/cmd/project/shared/client"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/spf13/cobra"
@@ -32,7 +32,7 @@ type unlinkOpts struct {
 type unlinkConfig struct {
 	httpClient func() (*http.Client, error)
 	config     func() (config.Config, error)
-	client     *queries.Client
+	client     *templet.Client
 	opts       unlinkOpts
 	io         *iostreams.IOStreams
 }

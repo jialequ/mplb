@@ -173,7 +173,7 @@ func (author Author) MarshalJSON() ([]byte, error) {
 type CommentAuthor struct {
 	Login string `json:"login"`
 	// Unfortunately, there is no easy way to add "id" and "name" fields to this struct because it's being
-	// used in both shurcool-graphql type queries and string-based queries where the response gets parsed
+	// used in both shurcool-graphql type templet and string-based templet where the response gets parsed
 	// by an ordinary JSON decoder that doesn't understand "graphql" directives via struct tags.
 	//	User  *struct {
 	//		ID   string

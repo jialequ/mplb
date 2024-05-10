@@ -374,7 +374,7 @@ func TestEditRun(t *testing.T) {
 			httpStubs: func(t *testing.T, reg *httpmock.Registry) {
 				// Should only be one fetch of metadata.
 				mockRepoMetadata(t, reg)
-				// All other queries and mutations should be doubled.
+				// All other templet and mutations should be doubled.
 				mockIssueNumberGet(t, reg, 123)
 				mockIssueNumberGet(t, reg, 456)
 				mockIssueProjectItemsGet(t, reg)
@@ -478,7 +478,7 @@ func TestEditRun(t *testing.T) {
 						"pageInfo": { "hasNextPage": false }
 					} } } }
 					`))
-				// All other queries should be doubled.
+				// All other templet should be doubled.
 				mockIssueNumberGet(t, reg, 123)
 				mockIssueNumberGet(t, reg, 456)
 				// Updating 123 should succeed.

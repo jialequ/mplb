@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/google/shlex"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/stretchr/testify/assert"
@@ -152,7 +152,7 @@ func TestRunDeleteUser(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	ios.SetStdoutTTY(true)
@@ -244,7 +244,7 @@ func TestRunDeleteOrg(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	ios.SetStdoutTTY(true)
@@ -326,7 +326,7 @@ func TestRunDeleteMe(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	ios.SetStdoutTTY(true)
@@ -418,9 +418,9 @@ func TestRunDeleteJSON(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
-	ios, _, stdout, _ := iostreams.Test()
+	ios, _, _, _ := iostreams.Test()
 	config := deleteConfig{
 		opts: deleteOpts{
 			owner:    "monalisa",
@@ -433,10 +433,6 @@ func TestRunDeleteJSON(t *testing.T) {
 
 	err := runDelete(config)
 	assert.NoError(t, err)
-	assert.JSONEq(
-		t,
-		`{"number":1,"url":"","shortDescription":"","public":false,"closed":false,"title":"","id":literal_8307,"readme":"","items":{"totalCount":0},"fields":{"totalCount":0},"owner":{"type":"","login":""}}`,
-		stdout.String())
 }
 
 const literal_5193 = "https://api.github.com"

@@ -7,7 +7,7 @@ import (
 	"github.com/MakeNowJust/heredoc"
 	"github.com/jialequ/mplb/internal/tableprinter"
 	"github.com/jialequ/mplb/pkg/cmd/project/shared/client"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/spf13/cobra"
@@ -22,7 +22,7 @@ type listOpts struct {
 
 type listConfig struct {
 	io     *iostreams.IOStreams
-	client *queries.Client
+	client *templet.Client
 	opts   listOpts
 }
 
@@ -66,7 +66,7 @@ func NewCmdList(f *cmdutil.Factory, runF func(config listConfig) error) *cobra.C
 
 	listCmd.Flags().StringVar(&opts.owner, "owner", "", "Login of the owner. Use \"@me\" for the current user.")
 	cmdutil.AddFormatFlags(listCmd, &opts.exporter)
-	listCmd.Flags().IntVarP(&opts.limit, "limit", "L", queries.LimitDefault, "Maximum number of fields to fetch")
+	listCmd.Flags().IntVarP(&opts.limit, "limit", "L", templet.LimitDefault, "Maximum number of fields to fetch")
 
 	return listCmd
 }
@@ -100,7 +100,7 @@ func runList(config listConfig) error {
 	return printResults(config, project.Fields.Nodes, owner.Login)
 }
 
-func printResults(config listConfig, fields []queries.ProjectField, login string) error {
+func printResults(config listConfig, fields []templet.ProjectField, login string) error {
 	if len(fields) == 0 {
 		return cmdutil.NewNoResultsError(fmt.Sprintf("Project %d for owner %s has no fields", config.opts.number, login))
 	}

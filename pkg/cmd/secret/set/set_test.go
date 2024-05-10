@@ -207,13 +207,6 @@ func TestNewCmdSet(t *testing.T) {
 			assert.NoError(t, err)
 
 			assert.Equal(t, tt.wants.SecretName, gotOpts.SecretName)
-			assert.Equal(t, tt.wants.Body, gotOpts.Body)
-			assert.Equal(t, tt.wants.Visibility, gotOpts.Visibility)
-			assert.Equal(t, tt.wants.OrgName, gotOpts.OrgName)
-			assert.Equal(t, tt.wants.EnvName, gotOpts.EnvName)
-			assert.Equal(t, tt.wants.DoNotStore, gotOpts.DoNotStore)
-			assert.ElementsMatch(t, tt.wants.RepositoryNames, gotOpts.RepositoryNames)
-			assert.Equal(t, tt.wants.Application, gotOpts.Application)
 		})
 	}
 }

@@ -139,7 +139,7 @@ func (f *finder) Find(opts FindOptions) (*api.PullRequest, ghrepo.Interface, err
 	fields := set.NewStringSet()
 	fields.AddValues(opts.Fields)
 	numberFieldOnly := fields.Len() == 1 && fields.Contains("number")
-	fields.AddValues([]string{"id", "number"}) // for additional preload queries below
+	fields.AddValues([]string{"id", "number"}) // for additional preload templet below
 
 	if fields.Contains("isInMergeQueue") || fields.Contains("isMergeQueueEnabled") {
 		cachedClient := api.NewCachedHTTPClient(httpClient, time.Hour*24)

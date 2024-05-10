@@ -7,7 +7,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/jialequ/mplb/pkg/cmd/project/shared/client"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/jialequ/mplb/pkg/markdown"
@@ -22,7 +22,7 @@ type viewOpts struct {
 }
 
 type viewConfig struct {
-	client    *queries.Client
+	client    *templet.Client
 	opts      viewOpts
 	io        *iostreams.IOStreams
 	URLOpener func(string) error
@@ -104,7 +104,7 @@ func runView(config viewConfig) error {
 	return printResults(config, project)
 }
 
-func printResults(config viewConfig, project *queries.Project) error {
+func printResults(config viewConfig, project *templet.Project) error {
 	var sb strings.Builder
 	sb.WriteString("# Title\n")
 	sb.WriteString(project.Title)

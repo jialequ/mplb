@@ -6,7 +6,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/jialequ/mplb/pkg/cmd/project/shared/client"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/shurcooL/githubv4"
@@ -24,14 +24,14 @@ type createFieldOpts struct {
 }
 
 type createFieldConfig struct {
-	client *queries.Client
+	client *templet.Client
 	opts   createFieldOpts
 	io     *iostreams.IOStreams
 }
 
 type createProjectV2FieldMutation struct {
 	CreateProjectV2Field struct {
-		Field queries.ProjectField `graphql:"projectV2Field"`
+		Field templet.ProjectField `graphql:"projectV2Field"`
 	} `graphql:"createProjectV2Field(input:$input)"`
 }
 
@@ -142,7 +142,7 @@ func createFieldArgs(config createFieldConfig) (*createProjectV2FieldMutation, m
 	}
 }
 
-func printResults(config createFieldConfig, field queries.ProjectField) error {
+func printResults(config createFieldConfig, field templet.ProjectField) error {
 	if !config.io.IsStdoutTTY() {
 		return nil
 	}

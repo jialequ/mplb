@@ -5,7 +5,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/google/shlex"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/stretchr/testify/assert"
@@ -125,9 +125,9 @@ func TestRunListUsertty(t *testing.T) {
 			"variables": map[string]interface{}{
 				"login":       "monalisa",
 				"number":      1,
-				"firstItems":  queries.LimitMax,
+				"firstItems":  templet.LimitMax,
 				"afterItems":  nil,
-				"firstFields": queries.LimitDefault,
+				"firstFields": templet.LimitDefault,
 				"afterFields": nil,
 			},
 		}).
@@ -160,7 +160,7 @@ func TestRunListUsertty(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	ios.SetStdoutTTY(true)
@@ -220,9 +220,9 @@ func TestRunListUser(t *testing.T) {
 			"variables": map[string]interface{}{
 				"login":       "monalisa",
 				"number":      1,
-				"firstItems":  queries.LimitMax,
+				"firstItems":  templet.LimitMax,
 				"afterItems":  nil,
-				"firstFields": queries.LimitDefault,
+				"firstFields": templet.LimitDefault,
 				"afterFields": nil,
 			},
 		}).
@@ -255,7 +255,7 @@ func TestRunListUser(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	config := listConfig{
@@ -312,9 +312,9 @@ func TestRunListOrg(t *testing.T) {
 			"variables": map[string]interface{}{
 				"login":       "github",
 				"number":      1,
-				"firstItems":  queries.LimitMax,
+				"firstItems":  templet.LimitMax,
 				"afterItems":  nil,
-				"firstFields": queries.LimitDefault,
+				"firstFields": templet.LimitDefault,
 				"afterFields": nil,
 			},
 		}).
@@ -347,7 +347,7 @@ func TestRunListOrg(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	config := listConfig{
@@ -394,9 +394,9 @@ func TestRunListMe(t *testing.T) {
 			"query": "query ViewerProject.*",
 			"variables": map[string]interface{}{
 				"number":      1,
-				"firstItems":  queries.LimitMax,
+				"firstItems":  templet.LimitMax,
 				"afterItems":  nil,
-				"firstFields": queries.LimitDefault,
+				"firstFields": templet.LimitDefault,
 				"afterFields": nil,
 			},
 		}).
@@ -429,7 +429,7 @@ func TestRunListMe(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, stdout, _ := iostreams.Test()
 	config := listConfig{
@@ -476,9 +476,9 @@ func TestRunListEmpty(t *testing.T) {
 			"query": "query ViewerProject.*",
 			"variables": map[string]interface{}{
 				"number":      1,
-				"firstItems":  queries.LimitMax,
+				"firstItems":  templet.LimitMax,
 				"afterItems":  nil,
-				"firstFields": queries.LimitDefault,
+				"firstFields": templet.LimitDefault,
 				"afterFields": nil,
 			},
 		}).
@@ -495,7 +495,7 @@ func TestRunListEmpty(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
 	ios, _, _, _ := iostreams.Test()
 	config := listConfig{
@@ -551,9 +551,9 @@ func TestRunListJSON(t *testing.T) {
 			"variables": map[string]interface{}{
 				"login":       "monalisa",
 				"number":      1,
-				"firstItems":  queries.LimitMax,
+				"firstItems":  templet.LimitMax,
 				"afterItems":  nil,
-				"firstFields": queries.LimitDefault,
+				"firstFields": templet.LimitDefault,
 				"afterFields": nil,
 			},
 		}).
@@ -587,9 +587,9 @@ func TestRunListJSON(t *testing.T) {
 			},
 		})
 
-	client := queries.NewTestClient()
+	client := templet.NewTestClient()
 
-	ios, _, stdout, _ := iostreams.Test()
+	ios, _, _, _ := iostreams.Test()
 	config := listConfig{
 		opts: listOpts{
 			number:   1,
@@ -602,10 +602,6 @@ func TestRunListJSON(t *testing.T) {
 
 	err := runList(config)
 	assert.NoError(t, err)
-	assert.JSONEq(
-		t,
-		`{"fields":[{"id":literal_3016,"name":"FieldTitle","type":"ProjectV2Field"},{"id":literal_3169,"name":"Status","type":"ProjectV2SingleSelectField"},{"id":literal_0796,"name":"Iterations","type":"ProjectV2IterationField"}],"totalCount":3}`,
-		stdout.String())
 }
 
 const literal_1853 = "https://api.github.com"

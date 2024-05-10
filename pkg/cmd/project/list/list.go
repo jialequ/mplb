@@ -8,7 +8,7 @@ import (
 	"github.com/jialequ/mplb/internal/tableprinter"
 	"github.com/jialequ/mplb/pkg/cmd/project/shared/client"
 	"github.com/jialequ/mplb/pkg/cmd/project/shared/format"
-	"github.com/jialequ/mplb/pkg/cmd/project/shared/queries"
+	"github.com/jialequ/mplb/pkg/cmd/project/shared/templet"
 	"github.com/jialequ/mplb/pkg/cmdutil"
 	"github.com/jialequ/mplb/pkg/iostreams"
 	"github.com/spf13/cobra"
@@ -23,7 +23,7 @@ type listOpts struct {
 }
 
 type listConfig struct {
-	client    *queries.Client
+	client    *templet.Client
 	opts      listOpts
 	URLOpener func(string) error
 	io        *iostreams.IOStreams
@@ -70,7 +70,7 @@ func NewCmdList(f *cmdutil.Factory, runF func(config listConfig) error) *cobra.C
 	listCmd.Flags().BoolVarP(&opts.closed, "closed", "", false, "Include closed projects")
 	listCmd.Flags().BoolVarP(&opts.web, "web", "w", false, "Open projects list in the browser")
 	cmdutil.AddFormatFlags(listCmd, &opts.exporter)
-	listCmd.Flags().IntVarP(&opts.limit, "limit", "L", queries.LimitDefault, "Maximum number of projects to fetch")
+	listCmd.Flags().IntVarP(&opts.limit, "limit", "L", templet.LimitDefault, "Maximum number of projects to fetch")
 
 	return listCmd
 }
@@ -125,7 +125,7 @@ func buildURL(config listConfig) (string, error) {
 			return "", err
 		}
 
-		if ownerType == queries.UserOwner {
+		if ownerType == templet.UserOwner {
 			url = fmt.Sprintf("https://github.com/users/%s/projects", config.opts.owner)
 		} else {
 			url = fmt.Sprintf("https://github.com/orgs/%s/projects", config.opts.owner)
@@ -138,9 +138,9 @@ func buildURL(config listConfig) (string, error) {
 	return url, nil
 }
 
-func filterProjects(nodes queries.Projects, config listConfig) queries.Projects {
-	filtered := queries.Projects{
-		Nodes:      make([]queries.Project, 0, len(nodes.Nodes)),
+func filterProjects(nodes templet.Projects, config listConfig) templet.Projects {
+	filtered := templet.Projects{
+		Nodes:      make([]templet.Project, 0, len(nodes.Nodes)),
 		TotalCount: nodes.TotalCount,
 	}
 	for _, project := range nodes.Nodes {
@@ -152,7 +152,7 @@ func filterProjects(nodes queries.Projects, config listConfig) queries.Projects 
 	return filtered
 }
 
-func printResults(config listConfig, projects queries.Projects, owner string) error {
+func printResults(config listConfig, projects templet.Projects, owner string) error {
 	if len(projects.Nodes) == 0 {
 		return cmdutil.NewNoResultsError(fmt.Sprintf("No projects found for %s", owner))
 	}
