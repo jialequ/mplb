@@ -250,7 +250,9 @@ func QueryHasStateClause(searchQuery string) bool {
 	}
 
 	for _, arg := range argv {
-		if arg == "is:closed" || arg == "is:merged" || arg == "state:closed" || arg == "state:merged" || strings.HasPrefix(arg, "merged:") || strings.HasPrefix(arg, "closed:") {
+		flag := arg == "state:closed" || arg == "state:merged"
+		flag1 := strings.HasPrefix(arg, "merged:") || strings.HasPrefix(arg, "closed:")
+		if arg == "is:closed" || arg == "is:merged" || flag || flag1 {
 			return true
 		}
 	}

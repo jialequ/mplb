@@ -13,18 +13,25 @@ import (
 	"github.com/jialequ/mplb/internal/codespaces/connection"
 )
 
-func connectionReady(codespace *api.Codespace) bool {
+func connectionReady(codespace *api.Codespace) bool { //NOSONAR
 	// If the codespace is not available, it is not ready
 	if codespace.State != api.CodespaceStateAvailable {
 		return false
 	}
 
-	return codespace.Connection.TunnelProperties.ConnectAccessToken != "" &&
-		codespace.Connection.TunnelProperties.ManagePortsAccessToken != "" &&
-		codespace.Connection.TunnelProperties.ServiceUri != "" &&
-		codespace.Connection.TunnelProperties.TunnelId != "" &&
-		codespace.Connection.TunnelProperties.ClusterId != "" &&
-		codespace.Connection.TunnelProperties.Domain != ""
+	if codespace.Connection.TunnelProperties.ConnectAccessToken == "" ||
+		codespace.Connection.TunnelProperties.ManagePortsAccessToken == "" ||
+		codespace.Connection.TunnelProperties.ServiceUri == "" {
+		return false
+	}
+
+	if codespace.Connection.TunnelProperties.TunnelId == "" ||
+		codespace.Connection.TunnelProperties.ClusterId == "" ||
+		codespace.Connection.TunnelProperties.Domain == "" {
+		return false
+	}
+
+	return true
 }
 
 type apiClient interface {

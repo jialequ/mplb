@@ -46,14 +46,9 @@ type EditableProjects struct {
 }
 
 func (e Editable) Dirty() bool {
-	return e.Title.Edited ||
-		e.Body.Edited ||
-		e.Base.Edited ||
-		e.Reviewers.Edited ||
-		e.Assignees.Edited ||
-		e.Labels.Edited ||
-		e.Projects.Edited ||
-		e.Milestone.Edited
+	flag := e.Reviewers.Edited || e.Assignees.Edited || e.Labels.Edited || e.Projects.Edited
+	flag1 := e.Base.Edited || e.Milestone.Edited
+	return e.Title.Edited || e.Body.Edited || flag || flag1
 }
 
 func (e Editable) TitleValue() *string {

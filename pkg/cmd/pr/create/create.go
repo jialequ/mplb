@@ -190,8 +190,12 @@ func NewCmdCreate(f *cmdutil.Factory, runF func(*CreateOptions) error) *cobra.Co
 				return cmdutil.FlagErrorf("`--template` is not supported when using `--body` or `--body-file`")
 			}
 
-			if !opts.IO.CanPrompt() && !opts.WebMode && !(opts.FillVerbose || opts.Autofill || opts.FillFirst) && (!opts.TitleProvided || !opts.BodyProvided) {
-				return cmdutil.FlagErrorf("must provide `--title` and `--body` (or `--fill` or `fill-first` or `--fillverbose`) when not running interactively")
+			if !opts.IO.CanPrompt() && !opts.WebMode {
+				if !(opts.FillVerbose || opts.Autofill || opts.FillFirst) {
+					if !opts.TitleProvided || !opts.BodyProvided {
+						return cmdutil.FlagErrorf("must provide `--title` and `--body` (or `--fill` or `fill-first` or `--fillverbose`) when not running interactively")
+					}
+				}
 			}
 
 			if opts.DryRun && opts.WebMode {
@@ -313,8 +317,8 @@ func createRun(opts *CreateOptions) (err error) { //NOSONAR
 			cs.Cyan(ctx.BaseBranch),
 			ghrepo.FullName(ctx.BaseRepo))
 	}
-
-	if opts.FillVerbose || opts.Autofill || opts.FillFirst || (opts.TitleProvided && opts.BodyProvided) {
+	flag := opts.TitleProvided && opts.BodyProvided
+	if opts.FillVerbose || opts.Autofill || opts.FillFirst || flag {
 		err = handlePush(*opts, *ctx)
 		if err != nil {
 			return
@@ -523,8 +527,8 @@ func NewIssueState(ctx CreateContext, opts CreateOptions) (*shared.IssueMetadata
 		Milestones: milestoneTitles,
 		Draft:      opts.IsDraft,
 	}
-
-	if opts.FillVerbose || opts.Autofill || opts.FillFirst || !opts.TitleProvided || !opts.BodyProvided {
+	flag := !opts.TitleProvided || !opts.BodyProvided
+	if opts.FillVerbose || opts.Autofill || opts.FillFirst || flag {
 		err := initDefaultTitleBody(ctx, state, opts.FillFirst, opts.FillVerbose)
 		if err != nil && (opts.FillVerbose || opts.Autofill || opts.FillFirst) {
 			return nil, fmt.Errorf("could not compute title or body defaults: %w", err)

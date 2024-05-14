@@ -44,10 +44,10 @@ func (tb *IssueMetadataState) IsDirty() bool {
 }
 
 func (tb *IssueMetadataState) HasMetadata() bool {
+	flag := len(tb.Labels) > 0 || len(tb.Projects) > 0
 	return len(tb.Reviewers) > 0 ||
 		len(tb.Assignees) > 0 ||
-		len(tb.Labels) > 0 ||
-		len(tb.Projects) > 0 ||
+		flag ||
 		len(tb.Milestones) > 0
 }
 

@@ -10,12 +10,19 @@ func IsURL(u string) bool {
 }
 
 func isSupportedProtocol(u string) bool {
-	return strings.HasPrefix(u, "ssh:") ||
+	if strings.HasPrefix(u, "ssh:") ||
 		strings.HasPrefix(u, "git+ssh:") ||
-		strings.HasPrefix(u, "git:") ||
-		strings.HasPrefix(u, "http:") ||
+		strings.HasPrefix(u, "git:") {
+		return true
+	}
+
+	if strings.HasPrefix(u, "http:") ||
 		strings.HasPrefix(u, "git+https:") ||
-		strings.HasPrefix(u, "https:")
+		strings.HasPrefix(u, "https:") {
+		return true
+	}
+
+	return false
 }
 
 func isPossibleProtocol(u string) bool {

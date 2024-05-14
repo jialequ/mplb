@@ -87,9 +87,10 @@ func NewCmdEditItem(f *cmdutil.Factory, runF func(config editItemConfig) error) 
 				return err
 			}
 
+			flag := opts.date != "" || opts.singleSelectOptionID != "" || opts.iterationID != ""
 			if err := cmdutil.MutuallyExclusive(
 				"cannot use `--text`, `--number`, `--date`, `--single-select-option-id` or `--iteration-id` in conjunction with `--clear`",
-				opts.text != "" || opts.number != 0 || opts.date != "" || opts.singleSelectOptionID != "" || opts.iterationID != "",
+				opts.text != "" || opts.number != 0 || flag,
 				opts.clear,
 			); err != nil {
 				return err
@@ -146,7 +147,8 @@ func runEditItem(config editItemConfig) error {
 	}
 
 	// update item values
-	if config.opts.text != "" || config.opts.number != 0 || config.opts.date != "" || config.opts.singleSelectOptionID != "" || config.opts.iterationID != "" {
+	flag := config.opts.number != 0 || config.opts.date != "" || config.opts.singleSelectOptionID != ""
+	if config.opts.text != "" || flag || config.opts.iterationID != "" {
 		return updateItemValues(config)
 	}
 

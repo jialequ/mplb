@@ -46,7 +46,9 @@ func GetSecretEntity(orgName, envName string, userSecrets bool) (SecretEntity, e
 	orgSet := orgName != ""
 	envSet := envName != ""
 
-	if orgSet && envSet || orgSet && userSecrets || envSet && userSecrets {
+	flag := orgSet && userSecrets
+	flag1 := envSet && userSecrets
+	if orgSet && envSet || flag || flag1 {
 		return "", errors.New("cannot specify multiple secret entities")
 	}
 

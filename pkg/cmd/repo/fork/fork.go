@@ -234,8 +234,8 @@ func forkRun(opts *ForkOptions) error { //NOSONAR
 			fmt.Fprintf(stderr, "%s Renamed fork to %s\n", cs.SuccessIconWithColor(cs.Green), cs.Bold(ghrepo.FullName(forkedRepo)))
 		}
 	}
-
-	if (inParent && (!opts.Remote && !opts.PromptRemote)) || (!inParent && (!opts.Clone && !opts.PromptClone)) {
+	flag := (!inParent && (!opts.Clone && !opts.PromptClone))
+	if (inParent && (!opts.Remote && !opts.PromptRemote)) || flag {
 		return nil
 	}
 

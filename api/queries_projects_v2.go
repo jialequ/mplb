@@ -320,11 +320,13 @@ func CurrentUserProjectsV2(client *Client, hostname string) ([]ProjectV2, error)
 func ProjectsV2IgnorableError(err error) bool {
 	msg := err.Error()
 	if strings.Contains(msg, errorProjectsV2ReadScope) ||
-		strings.Contains(msg, errorProjectsV2UserField) ||
-		strings.Contains(msg, errorProjectsV2RepositoryField) ||
-		strings.Contains(msg, errorProjectsV2OrganizationField) ||
 		strings.Contains(msg, errorProjectsV2IssueField) ||
 		strings.Contains(msg, errorProjectsV2PullRequestField) {
+		return true
+	}
+	if strings.Contains(msg, errorProjectsV2UserField) ||
+		strings.Contains(msg, errorProjectsV2RepositoryField) ||
+		strings.Contains(msg, errorProjectsV2OrganizationField) {
 		return true
 	}
 	return false

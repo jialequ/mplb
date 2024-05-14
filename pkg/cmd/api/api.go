@@ -475,11 +475,13 @@ func processResponse(resp *http.Response, opts *ApiOptions, bodyWriter, headersW
 	} else if isJSON && opts.IO.ColorEnabled() {
 		err = jsoncolor.Write(bodyWriter, responseBody, ttyIndent)
 	} else {
-		if isJSON && opts.Paginate && !opts.Slurp && !isGraphQLPaginate && !opts.ShowResponseHeaders {
-			responseBody = &paginatedArrayReader{
-				Reader:      responseBody,
-				isFirstPage: isFirstPage,
-				isLastPage:  isLastPage,
+		if isJSON && opts.Paginate && !opts.Slurp {
+			if !isGraphQLPaginate && !opts.ShowResponseHeaders {
+				responseBody = &paginatedArrayReader{
+					Reader:      responseBody,
+					isFirstPage: isFirstPage,
+					isLastPage:  isLastPage,
+				}
 			}
 		}
 		_, err = io.Copy(bodyWriter, responseBody)

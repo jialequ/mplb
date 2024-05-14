@@ -111,12 +111,10 @@ func replaceIssueFields(httpClient *http.Client, repo ghrepo.Interface, id strin
 }
 
 func dirtyExcludingLabels(e Editable) bool {
+	flag := e.Base.Edited || e.Reviewers.Edited || e.Assignees.Edited || e.Projects.Edited
 	return e.Title.Edited ||
 		e.Body.Edited ||
-		e.Base.Edited ||
-		e.Reviewers.Edited ||
-		e.Assignees.Edited ||
-		e.Projects.Edited ||
+		flag ||
 		e.Milestone.Edited
 }
 

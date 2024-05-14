@@ -203,7 +203,8 @@ func listRun(opts *ListOptions) error { //NOSONAR
 		fmt.Fprintln(opts.IO.ErrOut, "warning: this query uses the Search API which is capped at 1000 results maximum")
 	}
 	if opts.IO.IsStdoutTTY() {
-		hasFilters := filter.Visibility != "" || filter.Fork || filter.Source || filter.Language != "" || len(filter.Topic) > 0
+		flag := filter.Fork || filter.Source || filter.Language != ""
+		hasFilters := filter.Visibility != "" || flag || len(filter.Topic) > 0
 		title := listHeader(listResult.Owner, totalMatchCount, listResult.TotalCount, hasFilters)
 		fmt.Fprintf(opts.IO.Out, "\n%s\n\n", title)
 	}
